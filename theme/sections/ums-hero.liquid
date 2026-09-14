@@ -4,6 +4,10 @@
   Replaces the old two-tile "split screen" homepage, which was explicitly
   rejected (brief section 1). The two business lines are separated by weight
   and order here, not by a 50/50 visual split.
+
+  The two calls to action are one matched pair of buttons (Raheem, Phase 8
+  review): identical type and size, filled for Organizations and outlined
+  for the Storefront.
 {%- endcomment -%}
 
 <div class="ums-hero color-{{ section.settings.color_scheme }} gradient">
@@ -25,7 +29,7 @@
         </a>
       {%- endif -%}
       {%- if section.settings.secondary_label != blank -%}
-        <a class="ums-hero__link" href="{{ section.settings.secondary_link }}">
+        <a class="button button--secondary ums-cta ums-hero__cta" href="{{ section.settings.secondary_link }}">
           {{ section.settings.secondary_label | escape }}
         </a>
       {%- endif -%}
@@ -69,17 +73,16 @@
   .ums-hero__body > :first-child { margin-top: 0; }
   .ums-hero__body > :last-child { margin-bottom: 0; }
 
+  /* Both actions are the same button: same face, size, weight, and
+     letter-spacing. Only the fill differs — solid green for the
+     primary line, outlined for the storefront — so they read as a
+     matched pair with a clear first choice. */
   .ums-hero__actions {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 1.6rem 2.8rem;
+    gap: 1.2rem 1.6rem;
     margin-top: 3.2rem;
-  }
-
-  .ums-hero__link {
-    font-size: 1.6rem;
-    text-underline-offset: 0.4rem;
   }
 
   @media screen and (max-width: 749px) {
@@ -97,8 +100,8 @@
     { "type": "richtext", "id": "body", "label": "Body" },
     { "type": "text", "id": "primary_label", "label": "Primary button label", "default": "Start an order" },
     { "type": "url", "id": "primary_link", "label": "Primary button link" },
-    { "type": "text", "id": "secondary_label", "label": "Secondary link label", "default": "Shop the storefront" },
-    { "type": "url", "id": "secondary_link", "label": "Secondary link" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary button label", "default": "Shop the storefront" },
+    { "type": "url", "id": "secondary_link", "label": "Secondary button link" },
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
   ],
   "presets": [{ "name": "UMS hero" }]

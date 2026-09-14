@@ -111,9 +111,13 @@ all sales final, "Taxes and discounts are calculated at checkout."). The wording
 in **Theme settings → UMS cart note** if it ever needs changing. Nothing was done in
 `locales/` after all — the snippet route kept the change in one place.
 
-## 6. The misspelled store email — admin only, two fields
+## 6. Store email — FIXED 2026-09-14; forwarding and a test still to do
 
-Both `shop.email` and `shop.contactEmail` are still `Dtftranfers@uptownmerch145.com`.
+**Verified through the API after Raheem's change: both `shop.email` and
+`shop.contactEmail` now read `orders@uptownmerch145.com`.** What remains is the
+forwarding rule to mgarafano@ (below) and one test submission per form.
+
+For the record, both fields had been `Dtftranfers@uptownmerch145.com`.
 There is **no Admin API mutation that writes either field** (checked all 441 of them on
 2026-09-14), so this cannot be done from the build session. Shopify delivers contact
 form submissions to one store address, so this is also why mgarafano@ has not been

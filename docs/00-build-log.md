@@ -324,3 +324,15 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
     Build your list with three items (one under 8), the order form top to bottom
     including the artwork picker, and the contact page.
   - All five pushed files verified by MD5 against the repo copies.
+
+- **2026-09-14 — Phase 8 review fixes.**
+  - **Hero actions are a matched pair.** Raheem: "Start an order for your group" and
+    "Shop the storefront" should look the same on desktop and mobile. They were a
+    button and a text link. Both are now Dawn buttons of identical type, size, weight,
+    and letter-spacing; the only difference is fill — solid green for Organizations,
+    outlined for the Storefront — so the primary line still reads first (brief §1).
+    On phones they stack as two full-width bars. The theme-editor labels were updated
+    to say "button" for both. Pushed and verified by MD5.
+  - **Store email fixed by Raheem** — `shop.email` and `shop.contactEmail` both read
+    `orders@uptownmerch145.com` now. The forwarding rule to mgarafano@ and one test
+    submission per form are still on him (`docs/04` §6).
