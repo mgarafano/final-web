@@ -18,7 +18,7 @@ From `docs/04-store-settings-todo.md`:
       ("Exclude from sales channels" → Online Store) and verified through the API: all
       17 are off the Online Store; Home page, Products, Uptown Blanks, and UMS Storefront
       remain on. Their 17 redirects are live.
-- [ ] §4 Checkout branding in Settings → Checkout → Customize (values ready to paste).
+- [x] §4 Checkout branding — done by Raheem in the editor (API cannot verify on this plan; visual check on the live checkout).
 - [ ] §6 Forwarding rule from orders@ to mgarafano@, then one test through each form.
 - [ ] §7 Shop Pay Installments off, if the product page still shows the "Pay in 4" line.
 - [ ] Phone pass on the preview (`?preview_theme_id=162803613922`), any last fixes.

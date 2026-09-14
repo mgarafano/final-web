@@ -65,7 +65,13 @@ local pickup now. Bulk-order shipping is arranged outside the website.
 Still worth deciding: whether "Shop location" (no inventory) should exist at all, and
 the pickup instructions in §2.
 
-## 4. Checkout branding — admin only, values ready to enter
+## 4. Checkout branding — DONE by Raheem 2026-09-14 (not readable from here)
+
+Raheem applied the branding in Settings → Checkout → Customize. The API cannot read it
+back on this plan (the write was also tried and refused: Plus-only), so the check is
+visual: one item in the cart, open checkout, nothing orange or purple, logo top left.
+
+Original instructions kept below.
 
 The API route is closed: `checkoutBranding` returns *"Access denied … the shop must be
 on a Plus plan or a Development store plan."* The checkout editor itself is available on
