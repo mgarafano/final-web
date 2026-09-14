@@ -145,7 +145,10 @@ Finally, send one test through `/pages/organizations-order` and one through
 `mgarafano@` is not listed anywhere on the site and never will be — verified by
 searching every theme file. `orders@` is the only address shown to customers.
 
-## 7. Shop Pay Installments messaging (brief §7)
+## 7. Shop Pay Installments — DONE by Raheem 2026-09-14
+
+Disabled in Settings → Payments. The "Pay in 4" line no longer renders on product pages.
+Original note kept below.
 
 The brief wants the "Pay in 4 interest-free installments" line removed from product
 pages with the native toggle, not custom code. Dawn 16 renders that line in the price
