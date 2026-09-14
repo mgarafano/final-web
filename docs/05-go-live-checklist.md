@@ -28,7 +28,8 @@ From `docs/04-store-settings-todo.md`:
 
 Raheem published the theme (now "UMS Live 2026", role MAIN; "Dawn" back in the library as
 the rollback) at 09:30 UTC. The session then ran steps 3 and 5. Step 4 (removing Uptown
-Blanks from the Online Store channel) is Raheem's click; its redirect is already in place.
+Blanks from the Online Store channel) was done by Raheem at 09:45 UTC and verified through
+the API: the collection is off the channel and its redirect is live. Sequence complete.
 
 Total time from first click to done: a few minutes. Best done outside the store's
 busiest hour, but no downtime is involved.
@@ -81,7 +82,7 @@ Kept as-is: `/pages/contact`, `/pages/about`, and every `/pages/organizations*` 
 
 | Old path | Products | Target | Status |
 |---|---|---|---|
-| `/collections/uptown-blanks` | 29 — the same products as UMS Storefront | `/collections/ums-storefront` | redirect created 2026-09-14; Raheem removes the collection from the Online Store channel |
+| `/collections/uptown-blanks` | 29 — the same products as UMS Storefront | `/collections/ums-storefront` | done 2026-09-14: hidden by Raheem + redirect |
 | `/collections/pos-products` | 29 — Point of Sale grouping, was never meant to be public | `/collections/ums-storefront` | done: hidden + redirect |
 | `/collections/pos-services` | 8 — Point of Sale services, not sold online | `/pages/organizations` | done: hidden + redirect |
 

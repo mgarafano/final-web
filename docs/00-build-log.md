@@ -496,3 +496,6 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
   unpublished, since Shopify will not redirect a path that still resolves. Read back:
   36 redirects; the only remaining go-live click is Raheem removing Uptown Blanks from
   the Online Store channel.
+  - Raheem removed Uptown Blanks from the Online Store channel; verified through the
+    API. Online Store collections are now UMS Storefront and the built-in "Products"
+    listing only. The go-live sequence is complete.
