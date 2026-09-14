@@ -61,44 +61,15 @@ Note the existing text also has a missing space after "order." and a trailing sp
 Then decide whether "Shop location" should exist at all — an inventory-less duplicate
 location is a common source of confusion.
 
-## 3. Shipping rates are LIVE — decision needed before go-live
+## 3. Shipping — DONE 2026-09-14, pickup is the only method
 
-Audited on 2026-09-14 through the delivery profiles API. The brief (§4) requires that
-local pickup be the only fulfillment method and that no shipping be offered or implied.
-Right now the store can sell shipping:
+On Raheem's go-ahead, both shipping zones (Domestic with five flat rates, International
+with USPS and DHL Express) were deleted from the General profile. Verified afterwards:
+the profile has no zones and the store ships to no countries. Checkout can only offer
+local pickup now. Bulk-order shipping is arranged outside the website.
 
-| Profile | Zone | Rates (all active) |
-|---|---|---|
-| General profile (default) | Domestic — United States | Economy $0.00, Economy $4.90, Economy $19.90, Standard $6.90, Standard $9.90 |
-| General profile (default) | International — 27 countries (CA, GB, AU, DE, FR, JP, …) | USPS (carrier-calculated), DHL Express (carrier-calculated) |
-
-Two more things worth knowing:
-
-- The profile ships from **"Shop location" only** — the location with no inventory.
-  "Uptown Merch Solutions", where every unit of stock actually sits, is not in the
-  profile at all. Which method Shopify offers a given customer therefore depends on
-  how it routes the order between the two locations — not something to leave to chance.
-- Local pickup is enabled on **both** locations, with instructions only on the
-  empty one (see §2).
-
-**Recommended fix:** delete both zones from the General profile, leaving it with no
-shipping rates at all. Checkout then offers pickup only. Nothing else (products,
-prices, locations, inventory) is touched.
-
-This is a live-store change that affects every checkout from the moment it runs, so it
-waits for a go-ahead. Two ways to do it:
-
-- **In admin:** Settings → Shipping and delivery → General shipping rates → Manage →
-  delete the Domestic and International zones (or every rate inside them) → Save.
-- **From this session, on a "yes":** one `deliveryProfileUpdate` mutation on profile
-  `gid://shopify/DeliveryProfile/96243482850`, removing zones
-  `gid://shopify/DeliveryZone/390961037538` (Domestic) and
-  `gid://shopify/DeliveryZone/390961070306` (International) from location group
-  `gid://shopify/DeliveryLocationGroup/97430077666`.
-
-Also worth deciding: whether "Shop location" should exist at all. An inventory-less
-duplicate location is a common source of confusion (it is the reason pickup instructions
-and shipping rates are attached to the wrong place).
+Still worth deciding: whether "Shop location" (no inventory) should exist at all, and
+the pickup instructions in §2.
 
 ## 4. Checkout branding — admin only, values ready to enter
 
@@ -140,29 +111,31 @@ all sales final, "Taxes and discounts are calculated at checkout."). The wording
 in **Theme settings → UMS cart note** if it ever needs changing. Nothing was done in
 `locales/` after all — the snippet route kept the change in one place.
 
-## 6. Form submissions go to one address — and it's still the misspelled one
+## 6. The misspelled store email — admin only, two fields
 
-Re-checked after Raheem's test submission on 2026-09-14, and again at the end of
-Phase 7: the store contact email is **still** `Dtftranfers@uptownmerch145.com` (both
-`email` and `contactEmail`). That is
-where the test landed.
+Both `shop.email` and `shop.contactEmail` are still `Dtftranfers@uptownmerch145.com`.
+There is **no Admin API mutation that writes either field** (checked all 441 of them on
+2026-09-14), so this cannot be done from the build session. Shopify delivers contact
+form submissions to one store address, so this is also why mgarafano@ has not been
+getting copies.
 
-**Why mgarafano@ didn't get a copy:** Shopify's contact form delivers to exactly one
-address — the store contact email. There is no second-recipient setting anywhere in
-Shopify, and nothing in the theme can add one. The second inbox is a **mailbox
-forwarding rule**, full stop.
+Two fields to change, both to `orders@uptownmerch145.com`:
 
-The two-step fix:
+1. **Settings → Store details → Profile → Store email** (Shopify's "where we contact
+   you" address). Fixes the typo at the source.
+2. **Settings → Notifications → Sender email** (the address customers see, and the one
+   Shopify uses to deliver contact-form submissions). Shopify sends a verification link
+   to the new address; the change takes effect once it's clicked. If admin also asks to
+   authenticate the domain (SPF/DKIM), it will be the same domain that was already in
+   use, so it usually passes as-is.
 
-1. **Settings → Store details → Contact information → Store contact email** →
-   `orders@uptownmerch145.com`. Fixes the routing *and* the typo.
-2. In the **orders@** mailbox, add a rule that forwards every message to
-   `mgarafano@uptownmerch145.com`. On Google Workspace that's Gmail → Settings →
-   Forwarding, or a group/alias in the admin console; on other providers it's the
-   equivalent forwarding or alias setting.
+Then, in the **orders@** mailbox, add a rule that forwards every message to
+`mgarafano@uptownmerch145.com`. On Google Workspace: Gmail → Settings → Forwarding and
+POP/IMAP, or a group/alias in the admin console. On other providers, the equivalent
+forwarding or alias setting.
 
-Then send one more test through `/pages/organizations-order` and one through
-`/pages/contact`. Both should arrive in both inboxes, each field labelled, with a
+Finally, send one test through `/pages/organizations-order` and one through
+`/pages/contact`. Both should land in both inboxes, each field labelled, with a
 `Source` line saying which form it came from.
 
 `mgarafano@` is not listed anywhere on the site and never will be — verified by

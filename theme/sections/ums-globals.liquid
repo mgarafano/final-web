@@ -197,6 +197,15 @@
     cursor: not-allowed;
   }
 
+  /* Phones: every primary action is a full-width bar. Easier to hit
+     with a thumb, and the button no longer sits beside a text link
+     at an awkward width. */
+  @media screen and (max-width: 749px) {
+    .ums-cta {
+      width: 100%;
+    }
+  }
+
   /* ---------------------------------------------------------------
      Shared page-intro pattern for the Organizations and contact pages.
      --------------------------------------------------------------- */
@@ -270,6 +279,18 @@
   .menu-drawer__menu-item[href*="/pages/organizations"]:focus {
     background: var(--ums-accent-hover);
     color: var(--ums-on-accent);
+  }
+
+  /* ---------------------------------------------------------------
+     Header logo on phones. Dawn renders the logo at the desktop
+     width on every screen; 130px of logo plus padding made the
+     mobile header taller than it needs to be. 80% of the desktop
+     width keeps the mark legible and gives the page back ~20px.
+     --------------------------------------------------------------- */
+  @media screen and (max-width: 749px) {
+    .header .header__heading-logo-wrapper {
+      width: 10.4rem;
+    }
   }
 
   /* ---------------------------------------------------------------

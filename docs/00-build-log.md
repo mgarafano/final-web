@@ -270,3 +270,57 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
     Privacy, Refund, Shipping, Terms). The store contact email is still `Dtftranfers@`,
     so form routing is still not fixed.
   - Every pushed file verified by MD5 against the repo copy.
+
+- **2026-09-14 — Shipping removed, on Raheem's go-ahead.** Both zones deleted from the
+  General profile (`DeliveryProfile/96243482850`) with one `deliveryProfileUpdate`:
+  Domestic (`DeliveryZone/390961037538` — Economy $0 / $4.90 / $19.90, Standard
+  $6.90 / $9.90) and International (`DeliveryZone/390961070306` — 27 countries, USPS
+  and DHL Express carrier rates). Verified afterwards: the profile has no zones and
+  `shop.shipsToCountries` is empty, so checkout can only offer local pickup. Pickup
+  stays enabled at both locations. The rate conditions (weight or price thresholds)
+  were not captured before deletion; if shipping is ever wanted again it gets set up
+  fresh. Bulk-order shipping is handled outside the site, per Raheem.
+  - **Store contact email cannot be changed from here.** Checked every one of the 441
+    Admin API mutations: nothing writes `shop.email` or `shop.contactEmail` (the only
+    shop-level writes are locales, policies, and resource feedback). It stays an admin
+    task — steps in `docs/04` §6.
+
+- **2026-09-14 — Phase 8, mobile pass.** No storefront rendering is possible from this
+  container (egress blocked), so this was a line-by-line review of every UMS file and
+  Dawn's header against the brief's mobile section, followed by fixes. Raheem's phone
+  is the final check; a checklist is at the end of this entry.
+  - **Already right, verified in the files:** country and language selectors off in the
+    header and footer groups; "UMS for Organizations" is a filled green row in the
+    mobile menu drawer (`.menu-drawer__menu-item` rule in `ums-globals`, more specific
+    than Dawn's hover and active rules, so it wins); collection grid 2 columns on
+    mobile with quick add on; cart drawer with backdrop; cart icon hidden on
+    Organizations pages on every screen size; every UMS form control is 16px type, so
+    iOS does not zoom on focus; every grid (business lines, package cards, steps, the
+    two-column form rows, the checkbox grid) collapses to one column under 750px.
+  - **Changed:**
+    - Every primary action becomes a full-width bar on phones — one rule on the shared
+      `.ums-cta` class. The hero, Organizations hub, and package-page buttons now carry
+      that class too (their duplicated CSS is gone), so "Start an order", "Start your
+      order", "Add to list", "Continue to the order form", "Send my request", "Send",
+      and both confirmation buttons all behave the same way.
+    - Build your list rows restack on phones: the item name takes the whole first
+      line, quantity and Remove share the second. Before, a long name like "Crewneck
+      sweatshirts" was being squeezed beside the quantity field. Remove and Clear
+      buttons now meet a 44px tap-target height.
+    - Organizations hub and package footer: tighter padding and smaller headings under
+      750px so the first screen shows content, not whitespace.
+    - **Judgment call:** the header logo renders at 80% of its desktop width on phones
+      (104px instead of 130px). Dawn has no mobile logo setting and was rendering the
+      full desktop width, which with the header padding made a ~115px-tall mobile
+      header. Easy to revert (one rule in `ums-globals`) if Raheem prefers it large.
+  - **Left alone, deliberately:** the announcement bar wraps to two lines on a narrow
+    phone. Abbreviating the days would break the copy standard ("Tuesday–Saturday",
+    never "Tue–Sat"); two lines is the honest trade.
+  - **Phone checklist for Raheem** (preview link in the environment table, add
+    `?preview_theme_id=162803613922`): the mobile menu (green Organizations row),
+    the homepage hero and two business-line panels, a collection page (2 columns,
+    "+" quick add), a product page (single Add to cart, pickup note), the cart drawer
+    (pickup note above Check out), `/cart`, the Organizations hub, one package page,
+    Build your list with three items (one under 8), the order form top to bottom
+    including the artwork picker, and the contact page.
+  - All five pushed files verified by MD5 against the repo copies.

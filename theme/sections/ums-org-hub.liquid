@@ -15,7 +15,7 @@
         <div class="ums-hub__body rte">{{ section.settings.body }}</div>
       {%- endif -%}
       <div class="ums-hub__actions">
-        <a class="button ums-hub__cta" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label | escape }}</a>
+        <a class="button ums-cta ums-hub__cta" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label | escape }}</a>
       </div>
     </div>
   </div>
@@ -65,7 +65,6 @@
   .ums-hub__body > :first-child { margin-top: 0; }
   .ums-hub__body > :last-child { margin-bottom: 0; }
   .ums-hub__actions { margin-top: 3.2rem; }
-  .ums-hub__cta { letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
 
   .ums-hub__section { padding-block: 5.6rem 0; }
   .ums-hub__section:last-child { padding-bottom: 6.4rem; }
@@ -108,6 +107,15 @@
   .ums-hub__step-title { font-weight: 600; font-size: 1.6rem; }
   .ums-hub__step-body { font-size: 1.45rem; line-height: 1.5; opacity: 0.85; }
   .ums-hub__rule { margin: 2.4rem 0 0; font-weight: 600; font-size: 1.5rem; }
+
+  @media screen and (max-width: 749px) {
+    .ums-hub__hero { padding-block: 4rem 3.6rem; }
+    .ums-hub__body { font-size: 1.6rem; }
+    .ums-hub__section { padding-block: 4rem 0; }
+    .ums-hub__section:last-child { padding-bottom: 4.8rem; }
+    .ums-hub__h2 { font-size: 2.2rem; }
+    .ums-hub__card { padding: 2rem; }
+  }
 
   @media (prefers-reduced-motion: reduce) {
     .ums-hub__card { transition: none; }

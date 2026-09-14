@@ -20,7 +20,7 @@
 
     <div class="ums-hero__actions">
       {%- if section.settings.primary_label != blank -%}
-        <a class="button ums-hero__cta" href="{{ section.settings.primary_link }}">
+        <a class="button ums-cta ums-hero__cta" href="{{ section.settings.primary_link }}">
           {{ section.settings.primary_label | escape }}
         </a>
       {%- endif -%}
@@ -75,12 +75,6 @@
     align-items: center;
     gap: 1.6rem 2.8rem;
     margin-top: 3.2rem;
-  }
-
-  .ums-hero__cta {
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    font-weight: 600;
   }
 
   .ums-hero__link {

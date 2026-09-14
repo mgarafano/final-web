@@ -286,7 +286,7 @@
   .ums-build__name { font-weight: 600; font-size: 1.6rem; }
   .ums-build__qty { width: 9rem; text-align: center; }
   .ums-build__remove {
-    background: none; border: 0; cursor: pointer; padding: 0.6rem;
+    background: none; border: 0; cursor: pointer; padding: 0.6rem; min-height: 4.4rem;
     font-size: 1.4rem; text-decoration: underline; text-underline-offset: 0.3rem;
     color: inherit; opacity: 0.75;
   }
@@ -297,8 +297,19 @@
     display: flex; flex-wrap: wrap; align-items: center; gap: 1.6rem 2.4rem; margin-top: 3.2rem;
   }
   .ums-build__clear {
-    background: none; border: 0; cursor: pointer; font-size: 1.4rem;
+    background: none; border: 0; cursor: pointer; font-size: 1.4rem; min-height: 4.4rem; padding: 0.6rem 0;
     text-decoration: underline; text-underline-offset: 0.4rem; color: inherit;
+  }
+
+  /* Phones: the item name takes the whole first line; quantity and
+     Remove sit together on the second, so long names never squeeze
+     the quantity field. */
+  @media screen and (max-width: 749px) {
+    .ums-build { padding-block: 3.2rem 4.8rem; }
+    .ums-build__add { padding: 2rem 1.6rem; }
+    .ums-build__row { grid-template-columns: auto 1fr; gap: 1rem 1.6rem; }
+    .ums-build__name { grid-column: 1 / -1; }
+    .ums-build__remove { justify-self: start; }
   }
 {% endstylesheet %}
 

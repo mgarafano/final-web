@@ -11,7 +11,7 @@
     <p class="ums-pkg__min">{{ section.settings.minimum_note | escape }}</p>
     <p class="ums-pkg__note">{{ section.settings.note | escape }}</p>
     <div class="ums-pkg__actions">
-      <a class="button ums-pkg__cta" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label | escape }}</a>
+      <a class="button ums-cta ums-pkg__cta" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label | escape }}</a>
       <a class="ums-pkg__back" href="{{ section.settings.back_link }}">{{ section.settings.back_label | escape }}</a>
     </div>
   </div>
@@ -26,8 +26,13 @@
   }
   .ums-pkg__note { margin: 1rem 0 0; font-size: 1.5rem; opacity: 0.9; max-width: 56ch; }
   .ums-pkg__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.6rem 2.4rem; margin-top: 2.4rem; }
-  .ums-pkg__cta { letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
   .ums-pkg__back { font-size: 1.4rem; text-underline-offset: 0.4rem; color: inherit; }
+
+  @media screen and (max-width: 749px) {
+    .ums-pkg { padding-block: 1.6rem 4.8rem; }
+    .ums-pkg__box { padding: 2.4rem 2rem; }
+    .ums-pkg__min { font-size: 2rem; }
+  }
 {% endstylesheet %}
 
 {% schema %}
