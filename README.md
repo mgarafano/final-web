@@ -26,6 +26,9 @@ Rebuild of the Uptown Merch Solutions Shopify storefront (uptownmerch145.com).
     line; express checkout buttons removed.
   - `snippets/cart-drawer.liquid` — pickup-only note replaces the tax/shipping line.
   - `config/settings_schema.json` — one settings group appended ("UMS cart note").
+  - `locales/en.default.json` — one string changed: the low-stock line reads
+    "Only N left" (brief §4). The file carries Shopify's auto-generated comment
+    header above the JSON, exactly as Shopify stores it.
 - Everything else on the theme is stock Dawn 16.0.0 and is not mirrored here.
 
 ## Pushing theme files
@@ -38,3 +41,7 @@ Rebuild of the Uptown Merch Solutions Shopify storefront (uptownmerch145.com).
   `md5sum`. JSON files: Shopify reformats them and adds an auto-generated comment, so
   compare the parsed content instead.
 - `config/settings_data.json` is deliberately not pushed; the theme editor owns it.
+- Muted text in UMS sections (eyebrows, hints, "(optional)") is colored with an explicit
+  foreground alpha, never `opacity`. Dawn paints body text at 75% already; stacking
+  opacity on top drops small text below the 4.5:1 contrast floor. Measured values are
+  in the comment at the top of `sections/ums-globals.liquid`.

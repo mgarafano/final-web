@@ -16,7 +16,7 @@
           "type": "text",
           "settings": {
             "heading": "Pickup and returns",
-            "subtext": "<p>Every order is picked up in store \u2014 we don't ship.</p><p>All sales are final. No refunds, no exchanges.</p>"
+            "subtext": "<p>Storefront orders are picked up in store \u2014 we don't ship.</p><p>All sales are final. No refunds, no exchanges.</p>"
           }
         },
         "browse": {

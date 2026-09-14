@@ -64,6 +64,12 @@
     --ums-space-8: 3.2rem;
   }
 
+  /* Muted text (eyebrows, hints, "(optional)") is painted with an explicit
+     foreground alpha and never with opacity. Dawn already paints body text
+     at 75% of the foreground color; stacking opacity on top of that took
+     these below the 4.5:1 WCAG AA contrast floor. Alpha values here were
+     measured: 0.68 on white gives 5.9:1, 0.82 gives 5.6:1 on hunter green. */
+
   /* ---------------------------------------------------------------
      One form system for every UMS form: build your list, the intake
      form, and the contact form. Every control is the same height and
@@ -87,7 +93,7 @@
 
   .ums-label__opt {
     font-weight: 400;
-    opacity: 0.7;
+    color: rgba(var(--color-foreground), 0.68);
   }
 
   .ums-input {
@@ -146,7 +152,7 @@
     margin: 0;
     font-size: 1.3rem;
     line-height: 1.45;
-    opacity: 0.72;
+    color: rgba(var(--color-foreground), 0.68);
   }
 
   .ums-note {
@@ -215,7 +221,7 @@
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    opacity: 0.7;
+    color: rgba(var(--color-foreground), 0.82);
   }
 
   .ums-h1 {

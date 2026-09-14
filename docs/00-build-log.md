@@ -427,3 +427,41 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
     by MD5 and all 9 JSON templates and groups match in content.
   - The render harness (liquidjs, Chromium) lives outside the repo; it is a review aid,
     not part of the theme.
+
+- **2026-09-14 — Third full review (brief re-read, Theme Check, contrast, catalog).**
+  Read the brief and the copy guide end to end and re-checked every section against
+  the theme and the store. Pulled all 110 text files of the build theme to disk and ran
+  Shopify's Theme Check over the whole theme: nothing in the UMS files beyond the
+  expected "class defined outside this file" notices for the shared `ums-globals`
+  classes; the handful of other notices sit in stock Dawn files. Measured WCAG contrast
+  on every rendered page. Eight fixes, sections pushed before templates and every file
+  read back:
+  - **Contrast.** Small muted text (eyebrows, hints, "(optional)", the package note,
+    the Remove button, the hub eyebrow) sat between 3.6:1 and 4.4:1 because an
+    `opacity` reduction stacked on Dawn's own 75% body-text alpha. Every one now uses
+    an explicit foreground alpha (0.68 on white, 0.82 on green); the audit passes on
+    all ten rendered pages.
+  - **Tagline in Organizations (brief §2).** "Bringing Brands to Life." now sits as a
+    signature line under the hub's hero button (`tagline` setting on `ums-org-hub`).
+  - **Low-stock wording (brief §4).** "Low stock: N left" → "Only N left" in
+    `locales/en.default.json`, now tracked in the repo as a modified Dawn file.
+  - **Footer pickup line** scoped to the storefront ("Storefront orders are picked up in
+    store — we don't ship."), matching the Shipping policy, which already explains that
+    group orders are arranged directly.
+  - Catalog re-audited product by product: 29 storefront products with standard titles,
+    vendor "Uptown Merch Solutions", product types, SKUs intact, one image each with
+    "<Name> in <Color>" alt text, tracked inventory, no overselling, all published;
+    8 service products active but off the Online Store; helper product unlisted.
+  - Store re-read: `ums-main-menu` correct; 33 redirects match the go-live map; the
+    "News" blog has no articles; four collections on the Online Store ("Products",
+    "Uptown Blanks" until go-live, "UMS Storefront", and the built-in listing); six
+    policies present; `UMS_logo_transparent.png` exists; the live "Dawn" theme has not
+    changed since it was created; pickup instructions on the stocked location intact.
+  - Noted, not changed (live content or Raheem's call): Contact page FAQ "Do you ship?
+    No." could mention that group orders are arranged directly; About page says 2024 in
+    two consecutive sentences; policy hours use hyphens in two policies and "to" in one;
+    `/collections` lists a "Products" collection (handle `all`) alongside UMS Storefront;
+    the favicon is the full transparent logo rather than a simplified crop; "Shop
+    location" still has local pickup enabled with no address and no stock; the
+    forwarding rule to the second inbox is still to do; package pages use a typed list
+    where the brief wants 3–5 photos.

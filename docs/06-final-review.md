@@ -166,3 +166,20 @@ preview of the order confirmation email for pickup, the Vendor filter in Search 
 Discovery, deleting the old themes after go-live, SKU `4527-JANUARY`. One new copy
 nit: the About page says "2024" in two consecutive sentences ("opened its doors in
 Harlem in 2024" and "was founded in 2024"); dropping the second date reads better.
+
+## Third review — 2026-09-14, brief re-read, Theme Check, contrast, catalog
+
+| Check | Result |
+|---|---|
+| Brief §1–§10 re-read line by line against the build | Two gaps found and closed: the tagline was absent from the Organizations section (§2), and the low-stock line did not use the brief's "Only N left" wording (§4). |
+| Shopify Theme Check on the complete theme (110 text files pulled from Shopify) | No errors or warnings in UMS code apart from the expected shared-class notices; remaining notices are in stock Dawn files. |
+| WCAG AA contrast, measured on all ten rendered pages | **Fixed.** 15 small-text elements were between 3.6:1 and 4.4:1; every one now passes (explicit alpha instead of stacked opacity). |
+| Copy consistency (hours, address, phone, final-sale line) across theme, pages, policies, pickup instructions | Consistent. Footer pickup line now scoped to storefront orders. |
+| Catalog, product by product | 29 storefront products pass every check; 8 POS-only services off the Online Store; helper product unlisted. |
+| Navigation, redirects, blog, collections, policies, files, themes, locations | All as planned; 33 redirects match the go-live map; live theme untouched. |
+| Pages | 24 pages: the new pages published, the old ones unpublished, `order-form` and `bulk-catalog` waiting for go-live. |
+
+Left as they are, for Raheem: the Contact page FAQ wording on shipping, the doubled
+"2024" on About, hyphens versus en dashes in the policies, the "Products" collection
+at `/collections`, a purpose-made favicon crop, local pickup still enabled on "Shop
+location", the forwarding rule, and photographs for the package pages.
