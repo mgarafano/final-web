@@ -25,14 +25,14 @@
 </div>
 
 {% stylesheet %}
-  .ums-paths {
+  .ums-paths.page-width { /* out-ranks Dawn's .page-width padding */
     display: grid;
     gap: 1.6rem;
     padding-block: 1.6rem 6.4rem;
   }
 
   @media screen and (min-width: 990px) {
-    .ums-paths {
+    .ums-paths.page-width {
       grid-template-columns: 1.7fr 1fr;
       align-items: stretch;
     }

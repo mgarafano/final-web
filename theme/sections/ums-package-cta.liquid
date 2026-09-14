@@ -18,7 +18,10 @@
 </div>
 
 {% stylesheet %}
-  .ums-pkg { padding-block: 2rem 6.4rem; }
+  /* .ums-pkg.page-width, not .ums-pkg: Dawn's base.css loads after this stylesheet and its
+     .page-width--narrow { padding: 0 } would otherwise win the tie and remove the vertical
+     spacing, leaving the box sitting on the footer. */
+  .ums-pkg.page-width { padding-block: 2rem 6.4rem; }
   .ums-pkg__box { padding: 3.2rem; border-radius: var(--ums-radius, 2px); }
   .ums-pkg__min {
     margin: 0; font-family: var(--font-heading-family); font-weight: var(--font-heading-weight);
@@ -29,7 +32,7 @@
   .ums-pkg__back { font-size: 1.4rem; text-underline-offset: 0.4rem; color: inherit; }
 
   @media screen and (max-width: 749px) {
-    .ums-pkg { padding-block: 1.6rem 4.8rem; }
+    .ums-pkg.page-width { padding-block: 1.6rem 4.8rem; }
     .ums-pkg__box { padding: 2.4rem 2rem; }
     .ums-pkg__min { font-size: 2rem; }
   }

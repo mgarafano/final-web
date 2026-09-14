@@ -64,6 +64,12 @@
     --ums-space-8: 3.2rem;
   }
 
+  /* Cascade note. Shopify bundles these stylesheet blocks into styles.css and injects
+     it through content_for_header, which Dawn's layout places BEFORE base.css. So on an
+     element that also carries a Dawn class (page-width, button, link, the header menu
+     item), a UMS rule of equal specificity loses the tie. Any such rule here or in the
+     sections out-ranks Dawn's on purpose, e.g. `.ums-pkg.page-width`. */
+
   /* Muted text (eyebrows, hints, "(optional)") is painted with an explicit
      foreground alpha and never with opacity. Dawn already paints body text
      at 75% of the foreground color; stacking opacity on top of that took
@@ -266,7 +272,18 @@
     color: var(--ums-on-accent);
   }
 
-  .header__menu-item[href*="/pages/organizations"] span {
+  /* Dawn marks the current page's menu item with .header__active-menu-item on the inner
+     span and paints it dark with an underline. Out-rank that so the pill stays white on
+     the Organizations pages themselves, and keep hover from underlining the pill. */
+  .header__inline-menu .header__menu-item[href*="/pages/organizations"],
+  .header__inline-menu .header__menu-item[href*="/pages/organizations"] span,
+  .header__inline-menu .header__menu-item[href*="/pages/organizations"] .header__active-menu-item {
+    color: var(--ums-on-accent);
+    text-decoration: none;
+  }
+
+  .header__inline-menu .header__menu-item[href*="/pages/organizations"]:hover span,
+  .header__inline-menu .header__menu-item[href*="/pages/organizations"]:focus span {
     text-decoration: none;
   }
 
@@ -276,6 +293,7 @@
   .menu-drawer__menu-item[href*="/pages/organizations"] {
     background: var(--ums-accent);
     color: var(--ums-on-accent);
+    text-decoration: none;
     font-weight: 600;
     letter-spacing: var(--ums-tracking-wide);
     text-transform: uppercase;

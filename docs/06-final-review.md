@@ -183,3 +183,12 @@ Left as they are, for Raheem: the Contact page FAQ wording on shipping, the doub
 "2024" on About, hyphens versus en dashes in the policies, the "Products" collection
 at `/collections`, a purpose-made favicon crop, local pickup still enabled on "Shop
 location", the forwarding rule, and photographs for the package pages.
+
+## After Raheem's desktop screenshots — 2026-09-14
+
+| Check | Result |
+|---|---|
+| "UMS for Organizations" pill on the Organizations pages | **Fixed.** Text stays white on the current page; Dawn's active-item color and underline are out-ranked. |
+| Package page box against the footer | **Fixed.** 64px of white below the box on desktop, 48px on phones. |
+| Same cause elsewhere | **Fixed.** Order form, build list, contact form, internal page and business-line cards regain their vertical spacing; the two forms return to a 72–76rem column on desktop. |
+| Root cause | Section CSS loads before Dawn's `base.css`; equal-weight rules on shared elements lost the tie. Documented in `ums-globals` and the README. |

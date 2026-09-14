@@ -45,3 +45,7 @@ Rebuild of the Uptown Merch Solutions Shopify storefront (uptownmerch145.com).
   foreground alpha, never `opacity`. Dawn paints body text at 75% already; stacking
   opacity on top drops small text below the 4.5:1 contrast floor. Measured values are
   in the comment at the top of `sections/ums-globals.liquid`.
+- Section CSS loads **before** Dawn's `base.css` (Shopify injects the bundle through
+  `content_for_header`). A UMS rule on an element that also carries a Dawn class
+  (`page-width`, `button`, `link`, the header menu item) must out-rank Dawn's rule or it
+  loses the tie: write `.ums-pkg.page-width`, not `.ums-pkg`.

@@ -82,7 +82,7 @@
       <a class="button ums-cta ums-build__continue" id="UmsBuildContinue" href="{{ section.settings.next_url }}" aria-disabled="true">
         {{ section.settings.continue_label | escape }}
       </a>
-      <button type="button" class="link ums-build__clear" id="UmsBuildClear">
+      <button type="button" class="ums-build__clear" id="UmsBuildClear">
         {{ section.settings.clear_label | escape }}
       </button>
     </div>
@@ -258,7 +258,7 @@
 </script>
 
 {% stylesheet %}
-  .ums-build { padding-block: 4rem 6rem; max-width: 76rem; }
+  .ums-build.page-width { padding-block: 4rem 6rem; max-width: 76rem; } /* out-ranks Dawn's .page-width padding and max-width */
   .ums-build__rule { margin-top: 2rem; }
 
   .ums-build__add {
@@ -305,7 +305,7 @@
      Remove sit together on the second, so long names never squeeze
      the quantity field. */
   @media screen and (max-width: 749px) {
-    .ums-build { padding-block: 3.2rem 4.8rem; }
+    .ums-build.page-width { padding-block: 3.2rem 4.8rem; }
     .ums-build__add { padding: 2rem 1.6rem; }
     .ums-build__row { grid-template-columns: auto 1fr; gap: 1rem 1.6rem; }
     .ums-build__name { grid-column: 1 / -1; }

@@ -465,3 +465,22 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
     location" still has local pickup enabled with no address and no stock; the
     forwarding rule to the second inbox is still to do; package pages use a typed list
     where the brief wants 3–5 photos.
+
+- **2026-09-14 — Raheem's screenshots: nav pill text dark on Organizations pages, package
+  box touching the footer.** Both had one cause my local renders could not see: Shopify
+  injects the bundled section CSS through `content_for_header`, which Dawn's layout places
+  *before* `base.css`, so wherever a UMS rule and a Dawn rule of equal weight sit on the
+  same element, Dawn wins. Dawn's `.page-width--narrow { padding: 0 }` erased the package
+  box's bottom spacing; its `.header__active-menu-item { color: foreground }` painted the
+  current-page pill text dark. The same tie was silently costing the order form, build
+  list, business-line cards, contact form, and internal page their vertical spacing, and
+  the two forms their 72–76rem column (they ran the full 1200px on desktop).
+  - Every rule on an element that also carries a Dawn class now out-ranks Dawn's (e.g.
+    `.ums-pkg.page-width`, `.header__inline-menu .header__menu-item[href*=...] span`).
+    Nine sections pushed, verified by MD5.
+  - Two rules that never took effect (`max-width: 82rem` on the hero and hub inner
+    wrappers) were removed rather than enforced: the full-width column is what Raheem has
+    been looking at and it keeps the hero text aligned with the cards below.
+  - "Clear the list" no longer borrows Dawn's `link` class, so its color is ours.
+  - The render harness now loads UMS styles before `base.css`, marks the current nav item
+    the way Dawn does, and ends with a footer block, so this class of bug shows up locally.
