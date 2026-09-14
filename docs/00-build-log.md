@@ -181,3 +181,8 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
     in `ums-globals.liquid`, so the cart never shows anywhere in this flow.
   - Package pages use a typed item list; the brief's "3–5 example photos" need real
     photography to replace it.
+  - **Known drift, cosmetic only:** the repo copies of `ums-hero`, `ums-paths`,
+    `ums-org-hub`, `ums-package-cta`, and `ums-build-list` have theme-editor labels
+    and code comments normalised to American spelling ("Color scheme", "catalog",
+    "program"); the theme still has the British spellings in those five files. Nothing
+    customer-facing differs. Will sync on the next push that touches them.
