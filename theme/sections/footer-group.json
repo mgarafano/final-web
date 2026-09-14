@@ -9,14 +9,14 @@
           "type": "text",
           "settings": {
             "heading": "Visit the shop",
-            "subtext": "<p>241 W 145th St<br>Harlem, New York</p><p>Tuesday to Saturday, 11am–8pm<br>646-398-8178</p>"
+            "subtext": "<p>241 W 145th St<br>Harlem, New York</p><p>Tuesday\u2013Saturday, 11am\u20138pm<br>646-398-8178</p>"
           }
         },
         "pickup": {
           "type": "text",
           "settings": {
             "heading": "Pickup and returns",
-            "subtext": "<p>Every order is picked up in store — we don't ship.</p><p>All sales are final. No refunds, no exchanges.</p>"
+            "subtext": "<p>Every order is picked up in store \u2014 we don't ship.</p><p>All sales are final. No refunds, no exchanges.</p>"
           }
         },
         "browse": {
@@ -27,7 +27,11 @@
           }
         }
       },
-      "block_order": ["visit", "pickup", "browse"],
+      "block_order": [
+        "visit",
+        "pickup",
+        "browse"
+      ],
       "settings": {
         "color_scheme": "scheme-3",
         "newsletter_enable": true,
@@ -44,5 +48,7 @@
       }
     }
   },
-  "order": ["footer"]
+  "order": [
+    "footer"
+  ]
 }

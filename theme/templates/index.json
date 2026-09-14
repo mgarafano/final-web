@@ -4,8 +4,8 @@
       "type": "ums-hero",
       "settings": {
         "eyebrow": "Harlem, New York",
-        "heading": "Bringing brands to life.",
-        "body": "<p>Printed, embroidered and finished in-house at 241 W 145th Street — for one person or for a whole organization.</p>",
+        "heading": "Bringing Brands to Life.",
+        "body": "<p>Printed, embroidered, and finished in-house at 241 W 145th St \u2014 for one person or a whole organization.</p>",
         "primary_label": "Start an order for your group",
         "primary_link": "/pages/organizations",
         "secondary_label": "Shop the storefront",
@@ -19,9 +19,9 @@
         "orgs": {
           "type": "path",
           "settings": {
-            "label": "For schools, teams and companies",
+            "label": "For schools, teams, and companies",
             "heading": "UMS for Organizations",
-            "body": "Uniforms, spirit wear, staff apparel, event merch and custom patches — made for a whole group. Tell us what you need and we'll put a quote together.",
+            "body": "Uniforms, spirit wear, staff apparel, event merch, and custom patches \u2014 made for a whole group. Tell us what you need and we'll put a quote together.",
             "cta": "Start your order",
             "link": "/pages/organizations",
             "emphasis": "primary",
@@ -33,7 +33,7 @@
           "settings": {
             "label": "In the shop",
             "heading": "UMS Storefront",
-            "body": "Ready-to-wear pieces, finished in-house. Pick up at 145th Street.",
+            "body": "Ready-to-wear pieces, finished in-house. Pickup only, at the shop on 145th St.",
             "cta": "Browse the shop",
             "link": "/collections/ums-storefront",
             "emphasis": "secondary",
@@ -41,7 +41,10 @@
           }
         }
       },
-      "block_order": ["orgs", "shop"],
+      "block_order": [
+        "orgs",
+        "shop"
+      ],
       "settings": {}
     },
     "featured": {
@@ -63,5 +66,9 @@
       }
     }
   },
-  "order": ["hero", "paths", "featured"]
+  "order": [
+    "hero",
+    "paths",
+    "featured"
+  ]
 }

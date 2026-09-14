@@ -178,12 +178,18 @@
     "sections": {
       "main-password-header": {
         "type": "main-password-header",
-        "settings": { "color_scheme": "scheme-1" }
+        "settings": {
+          "color_scheme": "scheme-1"
+        }
       },
       "main-password-footer": {
         "type": "main-password-footer",
-        "settings": { "color_scheme": "scheme-1" }
+        "settings": {
+          "color_scheme": "scheme-1"
+        }
       }
-    }
+    },
+    "logo": "shopify://shop_images/UMS_logo_transparent.png",
+    "favicon": "shopify://shop_images/UMS_logo_transparent.png"
   }
 }

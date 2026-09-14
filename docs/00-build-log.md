@@ -93,3 +93,25 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
 | `themeFilesDelete` | Can't remove dead theme files | Raheem, in admin |
 | `publishableUnpublish` | Can't pull products off the Online Store | Raheem, in admin |
 | `appInstallations` read | Can't audit installed apps | Raheem, in admin |
+
+- **2026-09-14 — product cleanup executed, plus logo and a copy pass.**
+  - **29 products renamed** — title, vendor, product type, and description rewritten.
+    **Every SKU and inventory quantity verified unchanged** against the pre-rename
+    audit, including `4527-JANUARY` (40 units) and all ZS-series codes.
+  - Vendor is now `Uptown Merch Solutions` on every product; product types are real
+    garment types (T-Shirt, Tank Top, Hoodie, Joggers, Shorts, Cap, Beanie).
+  - 6 products had color option values flattened: `January` → `Red`,
+    `Gray/Brown` → `Gray`, `Mustard Yellow` → `Yellow`, `Burgundy Corduroy` →
+    `Burgundy`, `Forest Green Corduroy` → `Green`, `Burgundy Red/Khaki Beige` →
+    `Burgundy`, `Charcoal Gray/Black` → `Charcoal`.
+  - **Found during the pass:** every product's image alt text still read
+    `UPTOWN BLANKS <code> <color>` — customer-facing through screen readers and
+    search. All 29 rewritten.
+  - **One product could not be renamed:** `ZS4007 VINTAGE BLACK`
+    (`9219815538914`) returns "Product does not exist". It was a 0-stock draft at
+    audit time and has been deleted from the store since. Not deleted by this
+    session — product deletion is blocked on this connection.
+  - Logo and favicon wired to `UMS_logo_transparent.png`.
+  - Copy consistency pass; rules recorded in `docs/02-copy-style.md`.
+  - Organizations page given real interim content instead of a dev placeholder,
+    since the new nav links to it.
