@@ -222,10 +222,10 @@ back; the rest is listed with the exact steps.
 | "Shop location" offering pickup | **Done.** Local pickup disabled on that location (no stock, no address, old instructions); read back as no pickup settings. The stocked location is the only pickup point. The location itself stays active — `docs/04` §2. |
 | Policy hyphens and the Terms cross-reference | **Admin.** `shopPolicyUpdate` refused (`write_legal_policies`). Four find-and-replace edits in `docs/04` §9; `data/policies.json` matches. |
 | Favicon | **Admin, needs an image.** The favicon is the full 1958×1434 logo; at 32px it reads as a smudge. Needs a square crop of the logo's main mark, without any small lettering, exported as a 512×512 PNG on a transparent background, then Online Store → Themes → Customize (UMS Live 2026) → Theme settings → Favicon. That is a theme-editor setting, not a code push, so it needs no duplicate theme. No image bytes are reachable from this session, so the crop cannot be made here. |
-| Homepage meta description | **Admin.** Online Store → Preferences → Homepage meta description. Suggested: "Custom merch printed and embroidered in-house in Harlem. Ready-to-wear pieces for pickup at 241 W 145th St, and branded gear for schools, teams, and companies." The homepage title can stay as the store name. |
+| Homepage meta description | **Done by Raheem** (read back as the shop description on 2026-09-14): "Custom merch printed and embroidered in-house in Harlem. Ready-to-wear pieces for pickup at 241 W 145th St, and branded gear for schools, teams, and companies." |
 | Photos for the package pages | **Raheem.** 3–5 example photos per package (brief §5). The typed list stands in until they exist. |
 | Forwarding rule orders@ → mgarafano@ | **Raheem.** In the orders@ mailbox — `docs/04` §6. Then one test submission through each form. |
-| Old themes | **Admin.** Theme deletion is refused by API policy. Once the new site has settled: Online Store → Themes → ⋯ → Delete on "Copy of UMS logo homepage Live Version", "UMS site - Create Your Brand Uptown (staged)", and "UMS logo homepage Live Version". Keep "Dawn" as the one-click rollback for now. |
+| Old themes | **Two deleted by Raheem** ("UMS site - Create Your Brand Uptown (staged)" and "UMS logo homepage Live Version"). Left: "Copy of UMS logo homepage Live Version" (delete when ready) and "Dawn", the one-click rollback. |
 | "Products" collection at `/collections` | **Left as is, on purpose.** Hiding the built-in `all` collection would break `/collections/all` links; it lists the same 29 products. |
 
 ## Product page caption — 2026-09-14
@@ -235,3 +235,25 @@ the pickup-only store. It is Dawn's `products.product.shipping_policy_html` stri
 whenever a Shipping policy exists. Replaced in the repo with "Pickup only at 241 W 145th
 St, Harlem — we don't ship.", "we don't ship" linked to the Shipping policy. Not yet live:
 the API refuses writes to the live theme; the two ways to apply it are in `docs/04` §10.
+
+## Fifth review — 2026-09-14, the most critical pass
+
+Aimed at what a rendered check cannot show: stock Dawn behavior driven by store data (the
+shipping caption was one of those), catalog data as the theme will display it, channel
+and publication state, and the live theme measured against Dawn itself.
+
+| Check | Result |
+|---|---|
+| Live theme against stock Dawn v16.0.0, every file | 345 Dawn files present and identical by checksum, apart from the four known edits (`settings_schema`, `en.default.json`, `main-cart-footer`, `cart-drawer`); 16 UMS additions; JSON files differ only by Shopify's reformatting — 15 templates, groups and config compared as parsed content: identical to the repo, except the caption string (Raheem's wording, repo synced) and one dead key (below). |
+| Repo vs live | `templates/index.json` carried `enable_quick_add`, a key Dawn 16 does not have; Shopify dropped it, so the homepage grid has no quick add. Key removed from the repo; enabling it is a theme-editor choice (`docs/04` §11). |
+| Store | Password protection off. Primary domain `uptownmerch145.com` with SSL, www and the myshopify domain alongside. Shop name "Uptown Merch Solutions" (drives the title tag and the copyright line). Store and contact email orders@. Meta description set. Customer accounts disabled. Ships to no countries. |
+| Pages | 11 published; every template each page names exists in the live theme; 17 old pages unpublished. |
+| Redirects | 36; every target is a live page, collection, or the homepage; no chains. |
+| Helper product | Status `UNLISTED` — Shopify itself keeps it out of search, collections and recommendations, and out of `/collections/all`; published to the Online Store so the cart endpoint accepts it; `internal` template. |
+| Catalog, 29 products | Sizes in the right order on every product (XS…3X, YXS…YL); one image each with "<Name> in <Color>" alt; no compare-at prices, so no false sale badges; inventory tracked, no overselling; one sold-out variant (Women's Crop Long Sleeve — White, XS) shows as unavailable, correctly. Descriptions carry no shipping, custom or blank-goods language. Size labels differ between families ("2X, 3X" on the Heavyweight Tees, "2XL" on the Garment-Dyed Tee) — cosmetic, both read fine. |
+| Catalog, found | **Photos are cropped in every grid**: apparel shots are portrait, cards are square with cover-fit, so a sixth is cut top and bottom. **Pagination**: 24 per page splits 29 products across two pages. **No product category** on any product (Shopify Tax's NY clothing exemption depends on it). **Hats not on Point of Sale** (12 of 29). Three POS tile collections on no channel. All in `docs/04` §11 with the one-setting fixes. |
+| Product page | Now says "Pickup only" three times (caption under the price, the text block under the buy button, Dawn's pickup-availability line). Trim the block to the all-sales-final sentence — a theme-editor edit. |
+| Forms | Intake and contact forms re-read line by line: required fields, Shopify's error list, the artwork upload's size cap, failure message, and cleanup of the $0 helper line, and the submit guard while an upload is in flight. Nothing to change. The upload has been verified in code and locally, not yet on the live store — one live test with a file attached is the remaining step. |
+| Locations | Stocked location: full address, phone, pickup instructions, 24-hour window. "Shop location": pickup off, still active for POS. |
+| Themes | Two old themes gone (Raheem). "Copy of UMS logo homepage Live Version" and the "Dawn" rollback remain. |
+| Social preview | No social sharing image is set (Preferences); shared links show no image. |

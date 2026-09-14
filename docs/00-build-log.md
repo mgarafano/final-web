@@ -533,3 +533,21 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
   theme, and writes to the live theme are refused — so the live step is Raheem's, either
   through Edit default theme content on the live theme or the duplicate-push-publish
   workflow (`docs/04` §10).
+
+- **2026-09-14 — Fifth review, the most critical pass.** Raheem had already applied the
+  product-page caption through Edit default theme content, with "No Shipping" as the
+  link text; read back, repo synced to his wording (nothing else in the file moved).
+  Pulled Dawn v16.0.0 from GitHub and compared the live theme file for file: all 345
+  stock files identical by checksum except the four known edits; JSON differs only by
+  Shopify's reformatting (parsed content compared for 15 files). Found and removed a dead
+  key in the repo's `templates/index.json` (`enable_quick_add` — Dawn 16 uses
+  `quick_add`), which is why the live homepage grid has no quick add. Audited the 29
+  products as the theme will render them (option order, stock, prices, images, alt text,
+  descriptions, categories, channels), the publications (Online Store, POS, Shop,
+  Snapchat, Inbox), redirects, pages against templates, domains, password protection,
+  locations, and the helper product's `UNLISTED` status. New findings, all settings or
+  store data rather than code, are listed with their one-setting fixes in `docs/04` §11:
+  cropped grid photos, two-page collection, no product categories, hats off POS, POS
+  tile collections on no channel, no social sharing image, the product page's tripled
+  pickup line, and the old Main menu. Raheem also set the meta description and deleted
+  two old themes; docs updated.

@@ -58,7 +58,6 @@
         "image_ratio": "square",
         "show_secondary_image": false,
         "show_vendor": false,
-        "enable_quick_add": true,
         "show_view_all": true,
         "color_scheme": "scheme-1",
         "padding_top": 8,

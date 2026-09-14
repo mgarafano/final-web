@@ -188,7 +188,7 @@
       "taxes_included": "Taxes included.",
       "duties_included": "Duties included.",
       "duties_and_taxes_included": "Duties and taxes included.",
-      "shipping_policy_html": "Pickup only at 241 W 145th St, Harlem — <a href=\"{{ link }}\">we don't ship</a>."
+      "shipping_policy_html": "Pickup only at 241 W 145th St, Harlem — <a href=\"{{ link }}\">No Shipping</a>."
     },
     "modal": {
       "label": "Media gallery"

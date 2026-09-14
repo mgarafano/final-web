@@ -29,9 +29,11 @@ Rebuild of the Uptown Merch Solutions Shopify storefront (uptownmerch145.com).
   - `config/settings_schema.json` — one settings group appended ("UMS cart note").
   - `locales/en.default.json` — two strings changed: the low-stock line reads
     "Only N left" (brief §4), and the caption under a product's price reads "Pickup
-    only at 241 W 145th St, Harlem — we don't ship." (linked to the Shipping policy)
-    instead of Dawn's "Shipping calculated at checkout." The file carries Shopify's
-    auto-generated comment header above the JSON, exactly as Shopify stores it.
+    only at 241 W 145th St, Harlem — No Shipping." (linked to the Shipping policy)
+    instead of Dawn's "Shipping calculated at checkout." Raheem applied that one
+    through Edit default theme content; the repo carries his wording. The file
+    carries Shopify's auto-generated comment header above the JSON, exactly as
+    Shopify stores it.
 - Everything else on the theme is stock Dawn 16.0.0 and is not mirrored here.
 
 ## Pushing theme files
@@ -49,6 +51,11 @@ Rebuild of the Uptown Merch Solutions Shopify storefront (uptownmerch145.com).
   `md5sum`. JSON files: Shopify reformats them and adds an auto-generated comment, so
   compare the parsed content instead.
 - `config/settings_data.json` is deliberately not pushed; the theme editor owns it.
+- A JSON template may only carry keys the section's schema defines; Shopify drops
+  anything else silently at write time. Dawn 16's featured collection takes
+  `quick_add` ("none" / "standard" / "bulk"), not `enable_quick_add` — the homepage
+  template carried the wrong key until the fifth review, so the live homepage grid has
+  no quick add.
 - Muted text in UMS sections (eyebrows, hints, "(optional)") is colored with an explicit
   foreground alpha, never `opacity`. Dawn paints body text at 75% already; stacking
   opacity on top drops small text below the 4.5:1 contrast floor. Measured values are

@@ -217,7 +217,7 @@ The last one matters a little more than the dashes: the page customers land on i
 "Refund policy" (`/policies/refund-policy`), so the Terms should call it that. The en dash
 (–) is Option-hyphen on a Mac, Alt+0150 on Windows, or copy it from this table.
 
-## 10. Product page caption "Shipping calculated at checkout" — repo DONE 2026-09-14, live theme pending
+## 10. Product page caption "Shipping calculated at checkout" — DONE 2026-09-14 (Raheem, language editor)
 
 Raheem, with a product page screenshot: "There is no shipping … replace this with some
 other more intuitive line." Dawn prints `products.product.shipping_policy_html` under the
@@ -240,3 +240,33 @@ writes to the live theme, so getting it live is one of:
 Looked for a way to do it without Raheem: `themeFilesCopy` cannot read from another theme
 (its input has no source theme), `themeCreate` needs a public zip of the complete theme,
 and writes to the live theme are refused. So the live step is Raheem's.
+
+**Applied by Raheem through route 1**, with his own wording: "Pickup only at 241 W 145th
+St, Harlem — No Shipping." Read back from the live theme; the repo now carries that exact
+string, and nothing else in the file changed. One optional nit: the site's copy standard
+(`docs/02`) is sentence case, so "no shipping" would match the rest of the page; same
+editor, same field, if wanted.
+
+## 11. After the fifth review — theme-editor and admin items, none blocking
+
+Everything below is a setting or store-data change, not code. Where it is a theme-editor
+setting it can be made on the live theme directly (Online Store → Themes → Customize),
+no duplicate needed; the repo copy gets synced afterwards.
+
+| # | Item | Where | What |
+|---|---|---|---|
+| 1 | Product photos are cropped in the grids | Customize → Collection page → Product grid; Homepage → Featured collection; Product page → Related products | The tee shots are portrait (930×1395); the cards are square and use cover-fit, so the top and bottom sixth of every apparel photo is cut. Look at the storefront grid: if collars or hems are clipped, set **Image ratio → Adapt to image** in all three places (and Search page → Product grid, which already uses Adapt). Apparel cards become taller; hats stay square. |
+| 2 | Collection page splits 29 products over two pages | Customize → Collection page → Product grid → Products per page | 24 → **36**. One page. |
+| 3 | Product page says "Pickup only" three times | Customize → Products → Default product → the Text block under the buy button | Change "Pickup only, at 241 W 145th St. All sales are final — no refunds or exchanges." to **"All sales are final — no refunds or exchanges."** The caption under the price (§10) and Dawn's pickup-availability line already carry the pickup message. |
+| 4 | Homepage grid has no quick add | Customize → Homepage → Featured collection → Quick add | Optional: **Standard**, to match the collection page. The template carried a key Dawn 16 does not have, so the setting never took. |
+| 5 | Products carry no product category | Products → select all 29 → bulk edit → Category | Set Apparel & Accessories › Clothing (T-shirts, Hoodies, Shorts, Pants) and › Clothing Accessories › Hats. Shopify Tax uses the category to apply New York's clothing exemption under $110; without it, full sales tax can be charged on every tee. Check **Settings → Taxes → United States** for how NY clothing is set up. Can also be set through the API on request. |
+| 6 | The 12 hats are not on Point of Sale | Products → select the hats → ⋯ → Add to sales channels → Point of Sale | The 17 apparel products are on Online Store, POS and Shop; the hats are on Online Store only, so the register cannot ring them up from the catalog. Only matters if hats are sold in store. |
+| 7 | "POS Products", "POS Services", "Uptown Blanks" are on no channel at all | Collection → Publishing → Point of Sale | Their descriptions call them POS tile collections. If the register's smart grid used them, the tiles are dead; re-add them to **Point of Sale only** (not the Online Store). |
+| 8 | No social sharing image | Online Store → Preferences → Social sharing image | A 1200×630 image (logo on brand green). Without it, links shared in messages and social apps show no preview. |
+| 9 | "No Shipping" capitalization | Edit default theme content → Products → Shipping policy html | Optional: "no shipping" (sentence case, `docs/02`). |
+| 10 | Old "Main menu" still exists | Navigation → Main menu | Not used by the new theme (header and footer use "UMS main menu"), but it still lists Services, Blanks, Events and Promotional Products, Contact Us. Delete or empty it so it can never be picked by mistake. |
+
+Live tests still worth one run each: a pickup checkout (order → cart → checkout → Pick up),
+the contact form, the organizations order form **with an artwork file attached** (the
+upload is verified in code and locally, never yet on the live store), and the
+confirmation email that arrives.
