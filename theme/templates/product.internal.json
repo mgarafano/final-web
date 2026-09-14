@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "ums-internal-product",
+      "settings": {
+        "primary_link": "/pages/organizations",
+        "secondary_link": "/collections/ums-storefront"
+      }
+    }
+  },
+  "order": ["main"]
+}

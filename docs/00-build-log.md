@@ -370,3 +370,20 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
     Online Store), verified through the API: all 17 off the Online Store, POS untouched;
     Home page, Products, Uptown Blanks, and UMS Storefront still on. The 17 collection
     redirects are therefore live.
+
+- **2026-09-14 — Final review (Phase 9).** Every brief requirement checked against the
+  theme on Shopify, the catalog, and the settings; written up in
+  `docs/06-final-review.md`. All 12 repo code files match the theme by MD5; every JSON
+  template matches in content. Catalog: 29 storefront products pass every check
+  (titles, vendor, SKUs, descriptions, images, tracking, pricing, publication).
+  - **Fixed — intake form lost order types.** The checkboxes all posted as
+    `contact[Product types]`; Shopify keeps only the last of duplicate names, so a
+    request ticking two types arrived with one. Now a single hidden field carries every
+    ticked label, comma-separated. Verified by MD5 after push.
+  - **Fixed — helper product page.** `Artwork upload` now uses `product.internal`
+    (new `sections/ums-internal-product.liquid`): a plain "Nothing for sale here" page
+    with two buttons instead of a $0 Add to cart.
+  - Hero heading now escaped. Policies in the repo corrected to American spelling and
+    en-dash ranges; the five admin edits are in `docs/04` §9.
+  - Seven decisions for Raheem listed in `docs/06`, the material one being color as a
+    filterable option on the 18 single-color soft goods.

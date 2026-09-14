@@ -16,7 +16,7 @@
       <p class="ums-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>
     {%- endif -%}
 
-    <h1 class="ums-hero__title">{{ section.settings.heading }}</h1>
+    <h1 class="ums-hero__title">{{ section.settings.heading | escape }}</h1>
 
     {%- if section.settings.body != blank -%}
       <div class="ums-hero__body rte">{{ section.settings.body }}</div>

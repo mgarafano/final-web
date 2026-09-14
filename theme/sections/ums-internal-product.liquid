@@ -1,0 +1,38 @@
+{%- comment -%}
+  Internal product page — used only by the "Artwork upload" helper product
+  (template suffix "internal"). The helper exists so the Organizations order
+  form can hand artwork files to Shopify's CDN through the cart. It is never
+  meant to be seen or bought; if someone lands on its URL anyway, this is what
+  they get instead of a $0 buy button.
+{%- endcomment -%}
+
+<div class="ums-internal page-width">
+  <p class="ums-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+  <h1 class="ums-h1">{{ section.settings.heading | escape }}</h1>
+  <div class="ums-lede rte">{{ section.settings.body }}</div>
+  <div class="ums-internal__actions">
+    <a class="button ums-cta" href="{{ section.settings.primary_link }}">{{ section.settings.primary_label | escape }}</a>
+    <a class="button button--secondary ums-cta" href="{{ section.settings.secondary_link }}">{{ section.settings.secondary_label | escape }}</a>
+  </div>
+</div>
+
+{% stylesheet %}
+  .ums-internal { padding-block: 4.8rem 6.4rem; max-width: 72rem; }
+  .ums-internal__actions { display: flex; flex-wrap: wrap; gap: 1.2rem 1.6rem; margin-top: 2.8rem; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "UMS internal product",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Uptown Merch Solutions" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Nothing for sale here" },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>This page is used by our group order form to receive artwork files. There's nothing to buy on it.</p>" },
+    { "type": "text", "id": "primary_label", "label": "Primary button", "default": "Start a group order" },
+    { "type": "url", "id": "primary_link", "label": "Primary link" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary button", "default": "Shop the storefront" },
+    { "type": "url", "id": "secondary_link", "label": "Secondary link" }
+  ],
+  "presets": [{ "name": "UMS internal product" }]
+}
+{% endschema %}

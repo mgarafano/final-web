@@ -191,3 +191,17 @@ Two mitigations, both without Plus:
    also removes Shopify's local-pickup flow (pickup instructions at checkout, the
    ready-for-pickup email, the pickup orders tab in POS) — not recommended; the brief
    asks to keep the pickup pattern.
+
+## 9. Policy wording — five optional edits (Settings → Policies)
+
+The pasted policies work as they are. For consistency with the site's American-English,
+en-dash standard (`docs/02`):
+
+| Policy | Change |
+|---|---|
+| Contact information | "Tuesday to Saturday, 11am to 8pm" → "Tuesday–Saturday, 11am–8pm" |
+| Privacy policy | "submit an enquiry" → "submit an inquiry"; "fulfil your order" → "fulfill your order" |
+| Shipping | "Tuesday to Saturday, 11am to 8pm" → "Tuesday–Saturday, 11am–8pm"; "when you enquire" → "when you inquire" |
+| Terms of service | "Tuesday to Saturday, 11am to 8pm" → "Tuesday–Saturday, 11am–8pm" |
+
+`data/policies.json` in the repo already carries the corrected text.

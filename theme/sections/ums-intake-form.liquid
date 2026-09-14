@@ -111,12 +111,19 @@
             {%- assign clean = t | strip_newlines | strip -%}
             {%- if clean != blank -%}
               <label class="ums-intake__check">
-                <input type="checkbox" name="contact[Product types]" value="{{ clean | escape }}">
+                <input type="checkbox" value="{{ clean | escape }}">
                 <span>{{ clean | escape }}</span>
               </label>
             {%- endif -%}
           {%- endfor -%}
         </div>
+        {%- comment -%}
+          The checkboxes above carry no name of their own. Shopify's contact form
+          keeps only the last of several fields that share a name, so two ticked
+          boxes would arrive as one. Every ticked label is joined into this one
+          hidden field instead, e.g. "Team and spirit wear, Custom patches".
+        {%- endcomment -%}
+        <input type="hidden" name="contact[Product types]" id="UmsTypesValue" value="">
         <p class="ums-alert" id="UmsTypesError" hidden>Choose at least one.</p>
       </fieldset>
 
@@ -230,8 +237,16 @@
           // ---- At least one order type -----------------------------------
           var group = document.getElementById('UmsTypes');
           var err = document.getElementById('UmsTypesError');
+          var typesOut = document.getElementById('UmsTypesValue');
+          function syncTypes() {
+            var picked = [];
+            group.querySelectorAll('input[type="checkbox"]:checked').forEach(function (b) { picked.push(b.value); });
+            typesOut.value = picked.join(', ');
+            return picked.length > 0;
+          }
+          syncTypes();
           group.addEventListener('change', function () {
-            if (group.querySelector('input[type="checkbox"]:checked')) {
+            if (syncTypes()) {
               err.hidden = true;
               group.classList.remove('is-invalid');
             }
@@ -295,8 +310,7 @@
 
           // ---- Submit guard ----------------------------------------------
           form.addEventListener('submit', function (e) {
-            var any = group.querySelector('input[type="checkbox"]:checked');
-            if (!any) {
+            if (!syncTypes()) {
               e.preventDefault();
               err.hidden = false;
               group.classList.add('is-invalid');
