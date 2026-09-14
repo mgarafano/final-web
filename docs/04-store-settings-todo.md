@@ -38,9 +38,9 @@ period. Those would be new commitments the brief never authorized.
 Shopify will also prompt for a privacy policy and terms of service. Its generated
 templates are a reasonable starting point for both.
 
-## 2. Local pickup — instructions DONE 2026-09-14; one location question left
+## 2. Local pickup — DONE 2026-09-14 on both locations
 
-The stocked location, **Uptown Merch Solutions**, now carries pickup instructions (set
+The stocked location, **Uptown Merch Solutions**, carries the pickup instructions (set
 through the API on Raheem's "do whatever is best"):
 
 > Orders are usually ready within 24 hours. We'll email you when yours is ready. Pick up
@@ -48,12 +48,18 @@ through the API on Raheem's "do whatever is best"):
 
 Pickup window stays "usually ready in 24 hours". This is live at checkout now.
 
-**Still open — "Shop location".** It holds no inventory, ships nothing, and only carries
-the old typo'd pickup text. It was *not* deactivated: if the POS register is tied to
-it, deactivating would break in-store sales. Check **Point of Sale → Locations** (or
-the POS app's settings) for which location the register uses. If it is "Uptown Merch
-Solutions", then "Shop location" can be deactivated in Settings → Locations. If it is
-"Shop location", the right fix is to move the register to the stocked location first.
+**"Shop location" no longer offers pickup** — disabled through the API on 2026-09-14, on
+Raheem's "fix all issues identified", and read back as having no pickup settings. It holds
+no inventory and has no address, so the only thing it could do at checkout was show its
+old typo'd instructions; the stocked location is now the only pickup point. The location
+itself is still active and was *not* deactivated: if the POS register is tied to it,
+deactivating would break in-store sales. Re-enabling pickup is one click in Settings →
+Locations → Shop location if it is ever needed.
+
+To retire the location entirely, check **Point of Sale → Locations** (or the POS app's
+settings) for which location the register uses. If it is "Uptown Merch Solutions", then
+"Shop location" can be deactivated in Settings → Locations. If it is "Shop location", the
+right fix is to move the register to the stocked location first.
 
 ## 3. Shipping — DONE 2026-09-14, pickup is the only method
 
@@ -62,8 +68,8 @@ with USPS and DHL Express) were deleted from the General profile. Verified after
 the profile has no zones and the store ships to no countries. Checkout can only offer
 local pickup now. Bulk-order shipping is arranged outside the website.
 
-Still worth deciding: whether "Shop location" (no inventory) should exist at all, and
-the pickup instructions in §2.
+Still worth deciding: whether "Shop location" (no inventory, pickup now off) should
+exist at all — see §2.
 
 ## 4. Checkout branding — DONE by Raheem 2026-09-14 (not readable from here)
 
@@ -192,16 +198,21 @@ Two mitigations, both without Plus:
    ready-for-pickup email, the pickup orders tab in POS) — not recommended; the brief
    asks to keep the pickup pattern.
 
-## 9. Policy wording — five optional edits (Settings → Policies)
+## 9. Policy wording — four edits left (Settings → Policies)
 
-The pasted policies work as they are. For consistency with the site's American-English,
-en-dash standard (`docs/02`):
+Raheem made the spelling edits (inquiry, fulfill) on 2026-09-14. What remains is the dash
+style in three policies and one cross-reference. The API cannot make them: on 2026-09-14
+`shopPolicyUpdate` was refused again (*"Access denied … requires `write_legal_policies`"*),
+so they are admin edits. `data/policies.json` carries the final text of all six policies
+if pasting a whole policy is easier than editing in place.
 
-| Policy | Change |
-|---|---|
-| Contact information | "Tuesday to Saturday, 11am to 8pm" → "Tuesday–Saturday, 11am–8pm" |
-| Privacy policy | "submit an enquiry" → "submit an inquiry"; "fulfil your order" → "fulfill your order" |
-| Shipping | "Tuesday to Saturday, 11am to 8pm" → "Tuesday–Saturday, 11am–8pm"; "when you enquire" → "when you inquire" |
-| Terms of service | "Tuesday to Saturday, 11am to 8pm" → "Tuesday–Saturday, 11am–8pm" |
+| Policy | Find | Replace with |
+|---|---|---|
+| Contact information | `Tuesday-Saturday, 11am-8pm` | `Tuesday–Saturday, 11am–8pm` |
+| Shipping policy | `Tuesday-Saturday, 11am-8pm` | `Tuesday–Saturday, 11am–8pm` |
+| Terms of service | `Tuesday-Saturday, 11am-8pm` | `Tuesday–Saturday, 11am–8pm` |
+| Terms of service | `See our Return and refund policy.` | `See our Refund policy.` |
 
-`data/policies.json` in the repo already carries the corrected text.
+The last one matters a little more than the dashes: the page customers land on is titled
+"Refund policy" (`/policies/refund-policy`), so the Terms should call it that. The en dash
+(–) is Option-hyphen on a Mac, Alt+0150 on Windows, or copy it from this table.

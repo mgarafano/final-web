@@ -506,3 +506,17 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
   accounts disabled, orders@ everywhere, 11 pages, 36 redirects, two collections on the
   channel, helper product unlisted). Write-up in `docs/06`. The API now refuses writes to
   the live theme; the duplicate-push-publish workflow is in the README.
+
+- **2026-09-14 — "Please fix all issues identified."** Applied everything the API can reach
+  from the post-go-live open list, and read each change back:
+  - Contact page: the "Do you ship?" answer now separates storefront pickup from group
+    orders arranged directly with the team (matches the footer line and the Shipping
+    policy). About page: the second "in 2024" dropped.
+  - "Shop location": local pickup disabled (`locationLocalPickupDisable`); read back with
+    no pickup settings. The location stays active — the POS question in `docs/04` §2.
+  - Policies: `shopPolicyUpdate` refused (`write_legal_policies`), so the three dash edits
+    and the Terms cross-reference ("Refund policy" — the page's real title) are listed for
+    admin in `docs/04` §9; `data/policies.json` updated to match.
+  - Not reachable from here, listed with steps in `docs/06`: favicon crop (needs an image
+    file), homepage meta description, package photos, forwarding rule, old-theme deletion
+    (API policy).

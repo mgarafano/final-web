@@ -112,7 +112,8 @@ for those can be added later if search traffic shows up for them.
 A: unpublish Our Work (done). B: unpublish both for now (done). C: hide, never delete
 (redirects done; hiding is an admin step, see section 1). D: "do whatever is best" —
 pickup instructions set on the stocked location; "Shop location" left active pending the
-POS check in `docs/04` §2.
+POS check in `docs/04` §2 (its local pickup was switched off after go-live, so it can no
+longer appear at checkout).
 
 Original questions, for the record:
 

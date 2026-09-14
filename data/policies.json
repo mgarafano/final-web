@@ -1,7 +1,7 @@
 {
   "refund": {
-    "shopifyField": "Return and refund policy",
-    "title": "Return and refund policy",
+    "shopifyField": "Return and refund policy (Settings → Policies)",
+    "title": "Refund policy",
     "paras": [
       "All sales are final. Uptown Merch Solutions does not offer refunds or exchanges on any item.",
       "This applies to everything we sell, both in the shop and through uptownmerch145.com.",
@@ -51,7 +51,7 @@
       "We do not ship. Every order is collected in person at 241 W 145th St, Harlem, New York, during opening hours — Tuesday–Saturday, 11am–8pm.",
       "We'll let you know when your order is ready. Please collect it promptly; we have limited space to hold finished orders.",
       "ALL SALES ARE FINAL",
-      "We do not offer refunds or exchanges. See our Return and refund policy.",
+      "We do not offer refunds or exchanges. See our Refund policy.",
       "GROUP AND BULK ORDERS",
       "Quotes for group and organization orders are prepared individually and are not binding until both sides confirm the order in writing. Quantities, pricing, and timing depend on what you need and what our suppliers can provide. Nothing on this website constitutes a price quote for a bulk order.",
       "ARTWORK YOU SUPPLY",

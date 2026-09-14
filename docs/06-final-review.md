@@ -209,3 +209,21 @@ Open, all Raheem's call: the Contact page shipping answer, the doubled "2024" on
 policy hyphens, a purpose-made favicon, "Shop location" still offering pickup with its old
 instructions and no stock, the forwarding rule, photos for the package pages, and deleting
 the four old themes once the new site has settled.
+
+## Fixes applied — 2026-09-14, after the final review
+
+Raheem: "please fix all issues identified." Everything the API can reach is done and read
+back; the rest is listed with the exact steps.
+
+| Item | Result |
+|---|---|
+| Contact page, "Do you ship?" | **Done.** Now reads "No — storefront orders are picked up in store. Group orders are arranged directly with our team, including how you'll receive them." Same line of thought as the footer and the Shipping policy. |
+| About page, "2024" twice | **Done.** Second sentence now "UMS was founded by someone who grew up right here in Harlem…"; the opening year stays in the first sentence. |
+| "Shop location" offering pickup | **Done.** Local pickup disabled on that location (no stock, no address, old instructions); read back as no pickup settings. The stocked location is the only pickup point. The location itself stays active — `docs/04` §2. |
+| Policy hyphens and the Terms cross-reference | **Admin.** `shopPolicyUpdate` refused (`write_legal_policies`). Four find-and-replace edits in `docs/04` §9; `data/policies.json` matches. |
+| Favicon | **Admin, needs an image.** The favicon is the full 1958×1434 logo; at 32px it reads as a smudge. Needs a square crop of the logo's main mark, without any small lettering, exported as a 512×512 PNG on a transparent background, then Online Store → Themes → Customize (UMS Live 2026) → Theme settings → Favicon. That is a theme-editor setting, not a code push, so it needs no duplicate theme. No image bytes are reachable from this session, so the crop cannot be made here. |
+| Homepage meta description | **Admin.** Online Store → Preferences → Homepage meta description. Suggested: "Custom merch printed and embroidered in-house in Harlem. Ready-to-wear pieces for pickup at 241 W 145th St, and branded gear for schools, teams, and companies." The homepage title can stay as the store name. |
+| Photos for the package pages | **Raheem.** 3–5 example photos per package (brief §5). The typed list stands in until they exist. |
+| Forwarding rule orders@ → mgarafano@ | **Raheem.** In the orders@ mailbox — `docs/04` §6. Then one test submission through each form. |
+| Old themes | **Admin.** Theme deletion is refused by API policy. Once the new site has settled: Online Store → Themes → ⋯ → Delete on "Copy of UMS logo homepage Live Version", "UMS site - Create Your Brand Uptown (staged)", and "UMS logo homepage Live Version". Keep "Dawn" as the one-click rollback for now. |
+| "Products" collection at `/collections` | **Left as is, on purpose.** Hiding the built-in `all` collection would break `/collections/all` links; it lists the same 29 products. |
