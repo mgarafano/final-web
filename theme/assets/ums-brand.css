@@ -1,0 +1,87 @@
+/* Uptown Merch Solutions - brand foundation.
+   Source of truth: repo theme/assets/ums-brand.css
+   Palette locked per rebuild brief section 2. */
+
+:root {
+  /* Brand palette */
+  --ums-green: #355E3B;
+  --ums-gray: #a9a5a4;
+  --ums-gray-cool: #838388;
+  --ums-white: #ffffff;
+  --ums-ink: #1b1b1b;
+
+  /* Derived tints and shades */
+  --ums-green-900: #24412a;
+  --ums-green-050: #eef2ee;
+  --ums-gray-050: #f6f5f5;
+  --ums-gray-200: #e2e0df;
+  --ums-gray-600: #6c6a6a;
+
+  /* Semantic roles - components read these, never raw hex */
+  --ums-surface: var(--ums-white);
+  --ums-surface-alt: var(--ums-gray-050);
+  --ums-text: var(--ums-ink);
+  --ums-text-muted: var(--ums-gray-600);
+  --ums-border: var(--ums-gray-200);
+  --ums-accent: var(--ums-green);
+  --ums-accent-hover: var(--ums-green-900);
+  --ums-on-accent: var(--ums-white);
+  --ums-focus: var(--ums-green);
+
+  /* Type - families come from theme settings so the checkout branding
+     editor can be pointed at the same two families. */
+  --ums-font-heading: var(--font-heading-family);
+  --ums-font-body: var(--font-body-family);
+  --ums-tracking-wide: 0.06em;
+
+  /* Shape - squared off, matching the logo's hard-edged letterforms.
+     Buttons and inputs share a radius so the POWR contact form can be
+     matched exactly. */
+  --ums-radius: 2px;
+  --ums-radius-lg: 4px;
+}
+
+/* Nav weighting: 'UMS for Organizations' is the primary business line and
+   must read heavier than its neighbours on desktop and in the mobile drawer
+   (brief section 3, and section 8 / Mobile). */
+.ums-nav-cta > a,
+.ums-nav-cta > summary {
+  background: var(--ums-accent);
+  color: var(--ums-on-accent);
+  border-radius: var(--ums-radius);
+  padding: 0.7rem 1.2rem;
+  font-weight: 600;
+  letter-spacing: var(--ums-tracking-wide);
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.ums-nav-cta > a:hover,
+.ums-nav-cta > summary:hover {
+  background: var(--ums-accent-hover);
+  color: var(--ums-on-accent);
+}
+
+/* In the mobile drawer, a filled row rather than a pill - reads as primary
+   without looking like a stray button inside a stacked text list. */
+.menu-drawer .ums-nav-cta > a,
+.menu-drawer .ums-nav-cta > summary {
+  display: block;
+  border-radius: 0;
+  margin: 0.5rem 0;
+  padding: 1rem 1.5rem;
+}
+
+/* Organizations section has no cart or checkout anywhere in its flow, so an
+   active cart icon there would be misleading (brief section 3). The context
+   class is set on <body> in theme.liquid from the request path. */
+.ums-org-context .header__icon--cart,
+.ums-org-context #cart-icon-bubble {
+  display: none !important;
+}
+
+/* One consistent, brand-coloured focus ring across the whole site. */
+*:focus-visible {
+  outline: 2px solid var(--ums-focus);
+  outline-offset: 2px;
+}
