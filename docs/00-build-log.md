@@ -135,3 +135,26 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
 | Newly blocked operation | Consequence |
 |---|---|
 | `shopPolicyUpdate` | Cannot create the refund policy — Raheem must, in Settings → Policies |
+
+- **2026-09-14 — service products restored, POS-only.**
+  All 8 rebuilt from the salvage record and published to **Point of Sale only**.
+  Restored complete: Embroidery Setup and File Services (3), Embroidery Services (7),
+  Heat Press Vinyl (8), Custom Stickers (7), Window Decals (5), Step and Repeat (8 of 10).
+  Partial: DTF Services (8 of 30 — prices for the other 22 were never captured).
+  Quote Request restored with 4 of 5 variants; the `QUOTE-ESP` "ESP catalog quote
+  request" variant was left out deliberately per brief §3.
+
+  **Correction — unpublishing was never actually impossible.** `publishableUnpublish`
+  is blocked, but **`publicationUpdate` with `publishablesToRemove` is not**, and it
+  does the same job. It was used to take all 8 back off the Online Store after
+  activation auto-published them. Had this been found earlier, the manual admin step
+  — and the deletion that followed — would not have been needed.
+
+| Operation | Status |
+|---|---|
+| `publishableUnpublish` | ❌ blocked |
+| `publicationUpdate` (`publishablesToRemove`) | ✅ **works — use this instead** |
+
+- **2026-09-14 — all six store policies drafted** in `data/policies.json`, rendered for
+  copy-paste. Refund, shipping, and contact state existing practice. Privacy and terms
+  carry real legal weight and are flagged for review before use.
