@@ -1,0 +1,32 @@
+{
+  "sections": {
+    "hub": {
+      "type": "ums-org-hub",
+      "blocks": {
+        "p1": { "type": "package", "settings": { "title": "School and work uniforms", "body": "Consistent, durable pieces for students and staff, embroidered or printed with your crest.", "link": "/pages/organizations-uniforms" } },
+        "p2": { "type": "package", "settings": { "title": "Team and spirit wear", "body": "Jerseys, warm-ups, and fan gear for sports teams, clubs, and the people cheering them on.", "link": "/pages/organizations-team" } },
+        "p3": { "type": "package", "settings": { "title": "Corporate and staff apparel", "body": "Polos, quarter-zips, and jackets that put your logo on the people who represent you.", "link": "/pages/organizations-corporate" } },
+        "p4": { "type": "package", "settings": { "title": "Event and fundraiser merch", "body": "Tees, totes, and caps for a date on the calendar — launches, galas, walks, and drives.", "link": "/pages/organizations-events" } },
+        "p5": { "type": "package", "settings": { "title": "Custom patches", "body": "Embroidered or woven patches for uniforms, jackets, and bags.", "link": "/pages/organizations-patches" } },
+        "p6": { "type": "package", "settings": { "title": "Something else", "body": "Not sure which package fits? Tell us what you're planning and we'll figure it out together.", "link": "/pages/organizations-other" } },
+        "s1": { "type": "step", "settings": { "title": "Tell us what you need", "body": "Pick a package, or build a list of item types and quantities." } },
+        "s2": { "type": "step", "settings": { "title": "We quote it", "body": "You'll hear back by email with a quote based on your pieces, quantities, and decoration." } },
+        "s3": { "type": "step", "settings": { "title": "We make it", "body": "Once you confirm, we produce your order and arrange how you'll receive it." } }
+      },
+      "block_order": ["p1", "p2", "p3", "p4", "p5", "p6", "s1", "s2", "s3"],
+      "settings": {
+        "eyebrow": "UMS for Organizations",
+        "heading": "Branded gear for your whole group.",
+        "body": "<p>Uniforms, spirit wear, staff apparel, event merch, and custom patches — printed and embroidered in-house in Harlem for schools, teams, and companies.</p>",
+        "cta_label": "Start your order",
+        "cta_link": "/pages/organizations-build-list",
+        "hero_scheme": "scheme-3",
+        "packages_heading": "What are you ordering?",
+        "card_cta": "See this package",
+        "how_heading": "How it works",
+        "minimum_note": "Minimum order is 8 pieces per style. No pricing is listed online — every order is quoted."
+      }
+    }
+  },
+  "order": ["hub"]
+}

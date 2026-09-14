@@ -1,0 +1,47 @@
+{%- comment -%}
+  Package page footer — UMS for Organizations (brief §5.3).
+
+  Sits under the package description on every package page and carries the
+  two things each package page must state: the per-style minimum, and one
+  clear "Start your order" button. Nothing else — no pricing, no turnaround.
+{%- endcomment -%}
+
+<div class="ums-pkg page-width">
+  <div class="ums-pkg__box color-{{ section.settings.color_scheme }} gradient">
+    <p class="ums-pkg__min">{{ section.settings.minimum_note | escape }}</p>
+    <p class="ums-pkg__note">{{ section.settings.note | escape }}</p>
+    <div class="ums-pkg__actions">
+      <a class="button ums-pkg__cta" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label | escape }}</a>
+      <a class="ums-pkg__back" href="{{ section.settings.back_link }}">{{ section.settings.back_label | escape }}</a>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .ums-pkg { padding-block: 2rem 6.4rem; max-width: 76rem; }
+  .ums-pkg__box { padding: 3.2rem; border-radius: var(--ums-radius, 2px); }
+  .ums-pkg__min {
+    margin: 0; font-family: var(--font-heading-family); font-weight: var(--font-heading-weight);
+    font-size: 2.2rem; line-height: 1.2; letter-spacing: -0.01em;
+  }
+  .ums-pkg__note { margin: 1rem 0 0; font-size: 1.5rem; opacity: 0.9; max-width: 56ch; }
+  .ums-pkg__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.6rem 2.4rem; margin-top: 2.4rem; }
+  .ums-pkg__cta { letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
+  .ums-pkg__back { font-size: 1.4rem; text-underline-offset: 0.4rem; color: inherit; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "UMS package footer",
+  "settings": [
+    { "type": "text", "id": "minimum_note", "label": "Minimum", "default": "Minimum order is 8 pieces per style." },
+    { "type": "text", "id": "note", "label": "Note", "default": "Tell us what you need and we'll come back with a quote. Exact colors, sizes, and details get sorted out with you after you send your request." },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Start your order" },
+    { "type": "url", "id": "cta_link", "label": "Button link" },
+    { "type": "text", "id": "back_label", "label": "Back link label", "default": "See all packages" },
+    { "type": "url", "id": "back_link", "label": "Back link" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-3" }
+  ],
+  "presets": [{ "name": "UMS package footer" }]
+}
+{% endschema %}

@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "form": {
+      "type": "ums-intake-form",
+      "settings": {
+        "build_list_url": "/pages/organizations-build-list",
+        "done_link": "/"
+      }
+    }
+  },
+  "order": ["form"]
+}

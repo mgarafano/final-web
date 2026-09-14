@@ -1,0 +1,154 @@
+{%- comment -%}
+  UMS for Organizations — hub page.
+
+  The explainer for the bulk program (brief §5). Package cards link to the
+  six package pages; every path ends at "Start your order". No pricing, no
+  turnaround times, no cart — those are decisions, not omissions.
+{%- endcomment -%}
+
+<div class="ums-hub">
+  <div class="ums-hub__hero color-{{ section.settings.hero_scheme }} gradient">
+    <div class="page-width ums-hub__hero-inner">
+      <p class="ums-hub__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      <h1 class="ums-hub__title">{{ section.settings.heading | escape }}</h1>
+      {%- if section.settings.body != blank -%}
+        <div class="ums-hub__body rte">{{ section.settings.body }}</div>
+      {%- endif -%}
+      <div class="ums-hub__actions">
+        <a class="button ums-hub__cta" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label | escape }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-width">
+    <div class="ums-hub__section">
+      <h2 class="ums-hub__h2">{{ section.settings.packages_heading | escape }}</h2>
+      <div class="ums-hub__grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'package' -%}
+            <a class="ums-hub__card" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
+              <span class="ums-hub__card-title">{{ block.settings.title | escape }}</span>
+              <span class="ums-hub__card-body">{{ block.settings.body | escape }}</span>
+              <span class="ums-hub__card-cta">{{ section.settings.card_cta | escape }}</span>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="ums-hub__section ums-hub__how">
+      <h2 class="ums-hub__h2">{{ section.settings.how_heading | escape }}</h2>
+      <ol class="ums-hub__steps">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'step' -%}
+            <li class="ums-hub__step" {{ block.shopify_attributes }}>
+              <span class="ums-hub__step-title">{{ block.settings.title | escape }}</span>
+              <span class="ums-hub__step-body">{{ block.settings.body | escape }}</span>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ol>
+      <p class="ums-hub__rule">{{ section.settings.minimum_note | escape }}</p>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .ums-hub__hero { padding-block: 6rem 5.6rem; }
+  .ums-hub__hero-inner { max-width: 82rem; }
+  .ums-hub__eyebrow {
+    margin: 0 0 1.6rem; font-size: 1.2rem; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.75;
+  }
+  .ums-hub__title { margin: 0; font-size: clamp(3.2rem, 6vw, 5.2rem); line-height: 1.05; letter-spacing: -0.02em; text-wrap: balance; }
+  .ums-hub__body { margin-top: 2rem; max-width: 58rem; font-size: 1.8rem; line-height: 1.5; }
+  .ums-hub__body > :first-child { margin-top: 0; }
+  .ums-hub__body > :last-child { margin-bottom: 0; }
+  .ums-hub__actions { margin-top: 3.2rem; }
+  .ums-hub__cta { letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
+
+  .ums-hub__section { padding-block: 5.6rem 0; }
+  .ums-hub__section:last-child { padding-bottom: 6.4rem; }
+  .ums-hub__h2 { margin: 0 0 2.4rem; font-size: 2.6rem; letter-spacing: -0.01em; }
+
+  .ums-hub__grid { display: grid; gap: 1.6rem; }
+  @media screen and (min-width: 750px) { .ums-hub__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media screen and (min-width: 990px) { .ums-hub__grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .ums-hub__card {
+    display: flex; flex-direction: column; gap: 1rem; padding: 2.4rem;
+    border: 1px solid rgba(var(--color-foreground), 0.16);
+    border-radius: var(--ums-radius, 2px); text-decoration: none; color: inherit;
+    transition: border-color 0.18s ease, transform 0.18s ease;
+  }
+  .ums-hub__card:hover { border-color: var(--ums-green, #355e3b); transform: translateY(-2px); }
+  .ums-hub__card-title {
+    font-family: var(--font-heading-family); font-weight: var(--font-heading-weight);
+    font-size: 2rem; line-height: 1.15; letter-spacing: -0.01em;
+  }
+  .ums-hub__card-body { font-size: 1.5rem; line-height: 1.5; opacity: 0.85; }
+  .ums-hub__card-cta {
+    margin-top: auto; padding-top: 1.2rem; font-size: 1.3rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--ums-green, #355e3b);
+  }
+  .ums-hub__card-cta::after { content: " \2192"; }
+
+  .ums-hub__steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.6rem; counter-reset: s; }
+  @media screen and (min-width: 750px) { .ums-hub__steps { grid-template-columns: repeat(3, 1fr); } }
+  .ums-hub__step {
+    counter-increment: s; display: flex; flex-direction: column; gap: 0.8rem;
+    padding: 2rem 2rem 2rem 5.6rem; position: relative;
+    background: var(--ums-green-050, #eef2ee); border-radius: var(--ums-radius, 2px);
+  }
+  .ums-hub__step::before {
+    content: counter(s); position: absolute; left: 2rem; top: 1.8rem;
+    font-family: var(--font-heading-family); font-weight: 800; font-size: 2.2rem;
+    color: var(--ums-green, #355e3b);
+  }
+  .ums-hub__step-title { font-weight: 600; font-size: 1.6rem; }
+  .ums-hub__step-body { font-size: 1.45rem; line-height: 1.5; opacity: 0.85; }
+  .ums-hub__rule { margin: 2.4rem 0 0; font-weight: 600; font-size: 1.5rem; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ums-hub__card { transition: none; }
+    .ums-hub__card:hover { transform: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "UMS Organizations hub",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "UMS for Organizations" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Branded gear for your whole group." },
+    { "type": "richtext", "id": "body", "label": "Intro", "default": "<p>Uniforms, spirit wear, staff apparel, event merch, and custom patches — printed and embroidered in-house in Harlem for schools, teams, and companies.</p>" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Start your order" },
+    { "type": "url", "id": "cta_link", "label": "Button link" },
+    { "type": "color_scheme", "id": "hero_scheme", "label": "Hero colour scheme", "default": "scheme-3" },
+    { "type": "text", "id": "packages_heading", "label": "Packages heading", "default": "What are you ordering?" },
+    { "type": "text", "id": "card_cta", "label": "Card link text", "default": "See this package" },
+    { "type": "text", "id": "how_heading", "label": "How it works heading", "default": "How it works" },
+    { "type": "text", "id": "minimum_note", "label": "Minimum note", "default": "Minimum order is 8 pieces per style. No pricing is listed online — every order is quoted." }
+  ],
+  "blocks": [
+    {
+      "type": "package",
+      "name": "Package",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "text", "id": "body", "label": "One line" },
+        { "type": "url", "id": "link", "label": "Package page" }
+      ]
+    },
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "text", "id": "body", "label": "Body" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "UMS Organizations hub" }]
+}
+{% endschema %}

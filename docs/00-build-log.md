@@ -158,3 +158,26 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
 - **2026-09-14 — all six store policies drafted** in `data/policies.json`, rendered for
   copy-paste. Refund, shipping, and contact state existing practice. Privacy and terms
   carry real legal weight and are flagged for review before use.
+
+- **2026-09-14 — Phase 5, UMS for Organizations.**
+  - `sections/ums-build-list.liquid` — the build-your-list tool. Native Liquid + JS,
+    no app. Item types are a theme setting (generic goods, not Shopify products).
+    **8-per-style minimum is blocking**: any line under 8 disables Continue and says
+    why. List persists in `sessionStorage` under `ums:orgList`. No prices anywhere.
+  - `sections/ums-intake-form.liquid` — every field from brief §5.5 with the right
+    required/optional status, on Shopify's native `{% form 'contact' %}`. Reads the
+    build-list from sessionStorage and prefills "Exact products chosen" plus the
+    estimated quantity. On `form.posted_successfully?` the entire form is replaced by
+    a confirmation screen and the list is cleared. Checkbox group for order types is
+    JS-validated for at-least-one. Artwork slot is a marked placeholder pending the
+    upload app.
+  - `sections/ums-org-hub.liquid` — hub with 6 package cards + 3-step how-it-works.
+  - `sections/ums-package-cta.liquid` — the per-style minimum and one "Start your
+    order" button, shared by all six package pages.
+  - Templates: `page.organizations`, `page.package`, `page.build-list`, `page.order`.
+  - Pages created: `organizations-uniforms`, `-team`, `-corporate`, `-events`,
+    `-patches`, `-other`, `-build-list`, `-order`. Hub page switched to its template.
+  - Every page under `/pages/organizations*` matches the cart-icon suppression rule
+    in `ums-globals.liquid`, so the cart never shows anywhere in this flow.
+  - Package pages use a typed item list; the brief's "3–5 example photos" need real
+    photography to replace it.

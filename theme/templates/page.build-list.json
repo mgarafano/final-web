@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "tool": {
+      "type": "ums-build-list",
+      "settings": {
+        "eyebrow": "UMS for Organizations",
+        "heading": "Build your list",
+        "body": "<p>Add the item types you're thinking about and roughly how many of each. Exact colors, sizes, and details get sorted out after you send your request.</p>",
+        "minimum_qty": 8,
+        "next_url": "/pages/organizations-order"
+      }
+    }
+  },
+  "order": ["tool"]
+}

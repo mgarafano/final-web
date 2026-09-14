@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "main": { "type": "main-page", "settings": { "padding_top": 36, "padding_bottom": 8 } },
+    "cta": {
+      "type": "ums-package-cta",
+      "settings": {
+        "minimum_note": "Minimum order is 8 pieces per style.",
+        "note": "Tell us what you need and we'll come back with a quote. Exact colors, sizes, and details get sorted out with you after you send your request.",
+        "cta_label": "Start your order",
+        "cta_link": "/pages/organizations-build-list",
+        "back_label": "See all packages",
+        "back_link": "/pages/organizations",
+        "color_scheme": "scheme-3"
+      }
+    }
+  },
+  "order": ["main", "cta"]
+}
