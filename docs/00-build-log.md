@@ -565,5 +565,6 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
   `templates/index.json` (adapt), `templates/product.json` (adapt on related products; the
   text block trimmed to the all-sales-final sentence). `assets/ums-brand.css`, dead since
   Phase 3, is not in v2. `scripts/build-theme-zip.py` reproduces the package from the repo
-  exactly (Dawn's stock `404`, `article` and `password` templates differ from Shopify's
-  reformatted copies only in whitespace). README documents the route; publishing is Raheem's.
+  exactly, apart from Dawn's stock `404`, `article` and `password` templates, where
+  Shopify's rewritten copies carry empty `"settings": {}` objects that the originals omit —
+  no behavioral difference. README documents the route; publishing is Raheem's.
