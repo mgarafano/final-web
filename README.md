@@ -38,10 +38,20 @@ Rebuild of the Uptown Merch Solutions Shopify storefront (uptownmerch145.com).
 
 ## Pushing theme files
 
-- **The theme is live, and the API refuses writes to a live theme.** To change anything
-  now: duplicate the live theme (Online Store → Themes → ⋯ → Duplicate), push the changed
-  files to the duplicate, read them back, check the preview, then publish the duplicate
-  from admin. The previous live copy stays in the library as the rollback.
+- **The theme is live, and the API refuses writes to a live theme.** Changes go into a
+  new unpublished theme that Raheem publishes from admin; the previous live copy stays in
+  the library as the rollback. Two ways to make that theme:
+  1. **From this repo, no admin click needed** (used for "UMS Live 2026 v2" on
+     2026-09-14): `python3 scripts/build-theme-zip.py <dawn-v16.0.0-checkout> out.zip`
+     builds the complete theme (stock Dawn v16.0.0 plus `theme/`, which is everything
+     the live theme has that Dawn does not). Upload the zip to the store's Files with
+     `stagedUploadsCreate` + `fileCreate`, run `themeCreate` with the file's CDN URL
+     (`themeCreate` needs a URL that serves the zip with a content length — GitHub
+     archive links fail with "Src is empty"), wait until `processing` is false, read
+     every file back (checksums for code, parsed content for JSON), then delete the zip
+     from Files. The API refuses `themePublish`, so the last step is Raheem's.
+  2. Duplicate the live theme in admin (Online Store → Themes → ⋯ → Duplicate), push the
+     changed files to the duplicate with `themeFilesUpsert`, read them back.
 
 - Push `sections/*.liquid` and `snippets/*.liquid` first, in their own
   `themeFilesUpsert`; push JSON templates and section groups in a second call. Shopify

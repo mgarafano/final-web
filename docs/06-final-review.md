@@ -257,3 +257,16 @@ and publication state, and the live theme measured against Dawn itself.
 | Locations | Stocked location: full address, phone, pickup instructions, 24-hour window. "Shop location": pickup off, still active for POS. |
 | Themes | Two old themes gone (Raheem). "Copy of UMS logo homepage Live Version" and the "Dawn" rollback remain. |
 | Social preview | No social sharing image is set (Preferences); shared links show no image. |
+
+## After "fix 1, 3, 5, 6" — 2026-09-14
+
+| Item | Result |
+|---|---|
+| 1. Cropped grid photos | In "UMS Live 2026 v2": image ratio "adapt" on the collection grid, homepage featured collection, and related products. |
+| 3. Hats off Point of Sale | **Live.** All 12 published to POS through the API, read back. |
+| 5. Tripled pickup line | In v2: the product-page text block now reads "All sales are final — no refunds or exchanges." |
+| 6. Two-page collection | In v2: 36 products per page. |
+
+v2 was built from stock Dawn v16.0.0 plus the repo (`scripts/build-theme-zip.py`), created
+with `themeCreate`, and verified file by file (360 of 360). It is unpublished until Raheem
+publishes it; the live theme is untouched.

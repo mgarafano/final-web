@@ -255,12 +255,12 @@ no duplicate needed; the repo copy gets synced afterwards.
 
 | # | Item | Where | What |
 |---|---|---|---|
-| 1 | Product photos are cropped in the grids | Customize → Collection page → Product grid; Homepage → Featured collection; Product page → Related products | The tee shots are portrait (930×1395); the cards are square and use cover-fit, so the top and bottom sixth of every apparel photo is cut. Look at the storefront grid: if collars or hems are clipped, set **Image ratio → Adapt to image** in all three places (and Search page → Product grid, which already uses Adapt). Apparel cards become taller; hats stay square. |
-| 2 | Collection page splits 29 products over two pages | Customize → Collection page → Product grid → Products per page | 24 → **36**. One page. |
-| 3 | Product page says "Pickup only" three times | Customize → Products → Default product → the Text block under the buy button | Change "Pickup only, at 241 W 145th St. All sales are final — no refunds or exchanges." to **"All sales are final — no refunds or exchanges."** The caption under the price (§10) and Dawn's pickup-availability line already carry the pickup message. |
+| 1 | Product photos are cropped in the grids | **DONE in "UMS Live 2026 v2" (unpublished), 2026-09-14** | Image ratio is "Adapt to image" on the collection grid, the homepage featured collection, and related products (search already had it). Apparel cards become taller; hats stay square. Live once Raheem publishes v2. |
+| 2 | Collection page splits 29 products over two pages | **DONE in "UMS Live 2026 v2"** | Products per page 24 → 36. One page. |
+| 3 | Product page says "Pickup only" three times | **DONE in "UMS Live 2026 v2"** | The text block under the buy button now reads "All sales are final — no refunds or exchanges." The caption under the price (§10) and Dawn's pickup-availability line carry the pickup message. |
 | 4 | Homepage grid has no quick add | Customize → Homepage → Featured collection → Quick add | Optional: **Standard**, to match the collection page. The template carried a key Dawn 16 does not have, so the setting never took. |
 | 5 | Products carry no product category | Products → select all 29 → bulk edit → Category | Set Apparel & Accessories › Clothing (T-shirts, Hoodies, Shorts, Pants) and › Clothing Accessories › Hats. Shopify Tax uses the category to apply New York's clothing exemption under $110; without it, full sales tax can be charged on every tee. Check **Settings → Taxes → United States** for how NY clothing is set up. Can also be set through the API on request. |
-| 6 | The 12 hats are not on Point of Sale | Products → select the hats → ⋯ → Add to sales channels → Point of Sale | The 17 apparel products are on Online Store, POS and Shop; the hats are on Online Store only, so the register cannot ring them up from the catalog. Only matters if hats are sold in store. |
+| 6 | The 12 hats are not on Point of Sale | **DONE 2026-09-14 (API, `publishablePublish`)** | All 12 hats are now on Point of Sale as well as the Online Store; no errors, read back. |
 | 7 | "POS Products", "POS Services", "Uptown Blanks" are on no channel at all | Collection → Publishing → Point of Sale | Their descriptions call them POS tile collections. If the register's smart grid used them, the tiles are dead; re-add them to **Point of Sale only** (not the Online Store). |
 | 8 | No social sharing image | Online Store → Preferences → Social sharing image | A 1200×630 image (logo on brand green). Without it, links shared in messages and social apps show no preview. |
 | 9 | "No Shipping" capitalization | Edit default theme content → Products → Shipping policy html | Optional: "no shipping" (sentence case, `docs/02`). |
@@ -270,3 +270,13 @@ Live tests still worth one run each: a pickup checkout (order → cart → check
 the contact form, the organizations order form **with an artwork file attached** (the
 upload is verified in code and locally, never yet on the live store), and the
 confirmation email that arrives.
+
+**How the v2 theme was made (2026-09-14).** Raheem: "please fix 1,3,5,6". Items 1, 5 and 6
+are theme templates, so they need a new theme: built from stock Dawn v16.0.0 plus this repo's
+`theme/` folder (`scripts/build-theme-zip.py`), uploaded to Files, created with
+`themeCreate`, and read back file by file — all 360 files identical to the package
+(checksums for code, parsed content for JSON); the only difference from the live theme apart
+from the three template edits is that the dead `assets/ums-brand.css` is gone. Nothing in the
+live theme changed after 10:00 UTC, so v2 carries every editor setting. **To go live:**
+Online Store → Themes → "UMS Live 2026 v2" → ⋯ → Preview (check the storefront grid, a
+product page, the homepage), then ⋯ → Publish. "UMS Live 2026" becomes the rollback.

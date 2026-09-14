@@ -28,7 +28,7 @@
         "pickup_note": {
           "type": "text",
           "settings": {
-            "text": "Pickup only, at 241 W 145th St. All sales are final — no refunds or exchanges.",
+            "text": "All sales are final — no refunds or exchanges.",
             "text_style": "body"
           }
         },
@@ -71,7 +71,7 @@
         "columns_desktop": 4,
         "columns_mobile": "2",
         "color_scheme": "scheme-1",
-        "image_ratio": "square",
+        "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": false,
         "show_vendor": false,

@@ -551,3 +551,19 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
   tile collections on no channel, no social sharing image, the product page's tripled
   pickup line, and the old Main menu. Raheem also set the meta description and deleted
   two old themes; docs updated.
+
+- **2026-09-14 — "Please fix 1, 3, 5, 6."** Hats to Point of Sale: 12 `publishablePublish`
+  calls in one mutation, no errors, live. The other three are template settings, so they
+  needed a new theme. `themeFilesCopy` cannot read across themes and `themeCreate` from a
+  GitHub archive URL fails ("Src is empty" — no content length), so: built the complete theme
+  locally (stock Dawn v16.0.0 from GitHub, verified this morning to be byte-identical to the
+  live theme's stock files, plus the repo's `theme/` overlay with the edits), uploaded the
+  1 MB zip to the store's Files through a staged upload, ran `themeCreate` from the file's
+  CDN URL, waited for processing, read all 360 files back — every one identical to the
+  package by checksum or parsed content — then deleted the zip from Files. The result is
+  "UMS Live 2026 v2", unpublished. Edits: `templates/collection.json` (36 per page, adapt),
+  `templates/index.json` (adapt), `templates/product.json` (adapt on related products; the
+  text block trimmed to the all-sales-final sentence). `assets/ums-brand.css`, dead since
+  Phase 3, is not in v2. `scripts/build-theme-zip.py` reproduces the package from the repo
+  exactly (Dawn's stock `404`, `article` and `password` templates differ from Shopify's
+  reformatted copies only in whitespace). README documents the route; publishing is Raheem's.
