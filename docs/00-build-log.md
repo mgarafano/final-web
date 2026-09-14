@@ -568,3 +568,20 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
   exactly, apart from Dawn's stock `404`, `article` and `password` templates, where
   Shopify's rewritten copies carry empty `"settings": {}` objects that the originals omit —
   no behavioral difference. README documents the route; publishing is Raheem's.
+
+- **2026-09-14 — Product cards after v2 went live.** Raheem published v2, then sent phone
+  screenshots: buttons in one grid row at different heights, "Add to cart" next to "Choose
+  options". Rebuilt Dawn's product grid locally (its own CSS, the store's settings, the
+  card markup from `card-product.liquid`) and measured: in Chromium the buttons already
+  line up, because Dawn pins them through `.card-wrapper { height: 100% }` inside a
+  stretched flex item — the chain iOS Safari is known not to resolve, which matches the
+  screenshots exactly (one-line title level with the image, two-line title a line lower).
+  Fix in `ums-globals`: grid item, card wrapper and card stretched as flex items, no
+  percentage heights. Label: `products.product.choose_options` → "Add to cart". Photo
+  box: "adapt" (v2) gave ragged rows wherever a portrait apparel shot met a square hat
+  shot, so all four grid templates (search included, now in the repo) use the 4:5
+  "portrait" box with `object-fit: contain` — nothing cropped, every card the same
+  height. Measured again: buttons level in
+  every row at 390px and 1280px; Theme Check clean. v2 is live and write-protected, so
+  the change went into "UMS Live 2026 v3" by the zip route (`scripts/build-theme-zip.py`
+  → Files → `themeCreate`), read back file by file. Publishing is Raheem's.

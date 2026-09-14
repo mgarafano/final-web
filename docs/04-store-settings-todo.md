@@ -255,7 +255,7 @@ no duplicate needed; the repo copy gets synced afterwards.
 
 | # | Item | Where | What |
 |---|---|---|---|
-| 1 | Product photos are cropped in the grids | **DONE in "UMS Live 2026 v2" (unpublished), 2026-09-14** | Image ratio is "Adapt to image" on the collection grid, the homepage featured collection, and related products (search already had it). Apparel cards become taller; hats stay square. Live once Raheem publishes v2. |
+| 1 | Product photos are cropped in the grids | **DONE — v2 (published) used "Adapt to image"; v3 replaces it with a uniform 4:5 box and `object-fit: contain`** | Nothing is cropped in either. "Adapt" made rows ragged wherever a tall apparel shot sat beside a square hat shot; the 4:5 box with the photo fitted inside keeps every card the same height. |
 | 2 | Collection page splits 29 products over two pages | **DONE in "UMS Live 2026 v2"** | Products per page 24 → 36. One page. |
 | 3 | Product page says "Pickup only" three times | **DONE in "UMS Live 2026 v2"** | The text block under the buy button now reads "All sales are final — no refunds or exchanges." The caption under the price (§10) and Dawn's pickup-availability line carry the pickup message. |
 | 4 | Homepage grid has no quick add | Customize → Homepage → Featured collection → Quick add | Optional: **Standard**, to match the collection page. The template carried a key Dawn 16 does not have, so the setting never took. |
@@ -280,3 +280,28 @@ from the three template edits is that the dead `assets/ums-brand.css` is gone. N
 live theme changed after 10:00 UTC, so v2 carries every editor setting. **To go live:**
 Online Store → Themes → "UMS Live 2026 v2" → ⋯ → Preview (check the storefront grid, a
 product page, the homepage), then ⋯ → Publish. "UMS Live 2026" becomes the rollback.
+
+## 12. Product cards: buttons out of line and two different labels — DONE in "UMS Live 2026 v3", 2026-09-14
+
+Raheem published v2 and sent three phone screenshots of the storefront grid: quick-add
+buttons in the same row sitting at different heights, and "Add to cart" on some cards next
+to "Choose options" on others.
+
+- **Buttons.** Dawn pins the button to the bottom of the card through a chain of
+  `height: 100%` rules; iOS Safari does not resolve it, so a card with a two-line title
+  (or, under "adapt", a taller photo) pushed its button lower than its neighbour's.
+  `ums-globals` now stretches grid item → card wrapper → card as flex items, which needs no
+  percentage heights. Verified in a local rebuild of Dawn's grid: every button in a row at
+  the same pixel, at 390px and 1280px.
+- **Labels.** Dawn says "Add to cart" on single-variant products and "Choose options" on
+  the rest. The locale string is now "Add to cart" for all; on a product with sizes the
+  button opens the size chooser, then adds.
+- **Photo box.** All four grid templates (collection, homepage featured collection,
+  related products, search) use the 4:5 "portrait" box and the photo is fitted inside it
+  (`object-fit: contain`): apparel and hats both show in full, rows stay even, white
+  margins where a photo does not fill the box. `templates/search.json` joins the repo
+  for that one setting.
+
+v3 was built from the repo (`scripts/build-theme-zip.py`), created through `themeCreate`,
+and read back file by file. **To go live:** Online Store → Themes → "UMS Live 2026 v3" →
+⋯ → Preview (storefront grid on the phone), then ⋯ → Publish. v2 becomes the rollback.

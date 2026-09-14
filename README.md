@@ -27,13 +27,14 @@ Rebuild of the Uptown Merch Solutions Shopify storefront (uptownmerch145.com).
     line; express checkout buttons removed.
   - `snippets/cart-drawer.liquid` — pickup-only note replaces the tax/shipping line.
   - `config/settings_schema.json` — one settings group appended ("UMS cart note").
-  - `locales/en.default.json` — two strings changed: the low-stock line reads
-    "Only N left" (brief §4), and the caption under a product's price reads "Pickup
-    only at 241 W 145th St, Harlem — No Shipping." (linked to the Shipping policy)
-    instead of Dawn's "Shipping calculated at checkout." Raheem applied that one
-    through Edit default theme content; the repo carries his wording. The file
-    carries Shopify's auto-generated comment header above the JSON, exactly as
-    Shopify stores it.
+  - `locales/en.default.json` — three strings changed: the low-stock line reads
+    "Only N left" (brief §4); the caption under a product's price reads "Pickup only at
+    241 W 145th St, Harlem — No Shipping." (linked to the Shipping policy) instead of
+    Dawn's "Shipping calculated at checkout." (Raheem's wording, applied through Edit
+    default theme content); and the quick-add button on product cards says "Add to
+    cart" for every product — Dawn says "Choose options" on products with variants,
+    which put two different labels in one grid. The file carries Shopify's
+    auto-generated comment header above the JSON, exactly as Shopify stores it.
 - Everything else on the theme is stock Dawn 16.0.0 and is not mirrored here.
 
 ## Pushing theme files
@@ -74,3 +75,9 @@ Rebuild of the Uptown Merch Solutions Shopify storefront (uptownmerch145.com).
   `content_for_header`). A UMS rule on an element that also carries a Dawn class
   (`page-width`, `button`, `link`, the header menu item) must out-rank Dawn's rule or it
   loses the tie: write `.ums-pkg.page-width`, not `.ums-pkg`.
+- Product cards are stretched by `ums-globals` (grid item → card wrapper → card as flex
+  items) so the quick-add button sits at the bottom of every card in a row. Dawn relies
+  on a `height: 100%` chain for this, which iOS Safari does not resolve; on the phone the
+  buttons drifted by a line whenever a title wrapped. The photo box is 4:5 in every grid
+  template (collection, homepage, related products, search) with `object-fit: contain`,
+  so nothing is cropped and rows stay even.

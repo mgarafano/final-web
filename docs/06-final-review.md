@@ -270,3 +270,12 @@ and publication state, and the live theme measured against Dawn itself.
 v2 was built from stock Dawn v16.0.0 plus the repo (`scripts/build-theme-zip.py`), created
 with `themeCreate`, and verified file by file (360 of 360). It is unpublished until Raheem
 publishes it; the live theme is untouched.
+
+## Product cards — 2026-09-14, after v2 went live
+
+Raheem's phone screenshots: quick-add buttons in one row at different heights, and two
+different labels ("Add to cart" / "Choose options"). Cause and fix in `docs/04` §12. Fixed
+in "UMS Live 2026 v3" (unpublished until Raheem publishes it): cards stretched without
+percentage heights, one label, a uniform 4:5 photo box with the photo fitted inside.
+Measured in a local rebuild of Dawn's grid with the store's settings: buttons level in
+every row at phone and desktop widths. Theme Check clean.
