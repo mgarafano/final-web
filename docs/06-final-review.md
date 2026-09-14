@@ -276,6 +276,8 @@ publishes it; the live theme is untouched.
 Raheem's phone screenshots: quick-add buttons in one row at different heights, and two
 different labels ("Add to cart" / "Choose options"). Cause and fix in `docs/04` §12. Fixed
 in "UMS Live 2026 v3" (unpublished until Raheem publishes it): cards stretched without
-percentage heights, one label, a uniform 4:5 photo box with the photo fitted inside.
+percentage heights, one label at one size, a uniform 4:5 photo box that every photo fills
+(the first cut fitted photos inside the box, which made the hat shots look smaller — Raheem
+rejected it and v3 was corrected in place).
 Measured in a local rebuild of Dawn's grid with the store's settings: buttons level in
 every row at phone and desktop widths. Theme Check clean.

@@ -404,12 +404,21 @@
   }
 
   /* Every card gets the same 4:5 photo box (the templates set image_ratio "portrait")
-     and the photo is fitted inside it rather than cropped: the portrait apparel shots
-     and the square hat shots both show in full, with white margins where they do not
-     fill the box. Dawn's default, object-fit: cover, cut a sixth off the top and bottom
-     of every apparel photo; "adapt" showed them whole but made the rows ragged. */
+     and every photo fills it edge to edge, so all photos are exactly the same size.
+     Fitting the photo inside the box instead (object-fit: contain) left the square hat
+     shots visibly smaller than the tall apparel shots — rejected. 4:5 keeps the crop
+     small: about 8% off the top and bottom of a 2:3 apparel shot, 10% off each side of
+     a square hat shot, which is margin in every supplier photo. */
   .product-card-wrapper .card__media .media img {
-    object-fit: contain;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* One button on every card: the same label (the locale string), full width, one line,
+     so every button in the grid is the same size. */
+  .product-card-wrapper .quick-add__submit {
+    width: 100%;
+    white-space: nowrap;
   }
 
 {% endstylesheet %}

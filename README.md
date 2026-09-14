@@ -79,5 +79,6 @@ Rebuild of the Uptown Merch Solutions Shopify storefront (uptownmerch145.com).
   items) so the quick-add button sits at the bottom of every card in a row. Dawn relies
   on a `height: 100%` chain for this, which iOS Safari does not resolve; on the phone the
   buttons drifted by a line whenever a title wrapped. The photo box is 4:5 in every grid
-  template (collection, homepage, related products, search) with `object-fit: contain`,
-  so nothing is cropped and rows stay even.
+  template (collection, homepage, related products, search) and every photo fills it
+  edge to edge (`object-fit: cover`), so all photos are the same size; fitting them
+  inside the box instead left the square hat shots visibly smaller and was rejected.

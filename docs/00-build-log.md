@@ -585,3 +585,13 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
   every row at 390px and 1280px; Theme Check clean. v2 is live and write-protected, so
   the change went into "UMS Live 2026 v3" by the zip route (`scripts/build-theme-zip.py`
   → Files → `themeCreate`), read back file by file. Publishing is Raheem's.
+
+- **2026-09-14 — v3 corrected in place.** Raheem, after the first cut of v3: photos must be
+  the same size, none smaller or larger; buttons must share one text and one size. The
+  fitted-inside box (`object-fit: contain`) had left the square hat shots visibly smaller
+  than the tall apparel shots. `ums-globals` now fills the 4:5 box edge to edge
+  (`object-fit: cover`), and pins every card button to full width and one line. Re-measured
+  locally: boxes and buttons identical across every row. Pushed to the unpublished v3 with
+  `themeFilesUpsert`. A URL-sourced body (`type: URL` pointing at a file in Files) was
+  accepted, ran as a job, and wrote nothing — so the section went up as `type: TEXT` and
+  was read back by checksum.
