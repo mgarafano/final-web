@@ -387,3 +387,9 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
     en-dash ranges; the five admin edits are in `docs/04` §9.
   - Seven decisions for Raheem listed in `docs/06`, the material one being color as a
     filterable option on the 18 single-color soft goods.
+  - **Review decisions executed (Raheem).** Color option added to the 17 single-color
+    soft goods via `productOptionsCreate` with `LEAVE_AS_IS` — one product tested
+    first, SKUs/prices/stock unchanged, then the rest; About page now says founded in
+    2024; Raheem disabled customer accounts (verified `DISABLED`), excluded the "Home
+    page" collection from the Online Store (verified), and deleted POWR. Policy wording
+    edits remain optional.

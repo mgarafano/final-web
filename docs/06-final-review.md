@@ -54,7 +54,7 @@ Legend: **done** = built and verified · **admin** = needs Raheem in admin ·
 | Vendor changed | done | All 29 read "Uptown Merch Solutions"; vendor hidden everywhere in the theme. |
 | "January" and other option errors | done | No option value errors remain; caps carry real Color values. |
 | Descriptions: one sentence + bullets, no decoration language | done | Scanned all 29. |
-| Garment type and color as filterable data | **decision** | Product type is set on all 29 (T-Shirt, Tank Top, Hoodie, Shorts, Joggers, Cap, Beanie). Color is a real option only on the 11 headwear products; the 18 tees, tanks, hoodie, shorts, and joggers carry color in the title only. See decision A. |
+| Garment type and color as filterable data | done | Product type on all 29. Color is now a real option on all 29: 12 headwear products already had it; the 17 soft goods got a one-value option in the final review (decision A). |
 
 ## §5 Organizations
 
@@ -76,7 +76,7 @@ Legend: **done** = built and verified · **admin** = needs Raheem in admin ·
 
 | Requirement | Status | Evidence |
 |---|---|---|
-| About copy as approved | done | Page body matches the brief word for word. The approved text says "opened in 2024" and "founded in 2023"; flagged in Phase 6, unchanged on purpose — decision B. |
+| About copy as approved | done | Page body matches the brief, with one change Raheem asked for in the final review: "founded in 2024" (was 2023). |
 | Contact: Name, Email, question, required | done | Native form; no app. POWR not used. |
 | Contact page content: hours, address, phone, email, policy note, social | done | Page body carries all of it plus the "still do custom work?" answer. |
 | Social: TikTok and Instagram @145uptownmerch | done | Footer icons and Contact page handles. |
@@ -118,15 +118,24 @@ buttons, restacked list rows, 80% logo. Raheem's phone pass is the final check.
 3. The artwork helper product's page no longer offers a $0 purchase.
 4. Repo copy of the policies: American spelling and en-dash ranges (see decision C).
 
-## Decisions for Raheem
+## Decisions — answered 2026-09-14
 
-- **A. Color as a filter for the soft goods.** The brief wants color as real product data. Today the collection page can filter by product type, size, price, availability, and color for headwear only. Adding a one-value Color option to the 18 tees, tanks, hoodie, shorts, and joggers (e.g. "Arctic Blue") makes the color filter cover everything. Reversible, SKUs untouched, adds one "Color" pill on those product pages. Recommend yes; one API pass on a go-ahead.
-- **B. About page dates.** "Opened in 2024" and "founded in 2023" read as a contradiction to a customer. The copy is approved as-is, so it stays unless Raheem wants one of them changed.
-- **C. Policy wording.** The pasted policies use "enquiry", "fulfil", and "Tuesday to Saturday, 11am to 8pm" in a few places; the site standard is "inquiry", "fulfill", and "Tuesday–Saturday, 11am–8pm". Five small edits in Settings → Policies, listed in docs/04 §9. Cosmetic.
-- **D. Customer accounts.** New customer accounts are enabled, so the header shows an account icon and login link. Not in the brief either way. Keep, or turn off login links in Settings → Customer accounts.
-- **E. "Home page" collection.** Shopify's default collection, published, holds one product, and appears on the unlinked `/collections` page. Recommend excluding it from the Online Store like the other 17.
-- **F. Collection filters.** The filter set is controlled by Shopify's Search & Discovery app, not the theme. If a "Vendor" filter shows on the storefront page, remove it there — it has one value.
-- **G. Obsolete apps.** POWR Form Builder is no longer used. The brief expected removal of two obsolete apps; app data is not readable from here. Uninstall in Apps when convenient.
+- **A. Color as a filter — done.** A one-value Color option was added to the 17
+  single-color soft goods (Arctic Blue, Mint, Gray, Black, White, Navy, Natural,
+  Vintage Denim, Bubble Gum, Sky Bomb, Black Smoke), position 2 after Size, variant
+  strategy "leave as is". Tested on one product first: every SKU, price, and inventory
+  quantity unchanged; variant titles read "M / Arctic Blue". Then the other 16, no
+  errors. Every storefront product now has Color as real option data.
+- **B. About page — done.** "Founded in 2023" → "founded in 2024", per Raheem: 2024 is
+  when it opened. Live now (page bodies are store data).
+- **C. Policy wording — optional, still open.** Five word-level edits (spelling and
+  dash style, not fonts). Listed in `docs/04` §9. Cosmetic; can be skipped.
+- **D. Customer accounts — done by Raheem.** Verified: `DISABLED`. The header's login
+  icon disappears with it.
+- **E. "Home page" collection — done by Raheem.** Verified off the Online Store.
+- **F. Collection filters.** Still worth a glance on the storefront page after
+  publishing; remove a "Vendor" filter if one shows.
+- **G. POWR — deleted by Raheem.**
 
 ## Not verifiable from here, by design
 
