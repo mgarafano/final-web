@@ -1,6 +1,8 @@
 # Go-live checklist and redirect map
 
-Phase 9 working document. Nothing in here has been executed. Every step marked
+Phase 9 working document. **Updated 2026-09-14 after Raheem's decisions:** the old pages
+are unpublished and 32 redirects exist (section 3 shows status per row). What remains for
+the publish moment is small and listed in section 2. Every step marked
 **(Raheem)** is a click in admin; every step marked **(session)** runs through the API
 on an explicit "go" and is reversible unless the row says otherwise.
 
@@ -11,12 +13,18 @@ rollback (republish the current "Dawn" theme, ID `162803220706`).
 
 From `docs/04-store-settings-todo.md`:
 
-- [ ] §2 Pickup instructions on the **Uptown Merch Solutions** location (the one with stock).
+- [x] §2 Pickup instructions on the stocked location — done through the API.
+- [ ] **Hide 17 collections from the Online Store (Raheem, admin).** This connection's
+      safety policy refuses every collection-unpublish mutation, so: Products →
+      Collections → select the 17 listed in section 3 → bulk action to remove them from
+      the Online Store sales channel ("Unpublish" / "Make unavailable", depending on the
+      admin version). Or open each one → Sales channels → Manage → untick Online Store.
+      Their redirects already exist and start working the moment this is done.
 - [ ] §4 Checkout branding in Settings → Checkout → Customize (values ready to paste).
 - [ ] §6 Forwarding rule from orders@ to mgarafano@, then one test through each form.
 - [ ] §7 Shop Pay Installments off, if the product page still shows the "Pay in 4" line.
 - [ ] Phone pass on the preview (`?preview_theme_id=162803613922`), any last fixes.
-- [ ] Decide the four **open decisions** in section 4 below.
+- [x] The four open decisions — answered (section 4).
 
 ## 2. Go-live sequence
 
@@ -27,17 +35,16 @@ busiest hour, but no downtime is involved.
    publish" → ⋯ → **Publish**. Then rename it (⋯ → Rename) to something like
    "UMS 2026 — live". The old "Dawn" stays in the theme library as the rollback.
 2. **(Raheem)** Say "go" here.
-3. **(session)** Unpublish the old pages listed in section 3. Unpublishing is
-   reversible (the pages keep their content; they just stop resolving).
-4. **(session)** Take the old collections off the Online Store sales channel (section
-   3). Also reversible.
-5. **(session)** Delete the 15 empty placeholder collections — *only if the decision in
-   section 4 is yes.* Deletion is permanent, but they hold no products.
-6. **(session)** Create the redirects in section 3 and repoint the one existing
-   redirect. Shopify only fires a redirect when the old path no longer resolves, which
-   is why steps 3–5 come first.
-7. **(session)** Read everything back through the API and report: page states,
-   collection publication, the full redirect list.
+3. **(session)** Unpublish `/pages/order-form` and `/pages/bulk-catalog` — the two
+   old pages still in the live menu — and create their redirects to
+   `/pages/organizations`. Repoint `/pages/custom-print-order` straight to
+   `/pages/organizations`.
+4. **(Raheem)** Remove `uptown-blanks` from the Online Store sales channel (same admin
+   step as the 17 above — the API is blocked for this). The session creates its
+   redirect to `/collections/ums-storefront` at the same time as step 3, so the order
+   between 3 and 4 does not matter.
+5. **(session)** Read everything back through the API and report: page states, the
+   full redirect list.
 
 ## 3. Redirect map
 
@@ -46,37 +53,37 @@ follow one rule: a shopper lands on the closest live equivalent, never on a 404.
 
 ### Old pages — unpublish, then redirect
 
-| Old path | What it is | Target |
-|---|---|---|
-| `/pages/order-form` | Old custom-order page: neon styling, links to service variants that no longer sell online | `/pages/organizations` |
-| `/pages/bulk-catalog` | "Events and Promotional Products" — carries the **ESP link twice** and a `body{background:#101820}` rule (the brief's dark-gradient source). Must not survive go-live. | `/pages/organizations` |
-| `/pages/screen-printing` | Title "Order Form"; a script that bounces to `/pages/order-form` | `/pages/organizations` |
-| `/pages/direct-to-garment` | Old DTG service page with a mailto order form, "Free 1 Week Shipping", "Hub92Prints" copy | `/pages/organizations` |
-| `/pages/embroidery` | Old embroidery page with a mailto order form and `contact@` / `dtftransfers@` addresses | `/pages/organizations` |
-| `/pages/embroidered-patches` | Old patch order form (mailto `designs@`) | `/pages/organizations-patches` |
-| `/pages/vinyl-signs` | Old vinyl sign order form (mailto) | `/pages/organizations` |
-| `/pages/custom-apparel` | Empty | `/pages/organizations` |
-| `/pages/dtf-transfers` | Empty | `/pages/organizations` |
-| `/pages/build-your-own-gang-sheet` | Gang sheet builder pitch, links to a product that no longer sells online | `/pages/contact` |
-| `/pages/dtf-gang-sheets-order` | Already unpublished; redirect only | `/pages/contact` |
-| `/pages/locations` | Empty | `/pages/contact` |
-| `/pages/men` | Empty | `/collections/ums-storefront` |
-| `/pages/women` | Empty | `/collections/ums-storefront` |
-| `/pages/our-work` | Placeholder gallery — literally "[Add embroidery photo here]" | `/pages/about` (see decision A) |
-| `/pages/ums-urban-beach` | Empty body; its template exists only in the old theme | `/` (see decision B) |
-| `/pages/ums-learning-lab` | Empty body; its template exists only in the old theme | `/` (see decision B) |
+| Old path | What it is | Target | Status |
+|---|---|---|---|
+| `/pages/order-form` | Old custom-order page: neon styling, links to service variants that no longer sell online | `/pages/organizations` | at publish |
+| `/pages/bulk-catalog` | "Events and Promotional Products" — carries the **ESP link twice** and a `body{background:#101820}` rule (the brief's dark-gradient source). Must not survive go-live. | `/pages/organizations` | at publish |
+| `/pages/screen-printing` | Title "Order Form"; a script that bounces to `/pages/order-form` | `/pages/organizations` | done: unpublished + redirect |
+| `/pages/direct-to-garment` | Old DTG service page with a mailto order form, "Free 1 Week Shipping", "Hub92Prints" copy | `/pages/organizations` | done: unpublished + redirect |
+| `/pages/embroidery` | Old embroidery page with a mailto order form and `contact@` / `dtftransfers@` addresses | `/pages/organizations` | done: unpublished + redirect |
+| `/pages/embroidered-patches` | Old patch order form (mailto `designs@`) | `/pages/organizations-patches` | done: unpublished + redirect |
+| `/pages/vinyl-signs` | Old vinyl sign order form (mailto) | `/pages/organizations` | done: unpublished + redirect |
+| `/pages/custom-apparel` | Empty | `/pages/organizations` | done: unpublished + redirect |
+| `/pages/dtf-transfers` | Empty | `/pages/organizations` | done: unpublished + redirect |
+| `/pages/build-your-own-gang-sheet` | Gang sheet builder pitch, links to a product that no longer sells online | `/pages/contact` | done: unpublished + redirect |
+| `/pages/dtf-gang-sheets-order` | Already unpublished; redirect only | `/pages/contact` | done: unpublished + redirect |
+| `/pages/locations` | Empty | `/pages/contact` | done: unpublished + redirect |
+| `/pages/men` | Empty | `/collections/ums-storefront` | done: unpublished + redirect |
+| `/pages/women` | Empty | `/collections/ums-storefront` | done: unpublished + redirect |
+| `/pages/our-work` | Placeholder gallery — literally "[Add embroidery photo here]" | `/pages/about` (see decision A) | done: unpublished + redirect |
+| `/pages/ums-urban-beach` | Empty body; its template exists only in the old theme | `/` (see decision B) | done: unpublished + redirect |
+| `/pages/ums-learning-lab` | Empty body; its template exists only in the old theme | `/` (see decision B) | done: unpublished + redirect |
 
 Kept as-is: `/pages/contact`, `/pages/about`, and every `/pages/organizations*` page.
 
-### Old collections — remove from the Online Store channel, then redirect
+### Old collections — Raheem hides them in admin; redirects already exist
 
-| Old path | Products | Target |
-|---|---|---|
-| `/collections/uptown-blanks` | 29 — the same products as UMS Storefront | `/collections/ums-storefront` |
-| `/collections/pos-products` | 29 — Point of Sale grouping, was never meant to be public | `/collections/ums-storefront` |
-| `/collections/pos-services` | 8 — Point of Sale services, not sold online | `/pages/organizations` |
+| Old path | Products | Target | Status |
+|---|---|---|---|
+| `/collections/uptown-blanks` | 29 — the same products as UMS Storefront | `/collections/ums-storefront` | at publish (in the live menu) |
+| `/collections/pos-products` | 29 — Point of Sale grouping, was never meant to be public | `/collections/ums-storefront` | redirect done; hide in admin |
+| `/collections/pos-services` | 8 — Point of Sale services, not sold online | `/pages/organizations` | redirect done; hide in admin |
 
-### Empty placeholder collections — delete (decision C), then redirect
+### Empty placeholder collections — hide in admin (decision C: never delete); redirects done
 
 `shirts`, `shirts-1`, `garment-type` → `/collections/ums-storefront`
 `custom-patches` → `/pages/organizations-patches`
@@ -97,7 +104,14 @@ The eight service products restored to Point of Sale only already return 404 on 
 storefront today, so go-live changes nothing for their old `/products/…` URLs. Redirects
 for those can be added later if search traffic shows up for them.
 
-## 4. Open decisions (Raheem)
+## 4. Open decisions — answered 2026-09-14
+
+A: unpublish Our Work (done). B: unpublish both for now (done). C: hide, never delete
+(redirects done; hiding is an admin step, see section 1). D: "do whatever is best" —
+pickup instructions set on the stocked location; "Shop location" left active pending the
+POS check in `docs/04` §2.
+
+Original questions, for the record:
 
 - **A. `/pages/our-work`.** It is a published placeholder with bracketed "[Add … photo
   here]" text and is not in the new navigation. Recommendation: unpublish and redirect

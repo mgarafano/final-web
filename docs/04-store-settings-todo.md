@@ -38,28 +38,22 @@ period. Those would be new commitments the brief never authorized.
 Shopify will also prompt for a privacy policy and terms of service. Its generated
 templates are a reasonable starting point for both.
 
-## 2. Local pickup is configured on the wrong location
+## 2. Local pickup — instructions DONE 2026-09-14; one location question left
 
-There are two locations, and the pickup settings are on the one without stock:
+The stocked location, **Uptown Merch Solutions**, now carries pickup instructions (set
+through the API on Raheem's "do whatever is best"):
 
-| Location | Holds inventory | Pickup instructions |
-|---|---|---|
-| Shop location | **No** | "Same day service depending on the size of the order.Bring confirmation email. " |
-| Uptown Merch Solutions | **Yes** | *(empty)* |
+> Orders are usually ready within 24 hours. We'll email you when yours is ready. Pick up
+> at 241 W 145th St, Harlem, Tuesday–Saturday, 11am–8pm. Bring your confirmation email.
 
-Every product's stock sits at **Uptown Merch Solutions**, which has **no pickup
-instructions at all**. So the pickup box at checkout is blank for real orders, while
-the useful text sits on an empty location customers never pull from.
+Pickup window stays "usually ready in 24 hours". This is live at checkout now.
 
-Note the existing text also has a missing space after "order." and a trailing space.
-
-**Settings → Locations → Uptown Merch Solutions → Local pickup.** Suggested:
-
-> Orders are usually ready within 24 hours. We'll email you when yours is ready to
-> collect. Bring your confirmation email to the shop at 241 W 145th St.
-
-Then decide whether "Shop location" should exist at all — an inventory-less duplicate
-location is a common source of confusion.
+**Still open — "Shop location".** It holds no inventory, ships nothing, and only carries
+the old typo'd pickup text. It was *not* deactivated: if the POS register is tied to
+it, deactivating would break in-store sales. Check **Point of Sale → Locations** (or
+the POS app's settings) for which location the register uses. If it is "Uptown Merch
+Solutions", then "Shop location" can be deactivated in Settings → Locations. If it is
+"Shop location", the right fix is to move the register to the stocked location first.
 
 ## 3. Shipping — DONE 2026-09-14, pickup is the only method
 

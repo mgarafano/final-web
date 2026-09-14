@@ -336,3 +336,33 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
   - **Store email fixed by Raheem** — `shop.email` and `shop.contactEmail` both read
     `orders@uptownmerch145.com` now. The forwarding rule to mgarafano@ and one test
     submission per form are still on him (`docs/04` §6).
+
+- **2026-09-14 — Old content taken down (Raheem: "Remove all old obsolete content").**
+  Decisions: A unpublish Our Work; B unpublish Urban Beach and Learning Lab for now;
+  C hide the empty collections, never delete; D "do whatever is best".
+  - **14 old pages unpublished** through `pageUpdate` (reversible): screen-printing,
+    direct-to-garment, embroidery, locations, embroidered-patches, men, women,
+    custom-apparel, vinyl-signs, dtf-transfers, build-your-own-gang-sheet, our-work,
+    ums-urban-beach, ums-learning-lab. Nothing on the live theme links to any of them
+    (checked its header, footer, and homepage templates: the live menu is the only
+    place old links exist).
+  - **32 redirects created** (`urlRedirectCreate`): 15 for those pages plus the
+    already-unpublished dtf-gang-sheets-order, and 17 for the collections below. Map
+    in `docs/05`.
+  - **Collections could not be hidden from here.** `publicationUpdate` refuses
+    collections ("a catalog publication can only contain products"), and both
+    `publishableUnpublish` and the older `collectionUnpublish` are refused by this
+    connection's safety policy ("unpublishing is blocked"). Raheem hides the 17 in
+    admin; the redirects are already in place and start working the moment he does.
+  - **Deferred to the publish moment, deliberately:** `/pages/order-form`,
+    `/pages/bulk-catalog` (the ESP page), and `/collections/uptown-blanks` are the three
+    links in the live site's menu. Taking them down today would break the live
+    navigation; they go the minute the new theme is published.
+  - **Decision D, done the safe way:** the stocked location "Uptown Merch Solutions"
+    had empty pickup instructions, so checkout's pickup box was blank for every real
+    order. Set through `locationLocalPickupEnable`: "Orders are usually ready within
+    24 hours. We'll email you when yours is ready. Pick up at 241 W 145th St, Harlem,
+    Tuesday–Saturday, 11am–8pm. Bring your confirmation email." (24-hour pickup window
+    unchanged.) This is live now. "Shop location" was left alone: it may be the
+    location the POS register is tied to, and deactivating a location is not something
+    to do on a guess. Noted in `docs/04` §2.
