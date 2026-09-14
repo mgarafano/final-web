@@ -78,10 +78,12 @@ Rebuild of the Uptown Merch Solutions Shopify storefront (uptownmerch145.com).
   `content_for_header`). A UMS rule on an element that also carries a Dawn class
   (`page-width`, `button`, `link`, the header menu item) must out-rank Dawn's rule or it
   loses the tie: write `.ums-pkg.page-width`, not `.ums-pkg`.
-- Product cards are stretched by `ums-globals` (grid item → card wrapper → card as flex
-  items) so the quick-add button sits at the bottom of every card in a row. Dawn relies
-  on a `height: 100%` chain for this, which iOS Safari does not resolve; on the phone the
-  buttons drifted by a line whenever a title wrapped. Product photos are shown exactly
+- Product cards are stretched by `ums-globals` (the grid item and the card wrapper are
+  grid containers) so the quick-add button sits at the bottom of every card in a row.
+  Dawn relies on a `height: 100%` chain for this, which iOS Safari does not resolve; on
+  the phone the buttons drifted by a line whenever a title wrapped. Grid stretch needs no
+  width rules: a flex version with `width: 100%` left cards only as wide as their titles
+  on the live page. Product photos are shown exactly
   as Dawn shows them and as the first live theme did (square box, cover-fit, no UMS
   rule): two alternatives — "adapt" and a 4:5 box, fitted or filled — were tried in
   v2 and v3 and rejected by Raheem, who asked for the V1 photos back.

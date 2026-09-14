@@ -383,30 +383,25 @@
     font-size: 1.2rem;
   }
 
-  /* Product cards — collection grid, homepage featured collection, related products,
-     search. Dawn pins the quick-add button to the bottom of the card through a chain of
-     height: 100% rules (grid item → card-wrapper → card). On iOS Safari that chain does
+  /* Product cards (collection grid, homepage featured collection, related products,
+     search). Dawn pins the quick-add button to the bottom of the card through a chain
+     of height: 100% rules (grid item, card wrapper, card). On iOS Safari that chain does
      not resolve, so each card sizes to its own content and the buttons in a row sit at
-     different heights whenever one title wraps or one photo is taller. Stretching each
-     level as a flex item needs no percentage heights and behaves the same everywhere.
-     The selectors out-rank Dawn's .grid__item and .card-wrapper (see the cascade note). */
+     different heights whenever one title wraps. Making the grid item and the card
+     wrapper grid containers stretches the next level to the full width and height by
+     default: no percentage heights, no width declarations and no child combinators,
+     all of which proved fragile on the live page (a flex version of this rule left the
+     cards, photos and buttons only as wide as their titles). Photos are untouched:
+     Dawn's own square box and cover-fit, exactly as the first live theme. */
   .product-grid .grid__item {
-    display: flex;
+    display: grid;
   }
 
-  .product-grid .grid__item > .card-wrapper {
-    display: flex;
-    width: 100%;
+  .product-grid .grid__item .card-wrapper {
+    display: grid;
   }
 
-  .product-grid .card-wrapper > .card {
-    width: 100%;
-  }
-
-  /* Photos are left exactly as Dawn shows them (square box, cover-fit), which is how the
-     first live theme showed them — Raheem's call after two alternatives were rejected.
-
-     One button on every card: the same label (the locale string), full width, one line,
+  /* One button on every card: the same label (the locale string), full width, one line,
      so every button in the grid is the same size. */
   .product-card-wrapper .quick-add__submit {
     width: 100%;

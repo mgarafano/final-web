@@ -289,10 +289,12 @@ to "Choose options" on others.
 
 - **Buttons.** Dawn pins the button to the bottom of the card through a chain of
   `height: 100%` rules; iOS Safari does not resolve it, so a card with a two-line title
-  (or, under "adapt", a taller photo) pushed its button lower than its neighbour's.
-  `ums-globals` now stretches grid item → card wrapper → card as flex items, which needs no
-  percentage heights. Verified in a local rebuild of Dawn's grid: every button in a row at
-  the same pixel, at 390px and 1280px.
+  pushed its button lower than its neighbour's. `ums-globals` now makes the grid item and
+  the card wrapper grid containers, which stretch the next level to full width and height
+  by default — no percentage heights, no width rules, no child combinators (a flex version
+  with `width: 100%` rules left cards only as wide as their titles on the live page).
+  Verified in a local rebuild of Dawn's grid: every card, photo box and button the same
+  width, every button in a row at the same pixel, at 390px and 1280px.
 - **Labels.** Dawn says "Add to cart" on single-variant products and "Choose options" on
   the rest. The locale string is now "Add to cart" for all; on a product with sizes the
   button opens the size chooser, then adds.

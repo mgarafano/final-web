@@ -613,3 +613,16 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
   what the language editor had written, parsed content equal to the repo). Read back; the
   templates, settings and every other file on that theme untouched. v2's two approved
   template settings are not on it — noted for Raheem.
+
+- **2026-09-14 — Card stretch rule rewritten after Raheem's desktop screenshot.** On the
+  real page the flex version of the stretch (grid item as a flex container, card wrapper
+  and card given `width: 100%` through child-combinator selectors) left every card,
+  photo box and button only as wide as its product title; reproduced locally by
+  withholding the width rules — the wrapper or card shrinks to the title's width. Which
+  part the live bundle dropped could not be read (the storefront and CDN are unreachable
+  from this session), so the rule now needs none of it: the grid item and the card
+  wrapper are grid containers, which stretch the next level to full width and height by
+  default — no width declarations, no percentage heights, no child combinators. Measured
+  locally: every card, photo box and button the same width, buttons level in every row.
+  Pushed to "UMS Live 2026" as text and read back. Photos untouched (square box, Dawn's
+  cover-fit).
