@@ -160,7 +160,10 @@ is active.
 turn off.** If a product page on the build theme shows the installments line under the
 price, it is still on.
 
-## 8. The "Ship" tab in checkout cannot be removed on this plan
+## 8. The "Ship" tab in checkout cannot be removed on this plan — ACCEPTED by Raheem 2026-09-14
+
+Decision: leave it as is. The Ship tab is a dead end (no rates), Pick up is the only path
+that completes. The optional wording edit below remains available at any time.
 
 Raheem saw a "Shipping method" box in checkout ("Enter your shipping address to view
 available shipping methods") after all shipping rates were deleted.
