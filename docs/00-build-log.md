@@ -602,3 +602,14 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
   featured collection and related products, Dawn's stock search template (adapt), and no
   UMS photo rule. The button work stays: stretched cards, one label, full width, one line.
   Pushed to v3 as text (section first, then the four templates) and read back.
+
+- **2026-09-14 — Buttons only, into "UMS Live 2026".** Raheem deleted v3: "All i need is
+  for you to standardize the alignment and the words and the size of the button. do not
+  change anything regarding the photos." The first live theme, "UMS Live 2026", is
+  unpublished since v2 went live and therefore writable. Two files pushed as text:
+  `sections/ums-globals.liquid` (card stretch so buttons sit level, one full-width
+  single-line button rule, no photo rule — checksum matches the repo) and
+  `locales/en.default.json` (`choose_options` → "Add to cart"; the rest byte-for-byte
+  what the language editor had written, parsed content equal to the repo). Read back; the
+  templates, settings and every other file on that theme untouched. v2's two approved
+  template settings are not on it — noted for Raheem.

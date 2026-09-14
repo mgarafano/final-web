@@ -308,3 +308,16 @@ to "Choose options" on others.
 v3 was built from the repo (`scripts/build-theme-zip.py`), created through `themeCreate`,
 and read back file by file. **To go live:** Online Store → Themes → "UMS Live 2026 v3" →
 ⋯ → Preview (storefront grid on the phone), then ⋯ → Publish. v2 becomes the rollback.
+
+**Final state (2026-09-14, later).** Raheem deleted v3 and asked for the button work only —
+alignment, one label, one size — with nothing about the photos touched, uploaded to the
+theme named "UMS Live 2026" (the first live theme, unpublished since v2 went live, so the
+API can write to it). Done in place with two files: `sections/ums-globals.liquid` (card
+stretch + button rule; no photo rule) and `locales/en.default.json` (`choose_options` →
+"Add to cart"; the "No Shipping" caption Raheem set is kept). Both read back by checksum
+and parsed content; every other file on that theme is untouched — its photos are exactly
+as they always were (square box, Dawn's cover-fit). Note: "UMS Live 2026" never received
+the two v2 template changes Raheem approved earlier (§11 items 2 and 3: 36 products per
+page, the shorter all-sales-final note); they are in the repo and can be pushed to it on
+his word, nothing else. Publishing is Raheem's: Online Store → Themes → "UMS Live 2026" →
+⋯ → Publish (v2 becomes the rollback).

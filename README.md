@@ -39,9 +39,12 @@ Rebuild of the Uptown Merch Solutions Shopify storefront (uptownmerch145.com).
 
 ## Pushing theme files
 
-- **The theme is live, and the API refuses writes to a live theme.** Changes go into a
-  new unpublished theme that Raheem publishes from admin; the previous live copy stays in
-  the library as the rollback. Two ways to make that theme:
+- **The theme is live, and the API refuses writes to a live theme.** Changes go into an
+  unpublished theme that Raheem publishes from admin; the previous live copy stays in the
+  library as the rollback. As of 2026-09-14 the unpublished "UMS Live 2026" (the first
+  live theme) carries the button fix and the V1 photos, and differs from this repo only
+  in two template settings (36 per page, the shorter all-sales-final note) that live on
+  the published v2 and await Raheem's word. Two ways to make a new theme:
   1. **From this repo, no admin click needed** (used for "UMS Live 2026 v2" on
      2026-09-14): `python3 scripts/build-theme-zip.py <dawn-v16.0.0-checkout> out.zip`
      builds the complete theme (stock Dawn v16.0.0 plus `theme/`, which is everything

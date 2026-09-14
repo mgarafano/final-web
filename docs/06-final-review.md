@@ -280,3 +280,7 @@ percentage heights, one label at one size, and the photos exactly as V1 showed t
 box, fitted and then filled, was tried and rejected; Raheem asked for the V1 photos back).
 Measured in a local rebuild of Dawn's grid with the store's settings: buttons level in
 every row at phone and desktop widths. Theme Check clean.
+
+Raheem then deleted v3 and narrowed the ask to the buttons only, uploaded to the theme
+named "UMS Live 2026". Done in place (two files), read back; that theme's photos are
+untouched. Details in `docs/04` §12, "Final state".
