@@ -520,3 +520,16 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
   - Not reachable from here, listed with steps in `docs/06`: favicon crop (needs an image
     file), homepage meta description, package photos, forwarding rule, old-theme deletion
     (API policy).
+
+- **2026-09-14 — Product page: "Shipping calculated at checkout" replaced.** Raheem sent a
+  product page screenshot: the caption under the price still said shipping is calculated
+  at checkout. It is Dawn's `products.product.shipping_policy_html` string, rendered by
+  `main-product` (and `featured-product`) whenever `shop.shipping_policy` has a body —
+  which it does, since the Shipping policy is where the no-ship rule is published. New
+  string in `locales/en.default.json`: "Pickup only at 241 W 145th St, Harlem — we don't
+  ship.", with "we don't ship" linked to the Shipping policy as the word "Shipping" was.
+  Looked for a way to apply it without Raheem: `themeFilesCopy` cannot read from another
+  theme (its input has no source theme), `themeCreate` needs a public zip of the complete
+  theme, and writes to the live theme are refused — so the live step is Raheem's, either
+  through Edit default theme content on the live theme or the duplicate-push-publish
+  workflow (`docs/04` §10).

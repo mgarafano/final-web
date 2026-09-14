@@ -216,3 +216,27 @@ if pasting a whole policy is easier than editing in place.
 The last one matters a little more than the dashes: the page customers land on is titled
 "Refund policy" (`/policies/refund-policy`), so the Terms should call it that. The en dash
 (–) is Option-hyphen on a Mac, Alt+0150 on Windows, or copy it from this table.
+
+## 10. Product page caption "Shipping calculated at checkout" — repo DONE 2026-09-14, live theme pending
+
+Raheem, with a product page screenshot: "There is no shipping … replace this with some
+other more intuitive line." Dawn prints `products.product.shipping_policy_html` under the
+price whenever a Shipping policy exists (the quick-add modal shows it too, since it loads
+the same section). The repo's `locales/en.default.json` now reads:
+
+> Pickup only at 241 W 145th St, Harlem — <a href="{{ link }}">we don't ship</a>.
+
+The link goes to the Shipping policy, as the word "Shipping" did before. The API refuses
+writes to the live theme, so getting it live is one of:
+
+1. **Edit default theme content on the live theme.** Online Store → Themes → UMS Live
+   2026 → ⋯ → Edit default theme content → search "calculated at checkout" → replace the
+   *Shipping policy html* value with the line above, `<a>` tag included → Save. Takes
+   effect immediately. Shopify writes it into the theme's own `en.default.json`, so the
+   live theme still matches the repo; read the file back afterwards to confirm.
+2. **Duplicate → push → publish** (README workflow): duplicate the live theme in admin,
+   push the locale file to the duplicate, read it back, publish the duplicate.
+
+Looked for a way to do it without Raheem: `themeFilesCopy` cannot read from another theme
+(its input has no source theme), `themeCreate` needs a public zip of the complete theme,
+and writes to the live theme are refused. So the live step is Raheem's.

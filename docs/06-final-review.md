@@ -227,3 +227,11 @@ back; the rest is listed with the exact steps.
 | Forwarding rule orders@ → mgarafano@ | **Raheem.** In the orders@ mailbox — `docs/04` §6. Then one test submission through each form. |
 | Old themes | **Admin.** Theme deletion is refused by API policy. Once the new site has settled: Online Store → Themes → ⋯ → Delete on "Copy of UMS logo homepage Live Version", "UMS site - Create Your Brand Uptown (staged)", and "UMS logo homepage Live Version". Keep "Dawn" as the one-click rollback for now. |
 | "Products" collection at `/collections` | **Left as is, on purpose.** Hiding the built-in `all` collection would break `/collections/all` links; it lists the same 29 products. |
+
+## Product page caption — 2026-09-14
+
+Raheem: the "Shipping calculated at checkout" line under every product price contradicts
+the pickup-only store. It is Dawn's `products.product.shipping_policy_html` string, printed
+whenever a Shipping policy exists. Replaced in the repo with "Pickup only at 241 W 145th
+St, Harlem — we don't ship.", "we don't ship" linked to the Shipping policy. Not yet live:
+the API refuses writes to the live theme; the two ways to apply it are in `docs/04` §10.

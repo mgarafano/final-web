@@ -27,9 +27,11 @@ Rebuild of the Uptown Merch Solutions Shopify storefront (uptownmerch145.com).
     line; express checkout buttons removed.
   - `snippets/cart-drawer.liquid` — pickup-only note replaces the tax/shipping line.
   - `config/settings_schema.json` — one settings group appended ("UMS cart note").
-  - `locales/en.default.json` — one string changed: the low-stock line reads
-    "Only N left" (brief §4). The file carries Shopify's auto-generated comment
-    header above the JSON, exactly as Shopify stores it.
+  - `locales/en.default.json` — two strings changed: the low-stock line reads
+    "Only N left" (brief §4), and the caption under a product's price reads "Pickup
+    only at 241 W 145th St, Harlem — we don't ship." (linked to the Shipping policy)
+    instead of Dawn's "Shipping calculated at checkout." The file carries Shopify's
+    auto-generated comment header above the JSON, exactly as Shopify stores it.
 - Everything else on the theme is stock Dawn 16.0.0 and is not mirrored here.
 
 ## Pushing theme files
