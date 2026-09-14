@@ -14,12 +14,10 @@ rollback (republish the current "Dawn" theme, ID `162803220706`).
 From `docs/04-store-settings-todo.md`:
 
 - [x] §2 Pickup instructions on the stocked location — done through the API.
-- [ ] **Hide 17 collections from the Online Store (Raheem, admin).** This connection's
-      safety policy refuses every collection-unpublish mutation, so: Products →
-      Collections → select the 17 listed in section 3 → bulk action to remove them from
-      the Online Store sales channel ("Unpublish" / "Make unavailable", depending on the
-      admin version). Or open each one → Sales channels → Manage → untick Online Store.
-      Their redirects already exist and start working the moment this is done.
+- [x] **Hide 17 collections from the Online Store** — done by Raheem in admin
+      ("Exclude from sales channels" → Online Store) and verified through the API: all
+      17 are off the Online Store; Home page, Products, Uptown Blanks, and UMS Storefront
+      remain on. Their 17 redirects are live.
 - [ ] §4 Checkout branding in Settings → Checkout → Customize (values ready to paste).
 - [ ] §6 Forwarding rule from orders@ to mgarafano@, then one test through each form.
 - [ ] §7 Shop Pay Installments off, if the product page still shows the "Pay in 4" line.
@@ -80,10 +78,10 @@ Kept as-is: `/pages/contact`, `/pages/about`, and every `/pages/organizations*` 
 | Old path | Products | Target | Status |
 |---|---|---|---|
 | `/collections/uptown-blanks` | 29 — the same products as UMS Storefront | `/collections/ums-storefront` | at publish (in the live menu) |
-| `/collections/pos-products` | 29 — Point of Sale grouping, was never meant to be public | `/collections/ums-storefront` | redirect done; hide in admin |
-| `/collections/pos-services` | 8 — Point of Sale services, not sold online | `/pages/organizations` | redirect done; hide in admin |
+| `/collections/pos-products` | 29 — Point of Sale grouping, was never meant to be public | `/collections/ums-storefront` | done: hidden + redirect |
+| `/collections/pos-services` | 8 — Point of Sale services, not sold online | `/pages/organizations` | done: hidden + redirect |
 
-### Empty placeholder collections — hide in admin (decision C: never delete); redirects done
+### Empty placeholder collections — done: hidden by Raheem (decision C: never delete), redirects live
 
 `shirts`, `shirts-1`, `garment-type` → `/collections/ums-storefront`
 `custom-patches` → `/pages/organizations-patches`

@@ -366,3 +366,7 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
     unchanged.) This is live now. "Shop location" was left alone: it may be the
     location the POS register is tied to, and deactivating a location is not something
     to do on a guess. Noted in `docs/04` §2.
+  - **Collections hidden by Raheem** (admin bulk action "Exclude from sales channels" →
+    Online Store), verified through the API: all 17 off the Online Store, POS untouched;
+    Home page, Products, Uptown Blanks, and UMS Storefront still on. The 17 collection
+    redirects are therefore live.
