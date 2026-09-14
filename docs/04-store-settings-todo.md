@@ -73,3 +73,25 @@ Dawn's cart renders "Taxes, discounts and shipping calculated at checkout" from 
 translation string, not a theme setting. Correcting it to pickup-only wording means
 overriding that key in `locales/en.default.json`. Handled in the cart and checkout
 phase.
+
+## 6. Form submissions are going to the wrong address — and it has a typo
+
+Shopify delivers every contact-form submission — which now includes the
+Organizations intake form — to the **store contact email**. Right now that is:
+
+> `Dtftranfers@uptownmerch145.com`
+
+Two problems. It isn't `orders@`, so the brief's routing requirement (§5.5: every
+submission to **orders@** and **mgarafano@**) is not met. And "tranfers" is missing an
+"s" — if that mailbox doesn't actually exist, submissions vanish.
+
+Changing the store's primary contact email is a business decision, not a theme
+setting, so it was not changed from here.
+
+**Settings → Store details → Contact information → Store contact email** →
+`orders@uptownmerch145.com`. Then add a forwarding rule on orders@ so every message
+also reaches `mgarafano@uptownmerch145.com`. That is the whole routing mechanism —
+no code involved.
+
+Send one test submission through `/pages/organizations-order` afterwards and confirm
+it lands in both inboxes with every field labelled.
