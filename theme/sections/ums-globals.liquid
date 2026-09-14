@@ -1,0 +1,134 @@
+{%- comment -%}
+  UMS global styles.
+
+  Lives in the header group so it renders on every page. Shopify collects
+  stylesheet-tag content into styles.css and injects it via
+  content_for_header, so this loads from <head> with no flash of unstyled
+  content — and it keeps every UMS customisation out of Dawn's own files,
+  so a future Dawn update can't clobber it.
+
+  Renders no visible markup.
+{%- endcomment -%}
+
+{%- comment -%}
+  Organizations has no cart or checkout anywhere in its flow, so an active
+  cart icon there would be misleading (brief section 3). Emitted server-side
+  and conditionally, rather than as a body class, so there is no flash of a
+  cart icon before JS runs.
+{%- endcomment -%}
+{%- if request.path contains '/pages/organizations' -%}
+  <style>
+    .header__icon--cart,
+    #cart-icon-bubble {
+      display: none !important;
+    }
+  </style>
+{%- endif -%}
+
+{% stylesheet %}
+  /* ---------------------------------------------------------------
+     Brand tokens. Palette locked per rebuild brief section 2.
+     --------------------------------------------------------------- */
+  :root {
+    --ums-green: #355e3b;
+    --ums-gray: #a9a5a4;
+    --ums-gray-cool: #838388;
+    --ums-white: #ffffff;
+    --ums-ink: #1b1b1b;
+
+    --ums-green-900: #24412a;
+    --ums-green-050: #eef2ee;
+    --ums-gray-050: #f6f5f5;
+    --ums-gray-200: #e2e0df;
+    --ums-gray-600: #6c6a6a;
+
+    --ums-surface: var(--ums-white);
+    --ums-surface-alt: var(--ums-gray-050);
+    --ums-text: var(--ums-ink);
+    --ums-text-muted: var(--ums-gray-600);
+    --ums-border: var(--ums-gray-200);
+    --ums-accent: var(--ums-green);
+    --ums-accent-hover: var(--ums-green-900);
+    --ums-on-accent: var(--ums-white);
+
+    --ums-tracking-wide: 0.06em;
+    --ums-radius: 2px;
+
+    --ums-space-2: 0.8rem;
+    --ums-space-4: 1.6rem;
+    --ums-space-6: 2.4rem;
+    --ums-space-8: 3.2rem;
+  }
+
+  /* ---------------------------------------------------------------
+     Nav weighting. "UMS for Organizations" is the primary business line
+     and must read heavier than its neighbours (brief section 3), on
+     mobile as well as desktop (brief section 8 / Mobile).
+
+     Matched on href rather than a hand-added class, so the treatment
+     survives the menu being reordered or renamed in Shopify admin.
+     --------------------------------------------------------------- */
+  .header__menu-item[href*="/pages/organizations"] {
+    background: var(--ums-accent);
+    color: var(--ums-on-accent);
+    border-radius: var(--ums-radius);
+    padding: 1rem 1.8rem;
+    font-weight: 600;
+    letter-spacing: var(--ums-tracking-wide);
+    text-transform: uppercase;
+  }
+
+  .header__menu-item[href*="/pages/organizations"]:hover,
+  .header__menu-item[href*="/pages/organizations"]:focus {
+    background: var(--ums-accent-hover);
+    color: var(--ums-on-accent);
+  }
+
+  .header__menu-item[href*="/pages/organizations"] span {
+    text-decoration: none;
+  }
+
+  /* Mobile drawer: a filled row, not a pill. A pill inside a stacked
+     text list reads as a stray button; a full-width row reads as the
+     primary path, which is the signal the desktop button carries. */
+  .menu-drawer__menu-item[href*="/pages/organizations"] {
+    background: var(--ums-accent);
+    color: var(--ums-on-accent);
+    font-weight: 600;
+    letter-spacing: var(--ums-tracking-wide);
+    text-transform: uppercase;
+  }
+
+  .menu-drawer__menu-item[href*="/pages/organizations"]:hover,
+  .menu-drawer__menu-item[href*="/pages/organizations"]:focus {
+    background: var(--ums-accent-hover);
+    color: var(--ums-on-accent);
+  }
+
+  /* ---------------------------------------------------------------
+     Footer sits on hunter green (scheme-3). Dawn's default link
+     underlines get lost against it, so soften them deliberately.
+     --------------------------------------------------------------- */
+  .footer__content-top .list-menu__item--link,
+  .footer-block__details-content .list-menu__item--link {
+    text-decoration: none;
+  }
+
+  .footer__content-top .list-menu__item--link:hover,
+  .footer-block__details-content .list-menu__item--link:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "UMS global styles",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Loads the UMS brand tokens and global styling rules. Renders nothing visible — leave it in place."
+    }
+  ]
+}
+{% endschema %}

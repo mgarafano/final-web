@@ -1,0 +1,48 @@
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "visit": {
+          "type": "text",
+          "settings": {
+            "heading": "Visit the shop",
+            "subtext": "<p>241 W 145th St<br>Harlem, New York</p><p>Tuesday to Saturday, 11am–8pm<br>646-398-8178</p>"
+          }
+        },
+        "pickup": {
+          "type": "text",
+          "settings": {
+            "heading": "Pickup and returns",
+            "subtext": "<p>Every order is picked up in store — we don't ship.</p><p>All sales are final. No refunds, no exchanges.</p>"
+          }
+        },
+        "browse": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Browse",
+            "menu": "ums-main-menu"
+          }
+        }
+      },
+      "block_order": ["visit", "pickup", "browse"],
+      "settings": {
+        "color_scheme": "scheme-3",
+        "newsletter_enable": true,
+        "newsletter_heading": "Hear about new pieces first",
+        "enable_follow_on_shop": false,
+        "show_social": true,
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "payment_enable": true,
+        "show_policy": true,
+        "margin_top": 0,
+        "padding_top": 48,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": ["footer"]
+}

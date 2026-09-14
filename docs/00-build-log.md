@@ -36,3 +36,30 @@ deliberate human action.
 - **2026-09-13** — Audited all 45 products. Created build theme by duplicating the
   clean Dawn. Pushed `assets/ums-brand.css` (palette + nav weighting + cart
   suppression tokens). Wrote `docs/01-product-cleanup-proposal.md`.
+
+- **2026-09-14 — Phase 2, navigation and chrome.**
+  - Created menu `ums-main-menu` (Storefront / Organizations / About / Contact).
+    The live theme reads `main-menu`, which is **untouched**, so the live site's
+    navigation is unchanged.
+  - Created pages `/pages/about` (approved copy from brief §6) and
+    `/pages/organizations` (placeholder; built in a later phase).
+  - Created smart collection `ums-storefront` (rule: tag = `uptown-blanks`, 33 products).
+  - Theme settings: brand colour schemes, Archivo/Barlow typography, `cart_type: drawer`,
+    squared 2px radii, currency-code suffix off, vendor hidden, social links wired.
+  - Header: points at `ums-main-menu`; country and language selectors **off**
+    (brief §8/Mobile); announcement bar now carries pickup address and hours.
+  - Footer: hunter-green (scheme-3), "Follow on Shop" off, country/language off,
+    blocks for address + hours + phone, the all-sales-final policy, and a browse list.
+  - Added `sections/ums-globals.liquid` — brand tokens, the Organizations nav
+    weighting (desktop pill + mobile filled row, matched on href so it survives
+    menu edits), and conditional cart-icon suppression on Organizations pages.
+
+## Additional tooling limits found
+
+| Capability | Status |
+|---|---|
+| Delete a theme file (`themeFilesDelete`) | ❌ blocked by policy |
+| Reach the storefront/preview from this container | ❌ egress proxy denies it — **Raheem must eyeball previews** |
+
+Shopify validates theme files on upsert and writes **nothing** when validation fails.
+Confirmed it checks setting ranges/steps, font-picker handles, and section block types.
