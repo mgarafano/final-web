@@ -1,0 +1,112 @@
+{%- comment -%}
+  Homepage hero.
+
+  Replaces the old two-tile "split screen" homepage, which was explicitly
+  rejected (brief section 1). The two business lines are separated by weight
+  and order here, not by a 50/50 visual split.
+{%- endcomment -%}
+
+<div class="ums-hero color-{{ section.settings.color_scheme }} gradient">
+  <div class="ums-hero__inner page-width">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="ums-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    {%- endif -%}
+
+    <h1 class="ums-hero__title">{{ section.settings.heading }}</h1>
+
+    {%- if section.settings.body != blank -%}
+      <div class="ums-hero__body rte">{{ section.settings.body }}</div>
+    {%- endif -%}
+
+    <div class="ums-hero__actions">
+      {%- if section.settings.primary_label != blank -%}
+        <a class="button ums-hero__cta" href="{{ section.settings.primary_link }}">
+          {{ section.settings.primary_label | escape }}
+        </a>
+      {%- endif -%}
+      {%- if section.settings.secondary_label != blank -%}
+        <a class="ums-hero__link" href="{{ section.settings.secondary_link }}">
+          {{ section.settings.secondary_label | escape }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .ums-hero {
+    padding-block: 6.4rem 5.6rem;
+  }
+
+  .ums-hero__inner {
+    max-width: 82rem;
+  }
+
+  .ums-hero__eyebrow {
+    margin: 0 0 1.6rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  .ums-hero__title {
+    margin: 0;
+    font-size: clamp(3.4rem, 6vw, 5.6rem);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  .ums-hero__body {
+    margin-top: 2rem;
+    max-width: 56rem;
+    font-size: 1.8rem;
+    line-height: 1.5;
+  }
+
+  .ums-hero__body > :first-child { margin-top: 0; }
+  .ums-hero__body > :last-child { margin-bottom: 0; }
+
+  .ums-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.6rem 2.8rem;
+    margin-top: 3.2rem;
+  }
+
+  .ums-hero__cta {
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .ums-hero__link {
+    font-size: 1.6rem;
+    text-underline-offset: 0.4rem;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ums-hero { padding-block: 4rem 3.6rem; }
+    .ums-hero__body { font-size: 1.6rem; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "UMS hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Harlem, New York" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Bringing brands to life." },
+    { "type": "richtext", "id": "body", "label": "Body" },
+    { "type": "text", "id": "primary_label", "label": "Primary button label", "default": "Start an order" },
+    { "type": "url", "id": "primary_link", "label": "Primary button link" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary link label", "default": "Shop the storefront" },
+    { "type": "url", "id": "secondary_link", "label": "Secondary link" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1" }
+  ],
+  "presets": [{ "name": "UMS hero" }]
+}
+{% endschema %}

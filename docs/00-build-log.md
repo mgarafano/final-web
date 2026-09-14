@@ -63,3 +63,33 @@ deliberate human action.
 
 Shopify validates theme files on upsert and writes **nothing** when validation fails.
 Confirmed it checks setting ranges/steps, font-picker handles, and section block types.
+
+- **2026-09-14 — approved product actions + Phase 3, homepage.**
+  - ✅ **Executed:** the 4 "Example product" items set to DRAFT — off the live
+    storefront. Reversible from Shopify admin at any time.
+  - ⛔ **Blocked:** unpublishing the 8 `uptown-service` products from the Online
+    Store. `publishableUnpublish` is refused by policy on this connection
+    ("Unpublishing is blocked to prevent accidental storefront catalog removal").
+    **Raheem must do this in Shopify admin.** Setting them to DRAFT is *not* a
+    substitute — draft products disappear from POS too, which would break the register.
+  - **Correction to an earlier claim:** I previously wrote that Embroidery Setup
+    *and* Custom Stickers were Online Store only. That was extrapolated from a
+    3-product sample and is wrong. Checking all 8: seven are on Online Store **and**
+    Point of Sale. Only **Embroidery Setup and File Services** is Online Store only —
+    so unpublishing it leaves it on no channel at all.
+  - Homepage rebuilt: `sections/ums-hero.liquid`, `sections/ums-paths.liquid`,
+    and `templates/index.json`. The two business lines are separated by weight
+    (green filled panel vs smaller bordered card, 1.7fr/1fr) rather than the
+    rejected 50/50 split, and stack with Organizations first on mobile.
+    Featured row uses the real `ums-storefront` collection with quick-add on
+    and 2 columns on mobile, both per brief.
+
+## Blocked operations (cumulative)
+
+| Operation | Why it matters | Who does it |
+|---|---|---|
+| `themePublish` | Go-live | Raheem, in admin |
+| `themeFilesUpsert` on live theme | Can't touch the live site | — (by design) |
+| `themeFilesDelete` | Can't remove dead theme files | Raheem, in admin |
+| `publishableUnpublish` | Can't pull products off the Online Store | Raheem, in admin |
+| `appInstallations` read | Can't audit installed apps | Raheem, in admin |

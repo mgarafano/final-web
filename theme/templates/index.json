@@ -1,0 +1,67 @@
+{
+  "sections": {
+    "hero": {
+      "type": "ums-hero",
+      "settings": {
+        "eyebrow": "Harlem, New York",
+        "heading": "Bringing brands to life.",
+        "body": "<p>Printed, embroidered and finished in-house at 241 W 145th Street — for one person or for a whole organization.</p>",
+        "primary_label": "Start an order for your group",
+        "primary_link": "/pages/organizations",
+        "secondary_label": "Shop the storefront",
+        "secondary_link": "/collections/ums-storefront",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "paths": {
+      "type": "ums-paths",
+      "blocks": {
+        "orgs": {
+          "type": "path",
+          "settings": {
+            "label": "For schools, teams and companies",
+            "heading": "UMS for Organizations",
+            "body": "Uniforms, spirit wear, staff apparel, event merch and custom patches — made for a whole group. Tell us what you need and we'll put a quote together.",
+            "cta": "Start your order",
+            "link": "/pages/organizations",
+            "emphasis": "primary",
+            "color_scheme": "scheme-3"
+          }
+        },
+        "shop": {
+          "type": "path",
+          "settings": {
+            "label": "In the shop",
+            "heading": "UMS Storefront",
+            "body": "Ready-to-wear pieces, finished in-house. Pick up at 145th Street.",
+            "cta": "Browse the shop",
+            "link": "/collections/ums-storefront",
+            "emphasis": "secondary",
+            "color_scheme": "scheme-1"
+          }
+        }
+      },
+      "block_order": ["orgs", "shop"],
+      "settings": {}
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "In the shop right now",
+        "collection": "ums-storefront",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "image_ratio": "square",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "enable_quick_add": true,
+        "show_view_all": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 8,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": ["hero", "paths", "featured"]
+}

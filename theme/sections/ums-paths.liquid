@@ -1,0 +1,137 @@
+{%- comment -%}
+  The two business lines.
+
+  Deliberately asymmetric: Organizations is the primary line (brief section 1)
+  and gets the larger, filled panel; the Storefront sits beside it as a smaller
+  but plainly findable card. Not a 50/50 split, which was rejected.
+
+  Stacks to one column on mobile with Organizations first, so the weighting
+  survives the reflow.
+{%- endcomment -%}
+
+<div class="ums-paths page-width">
+  {%- for block in section.blocks -%}
+    <a
+      class="ums-path ums-path--{{ block.settings.emphasis }} color-{{ block.settings.color_scheme }} gradient"
+      href="{{ block.settings.link }}"
+      {{ block.shopify_attributes }}
+    >
+      <span class="ums-path__label">{{ block.settings.label | escape }}</span>
+      <span class="ums-path__title">{{ block.settings.heading | escape }}</span>
+      <span class="ums-path__body">{{ block.settings.body | escape }}</span>
+      <span class="ums-path__cta">{{ block.settings.cta | escape }}</span>
+    </a>
+  {%- endfor -%}
+</div>
+
+{% stylesheet %}
+  .ums-paths {
+    display: grid;
+    gap: 1.6rem;
+    padding-block: 1.6rem 6.4rem;
+  }
+
+  @media screen and (min-width: 990px) {
+    .ums-paths {
+      grid-template-columns: 1.7fr 1fr;
+      align-items: stretch;
+    }
+  }
+
+  .ums-path {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 3.2rem;
+    border-radius: var(--ums-radius, 2px);
+    text-decoration: none;
+    transition: transform 0.18s ease;
+  }
+
+  .ums-path--secondary {
+    border: 1px solid rgba(var(--color-foreground), 0.16);
+  }
+
+  .ums-path:hover { transform: translateY(-2px); }
+
+  .ums-path__label {
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .ums-path__title {
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    font-size: 3rem;
+  }
+
+  .ums-path--secondary .ums-path__title { font-size: 2.4rem; }
+
+  .ums-path__body {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    max-width: 46ch;
+    opacity: 0.92;
+  }
+
+  .ums-path__cta {
+    margin-top: auto;
+    padding-top: 1.6rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .ums-path__cta::after {
+    content: " \2192";
+  }
+
+  @media screen and (max-width: 989px) {
+    .ums-path { padding: 2.4rem; }
+    .ums-path__title { font-size: 2.6rem; }
+    .ums-path--secondary .ums-path__title { font-size: 2.2rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ums-path { transition: none; }
+    .ums-path:hover { transform: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "UMS business lines",
+  "max_blocks": 2,
+  "blocks": [
+    {
+      "type": "path",
+      "name": "Business line",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Eyebrow" },
+        { "type": "text", "id": "heading", "label": "Heading" },
+        { "type": "text", "id": "body", "label": "Body" },
+        { "type": "text", "id": "cta", "label": "Call to action" },
+        { "type": "url", "id": "link", "label": "Link" },
+        {
+          "type": "select",
+          "id": "emphasis",
+          "label": "Emphasis",
+          "options": [
+            { "value": "primary", "label": "Primary (large)" },
+            { "value": "secondary", "label": "Secondary" }
+          ],
+          "default": "primary"
+        },
+        { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "UMS business lines" }]
+}
+{% endschema %}
