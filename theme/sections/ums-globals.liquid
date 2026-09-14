@@ -403,18 +403,10 @@
     width: 100%;
   }
 
-  /* Every card gets the same 4:5 photo box (the templates set image_ratio "portrait")
-     and every photo fills it edge to edge, so all photos are exactly the same size.
-     Fitting the photo inside the box instead (object-fit: contain) left the square hat
-     shots visibly smaller than the tall apparel shots — rejected. 4:5 keeps the crop
-     small: about 8% off the top and bottom of a 2:3 apparel shot, 10% off each side of
-     a square hat shot, which is margin in every supplier photo. */
-  .product-card-wrapper .card__media .media img {
-    object-fit: cover;
-    object-position: center;
-  }
+  /* Photos are left exactly as Dawn shows them (square box, cover-fit), which is how the
+     first live theme showed them — Raheem's call after two alternatives were rejected.
 
-  /* One button on every card: the same label (the locale string), full width, one line,
+     One button on every card: the same label (the locale string), full width, one line,
      so every button in the grid is the same size. */
   .product-card-wrapper .quick-add__submit {
     width: 100%;

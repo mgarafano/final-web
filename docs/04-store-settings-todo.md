@@ -255,7 +255,7 @@ no duplicate needed; the repo copy gets synced afterwards.
 
 | # | Item | Where | What |
 |---|---|---|---|
-| 1 | Product photos are cropped in the grids | **Superseded by §12** | v2 (published) used "Adapt to image", which made rows ragged; v3 uses one 4:5 box that every photo fills, on Raheem's direction that photos must all be the same size. |
+| 1 | Product photos are cropped in the grids | **Withdrawn** | v2 (published) used "Adapt to image", which made rows ragged; v3 tried a 4:5 box fitted, then filled; Raheem asked for the V1 photos back. v3 shows photos exactly as V1 did. |
 | 2 | Collection page splits 29 products over two pages | **DONE in "UMS Live 2026 v2"** | Products per page 24 → 36. One page. |
 | 3 | Product page says "Pickup only" three times | **DONE in "UMS Live 2026 v2"** | The text block under the buy button now reads "All sales are final — no refunds or exchanges." The caption under the price (§10) and Dawn's pickup-availability line carry the pickup message. |
 | 4 | Homepage grid has no quick add | Customize → Homepage → Featured collection → Quick add | Optional: **Standard**, to match the collection page. The template carried a key Dawn 16 does not have, so the setting never took. |
@@ -296,14 +296,12 @@ to "Choose options" on others.
 - **Labels.** Dawn says "Add to cart" on single-variant products and "Choose options" on
   the rest. The locale string is now "Add to cart" for all; on a product with sizes the
   button opens the size chooser, then adds.
-- **Photo box.** All four grid templates (collection, homepage featured collection,
-  related products, search) use the 4:5 "portrait" box and every photo fills it edge to
-  edge (`object-fit: cover`), so every photo in the grid is exactly the same size. The
-  first cut of v3 fitted the photo inside the box instead, which left the square hat shots
-  visibly smaller than the apparel shots; Raheem rejected it ("they can not be smaller or
-  larger than others") and it was corrected in place. The crop at 4:5 is about 8% off the
-  top and bottom of an apparel shot and 10% off each side of a hat shot — margin in the
-  supplier photos. `templates/search.json` joins the repo for the box setting.
+- **Photos: back to V1.** Raheem, after two cuts of v3: "restore all photos to the
+  state they were in in the V1". So the photo settings are exactly the first live
+  theme's again — square box on the collection grid, homepage featured collection and
+  related products, Dawn's stock search template, and no UMS photo rule at all. The
+  4:5 box (fitted, then filled) and v2's "adapt" are gone. `templates/search.json` left
+  the repo again.
 - **Button size.** Besides the one label, every card button is full width and one line
   (`white-space: nowrap`), so all are the same size.
 

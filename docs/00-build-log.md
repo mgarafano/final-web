@@ -595,3 +595,10 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
   `themeFilesUpsert`. A URL-sourced body (`type: URL` pointing at a file in Files) was
   accepted, ran as a job, and wrote nothing — so the section went up as `type: TEXT` and
   was read back by checksum.
+
+- **2026-09-14 — v3, photos back to V1.** Raheem: "restore all photos to the state they were
+  in in the V1 and standardize the size of the buttons." Photo settings reverted to the
+  first live theme's exactly — `image_ratio` "square" on the collection grid, homepage
+  featured collection and related products, Dawn's stock search template (adapt), and no
+  UMS photo rule. The button work stays: stretched cards, one label, full width, one line.
+  Pushed to v3 as text (section first, then the four templates) and read back.

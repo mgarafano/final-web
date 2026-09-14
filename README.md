@@ -78,7 +78,7 @@ Rebuild of the Uptown Merch Solutions Shopify storefront (uptownmerch145.com).
 - Product cards are stretched by `ums-globals` (grid item → card wrapper → card as flex
   items) so the quick-add button sits at the bottom of every card in a row. Dawn relies
   on a `height: 100%` chain for this, which iOS Safari does not resolve; on the phone the
-  buttons drifted by a line whenever a title wrapped. The photo box is 4:5 in every grid
-  template (collection, homepage, related products, search) and every photo fills it
-  edge to edge (`object-fit: cover`), so all photos are the same size; fitting them
-  inside the box instead left the square hat shots visibly smaller and was rejected.
+  buttons drifted by a line whenever a title wrapped. Product photos are shown exactly
+  as Dawn shows them and as the first live theme did (square box, cover-fit, no UMS
+  rule): two alternatives — "adapt" and a 4:5 box, fitted or filled — were tried in
+  v2 and v3 and rejected by Raheem, who asked for the V1 photos back.
