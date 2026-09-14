@@ -159,3 +159,32 @@ is active.
 **Settings → Payments → Shopify Payments → Manage → Shop Pay → Shop Pay Installments →
 turn off.** If a product page on the build theme shows the installments line under the
 price, it is still on.
+
+## 8. The "Ship" tab in checkout cannot be removed on this plan
+
+Raheem saw a "Shipping method" box in checkout ("Enter your shipping address to view
+available shipping methods") after all shipping rates were deleted.
+
+Why it is there: Shopify's checkout always renders the delivery method chooser with a
+**Ship** tab beside **Pick up** whenever local pickup is available. Deleting the rates
+made shipping impossible to complete — a customer who stays on Ship and enters an
+address gets "no shipping methods available" and cannot continue — but the tab itself
+is not removable. Hiding or reordering delivery methods needs Shopify Functions or
+checkout UI extensions on the shipping step, which Shopify limits to Plus (confirmed in
+the developer docs on 2026-09-14). Every storefront product is a tracked, physical item
+stocked at the pickup-enabled location, so the Pick up tab is offered.
+
+Two mitigations, both without Plus:
+
+1. **Rewrite the strings inside the Ship tab** so the dead end explains itself.
+   Online Store → Themes → the build theme → ⋯ → Edit default theme content →
+   *Checkout & system* tab → search "shipping". Suggested:
+   - "Enter your shipping address to view available shipping methods." →
+     "We don't ship. Choose Pick up above to collect your order at 241 W 145th St."
+   - the "no shipping rates / can't be shipped to this address" message →
+     "This shop is pickup only. Select Pick up above."
+   These are store-wide checkout translations, not theme code, and take effect on save.
+2. **Mark products as not requiring shipping.** Removes the delivery step entirely, but
+   also removes Shopify's local-pickup flow (pickup instructions at checkout, the
+   ready-for-pickup email, the pickup orders tab in POS) — not recommended; the brief
+   asks to keep the pickup pattern.
