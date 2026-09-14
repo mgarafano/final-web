@@ -5,8 +5,8 @@
 | Thing | Value |
 |---|---|
 | Store | Uptown Merch Solutions — uptownmerch145.com, Shopify plan, USD, EDT |
-| **Live theme** | **"Dawn" — ID `162803220706`, role MAIN, published 2026-09-13 23:47 UTC** |
-| Build theme | "UMS Rebuild 2026" — ID `162803613922`, role UNPUBLISHED |
+| **Live theme** | **"UMS Live 2026" — ID `162803613922`, role MAIN, published by Raheem 2026-09-14 09:30 UTC** |
+| Rollback | "Dawn" — ID `162803220706`, stock Dawn 16.0.0, unpublished at go-live, kept in the library |
 | Dawn version | 16.0.0 |
 | Old live theme | "UMS logo homepage Live Version" (`160521519330`) — now unpublished |
 | Backup | "Copy of UMS logo homepage Live Version" (`162803089634`) |
@@ -499,3 +499,10 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
   - Raheem removed Uptown Blanks from the Online Store channel; verified through the
     API. Online Store collections are now UMS Storefront and the built-in "Products"
     listing only. The go-live sequence is complete.
+
+- **2026-09-14 — Final review after go-live.** Live theme compared file for file with the
+  repo (all match), render audits and Theme Check re-run on exactly those files (all
+  clean), live store settings re-read (no shipping zones, pickup instructions intact,
+  accounts disabled, orders@ everywhere, 11 pages, 36 redirects, two collections on the
+  channel, helper product unlisted). Write-up in `docs/06`. The API now refuses writes to
+  the live theme; the duplicate-push-publish workflow is in the README.

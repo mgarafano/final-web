@@ -29,7 +29,7 @@ Legend: **done** = built and verified · **admin** = needs Raheem in admin ·
 | Requirement | Status | Evidence |
 |---|---|---|
 | Storefront · Organizations (weighted) · About · Contact | done | Menu `ums-main-menu` in that order; Organizations styled as a filled pill on desktop, filled row on mobile. |
-| Old labels gone; ESP gone from the new site | done | New theme has no ESP reference. The old ESP page is unpublished at publish (it is in the live menu until then). |
+| Old labels gone; ESP gone from the new site | done | New theme has no ESP reference. The old ESP page was unpublished and redirected at go-live on 2026-09-14. |
 | Footer: social, policies, hours/location, payment icons | done | Footer group: visit block, pickup block, menu, social on, policies on, payments on, newsletter in footer only. |
 | Cart icon hidden on Organizations pages | done | `ums-globals` hides it on every `/pages/organizations*` path, server-side. |
 
@@ -107,7 +107,7 @@ buttons, restacked list rows, 80% logo. Raheem's phone pass is the final check.
 | Pickup instructions on stocked location | done |
 | Shipping zones removed | done |
 | Old pages unpublished, 32 redirects, 17 collections hidden | done |
-| Three live-menu items (order form, ESP page, Uptown Blanks) | at publish |
+| Three live-menu items (order form, ESP page, Uptown Blanks) | done at go-live 2026-09-14: pages unpublished, collection hidden, all three redirected |
 | Forwarding rule + test submissions | admin |
 | Phone pass | admin |
 
@@ -155,7 +155,7 @@ at 1280px and 390px, measured, and checked again against the store.
 | Post-submit confirmation screens (intake, contact) | **Fixed.** Focus ring and shadow no longer drawn around the "Thanks" block. |
 | Artwork upload on the theme | **Fixed.** The theme's `page.order.json` had lost `artwork_product`, so the picker never rendered. Cause: Shopify validates a template against the section schema when the template is written; a template pushed alongside a schema change loses the new setting. Restored, plus `artwork_variant_id` as a second source; read back with both present. |
 | Theme files | 12 code files match the repo by MD5; 9 JSON templates and groups match in content; `layout/theme.liquid` and every asset are stock Dawn 16 except the superseded `ums-brand.css`. |
-| Pages | 24 pages read in full: no `mgarafano@` anywhere; only `order-form` and `bulk-catalog` remain published besides the new pages (they go at publish). |
+| Pages | 24 pages read in full: no `mgarafano@` anywhere; `order-form` and `bulk-catalog` were the last old pages standing and went down at go-live. |
 | Helper product | `Artwork upload`: UNLISTED, on the Online Store, $0, available for sale, `product.internal` template. |
 
 Still optional, unchanged from the first review: policy wording (Contact and Terms use
@@ -192,3 +192,20 @@ location", the forwarding rule, and photographs for the package pages.
 | Package page box against the footer | **Fixed.** 64px of white below the box on desktop, 48px on phones. |
 | Same cause elsewhere | **Fixed.** Order form, build list, contact form, internal page and business-line cards regain their vertical spacing; the two forms return to a 72–76rem column on desktop. |
 | Root cause | Section CSS loads before Dawn's `base.css`; equal-weight rules on shared elements lost the tie. Documented in `ums-globals` and the README. |
+
+## Final review after go-live — 2026-09-14
+
+Run against the live theme and the live store, not a preview.
+
+| Check | Result |
+|---|---|
+| Live theme file for file against the repo | All 12 code files and the locale match by checksum; all 10 JSON templates and groups match in content; nothing edited in the theme editor since the last push. |
+| Rendered audits on the live files | Contrast: every page passes WCAG AA. No horizontal overflow at phone width. Package box and contact form share the body column exactly. Box clears the footer by 64px (48px on phones). Nav pill white on its own page. Forms hold their 72–76rem column. Theme Check: nothing in UMS code. |
+| Checkout inputs | Shipping profile has no zones, so no shipping rate can be offered; local pickup on the stocked location with the corrected instructions; accounts disabled; store email and contact email are orders@. |
+| Content and navigation | 11 pages published, every old page down; `ums-main-menu` in header and footer; 36 redirects; Online Store collections are UMS Storefront and the built-in Products listing; helper product unlisted, addable, untracked. |
+| Rollback | "Dawn" unpublished in the library; one click restores it. |
+
+Open, all Raheem's call: the Contact page shipping answer, the doubled "2024" on About,
+policy hyphens, a purpose-made favicon, "Shop location" still offering pickup with its old
+instructions and no stock, the forwarding rule, photos for the package pages, and deleting
+the four old themes once the new site has settled.

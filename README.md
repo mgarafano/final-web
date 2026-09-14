@@ -4,8 +4,9 @@ Rebuild of the Uptown Merch Solutions Shopify storefront (uptownmerch145.com).
 
 - `docs/` — the authoritative requirements brief, plus working proposals that need
   Raheem's sign-off before anything is executed against the live store.
-- `theme/` — source of truth for the new Shopify theme. Files here are pushed to the
-  unpublished theme **"UMS Rebuild 2026"** (theme ID `162803613922`).
+- `theme/` — source of truth for the Shopify theme **"UMS Live 2026"** (theme ID
+  `162803613922`), published on 2026-09-14. Every file here matched the live theme at
+  go-live (checksums for code, content for JSON).
 
 ## Ground rules
 
@@ -32,6 +33,11 @@ Rebuild of the Uptown Merch Solutions Shopify storefront (uptownmerch145.com).
 - Everything else on the theme is stock Dawn 16.0.0 and is not mirrored here.
 
 ## Pushing theme files
+
+- **The theme is live, and the API refuses writes to a live theme.** To change anything
+  now: duplicate the live theme (Online Store → Themes → ⋯ → Duplicate), push the changed
+  files to the duplicate, read them back, check the preview, then publish the duplicate
+  from admin. The previous live copy stays in the library as the rollback.
 
 - Push `sections/*.liquid` and `snippets/*.liquid` first, in their own
   `themeFilesUpsert`; push JSON templates and section groups in a second call. Shopify
