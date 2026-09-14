@@ -66,7 +66,7 @@ Legend: **done** = built and verified · **admin** = needs Raheem in admin ·
 | No pricing, no turnaround anywhere | done | Checked hub, packages, list tool, form, confirmation copy. |
 | Build your list: separate step, 8-per-style blocking, prefills form | done | `ums-build-list`: Continue refuses under 8; list carried via sessionStorage into "Exact products" and the quantity. |
 | Intake fields and required/optional per §5.5 | done | All eleven fields, required flags as specified, structured contact fields. |
-| Artwork upload, native, no app | done | File → hidden $0 helper product → Shopify CDN URL → hidden field. 20 MB cap, fallback to email. |
+| Artwork upload, native, no app | done | File → hidden $0 helper product → Shopify CDN URL → hidden field. 20 MB cap, fallback to email. Second review: the picker setting had been lost on the theme (see below); restored, with the variant ID also stored as a text setting. |
 | Multiple product types per submission | **fixed** | Ticked boxes shared one field name and Shopify keeps only the last one, so a two-type request would have arrived as one. Now joined into a single hidden field ("Team and spirit wear, Custom patches"). |
 | Routing to orders@ and mgarafano@ | done / admin | Store email is orders@ (verified). Forwarding rule to mgarafano@ is still Raheem's. |
 | Distinct confirmation screen, no customer email | done | Form is replaced by a confirmation state; nothing is sent to the customer. |
@@ -141,3 +141,28 @@ buttons, restacked list rows, 80% logo. Raheem's phone pass is the final check.
 
 Rendered pages (no storefront access from this environment), checkout branding, and
 the email delivery itself. Raheem's phone pass and test submissions cover these.
+
+## Second review — 2026-09-14, rendered pass
+
+Every UMS page rendered locally with Dawn's CSS and the theme's settings, screenshotted
+at 1280px and 390px, measured, and checked again against the store.
+
+| Check | Result |
+|---|---|
+| Home, Organizations hub, package page, Build your list, order form, Contact, cart note (page and drawer), internal product page — desktop and phone | Render correctly; no horizontal overflow at 390px on any page. |
+| Column alignment | **Fixed.** Package CTA box and contact form now share the body column exactly (`page-width--narrow`). |
+| Text links | **Fixed.** "Edit the list" was browser-default blue; now inherits the text color. Every other anchor carries a class. |
+| Post-submit confirmation screens (intake, contact) | **Fixed.** Focus ring and shadow no longer drawn around the "Thanks" block. |
+| Artwork upload on the theme | **Fixed.** The theme's `page.order.json` had lost `artwork_product`, so the picker never rendered. Cause: Shopify validates a template against the section schema when the template is written; a template pushed alongside a schema change loses the new setting. Restored, plus `artwork_variant_id` as a second source; read back with both present. |
+| Theme files | 12 code files match the repo by MD5; 9 JSON templates and groups match in content; `layout/theme.liquid` and every asset are stock Dawn 16 except the superseded `ums-brand.css`. |
+| Pages | 24 pages read in full: no `mgarafano@` anywhere; only `order-form` and `bulk-catalog` remain published besides the new pages (they go at publish). |
+| Helper product | `Artwork upload`: UNLISTED, on the Online Store, $0, available for sale, `product.internal` template. |
+
+Still optional, unchanged from the first review: policy wording (Contact and Terms use
+hyphens in "Tuesday-Saturday, 11am-8pm"; Shipping still says "Tuesday to Saturday, 11am
+to 8pm"), Dawn's "Low stock: N left" wording, the "Powered by Shopify" footer link, a
+homepage title and meta description, the staff "New order" notification recipient, a
+preview of the order confirmation email for pickup, the Vendor filter in Search &
+Discovery, deleting the old themes after go-live, SKU `4527-JANUARY`. One new copy
+nit: the About page says "2024" in two consecutive sentences ("opened its doors in
+Harlem in 2024" and "was founded in 2024"); dropping the second date reads better.

@@ -27,3 +27,14 @@ Rebuild of the Uptown Merch Solutions Shopify storefront (uptownmerch145.com).
   - `snippets/cart-drawer.liquid` — pickup-only note replaces the tax/shipping line.
   - `config/settings_schema.json` — one settings group appended ("UMS cart note").
 - Everything else on the theme is stock Dawn 16.0.0 and is not mirrored here.
+
+## Pushing theme files
+
+- Push `sections/*.liquid` and `snippets/*.liquid` first, in their own
+  `themeFilesUpsert`; push JSON templates and section groups in a second call. Shopify
+  validates a JSON template against the section schema at write time and silently drops
+  any setting the schema does not have yet.
+- Read every file back after a push. Code files: compare `checksumMd5` with the local
+  `md5sum`. JSON files: Shopify reformats them and adds an auto-generated comment, so
+  compare the parsed content instead.
+- `config/settings_data.json` is deliberately not pushed; the theme editor owns it.

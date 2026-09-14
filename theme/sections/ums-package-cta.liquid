@@ -6,7 +6,7 @@
   clear "Start your order" button. Nothing else — no pricing, no turnaround.
 {%- endcomment -%}
 
-<div class="ums-pkg page-width">
+<div class="ums-pkg page-width page-width--narrow">
   <div class="ums-pkg__box color-{{ section.settings.color_scheme }} gradient">
     <p class="ums-pkg__min">{{ section.settings.minimum_note | escape }}</p>
     <p class="ums-pkg__note">{{ section.settings.note | escape }}</p>
@@ -18,7 +18,7 @@
 </div>
 
 {% stylesheet %}
-  .ums-pkg { padding-block: 2rem 6.4rem; max-width: 76rem; }
+  .ums-pkg { padding-block: 2rem 6.4rem; }
   .ums-pkg__box { padding: 3.2rem; border-radius: var(--ums-radius, 2px); }
   .ums-pkg__min {
     margin: 0; font-family: var(--font-heading-family); font-weight: var(--font-heading-weight);

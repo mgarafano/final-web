@@ -23,6 +23,14 @@
   The file input has no name attribute, so the file itself is never sent
   with the contact form (which cannot accept files).
 
+  Shopify validates a JSON template against the section schema at the moment
+  the template is written, so a template pushed before (or in the same batch
+  as) a schema change silently loses the new setting. That is how the picker
+  value went missing once. The variant ID is therefore also carried in a plain
+  text setting (artwork_variant_id) as a second source. The picker wins when
+  it resolves; the ID is the fallback; with neither, the field degrades to
+  the email note.
+
   Every control uses the shared .ums-* form system from ums-globals, so
   labels, inputs, selects, and textareas are the same size everywhere.
 
@@ -34,6 +42,9 @@
   assign art_variant = ''
   if art_product != blank and art_product.selected_or_first_available_variant != blank
     assign art_variant = art_product.selected_or_first_available_variant.id
+  endif
+  if art_variant == blank and section.settings.artwork_variant_id != blank
+    assign art_variant = section.settings.artwork_variant_id | strip
   endif
 -%}
 
@@ -363,6 +374,7 @@
   .ums-intake__list-head { margin: 0 0 0.8rem; font-weight: 600; font-size: 1.4rem; }
   .ums-intake__list-items { margin: 0; padding-left: 1.8rem; font-size: 1.5rem; }
   .ums-intake__list-edit { margin: 1rem 0 0; font-size: 1.3rem; }
+  .ums-intake__list-edit a { color: inherit; text-underline-offset: 0.4rem; }
 
   .ums-intake__status--error { color: var(--ums-alert-ink); opacity: 1; font-weight: 600; }
 
@@ -370,7 +382,7 @@
   .ums-intake__submit .ums-hint { max-width: 50ch; }
 
   .ums-intake__done { max-width: 60ch; }
-  .ums-intake__done:focus { outline: none; }
+  .ums-intake__done:focus, .ums-intake__done:focus-visible { outline: none; box-shadow: none; }
   .ums-intake__done-actions { margin-top: 2.8rem; }
 {% endstylesheet %}
 
@@ -396,6 +408,7 @@
     },
     { "type": "header", "content": "Artwork upload" },
     { "type": "product", "id": "artwork_product", "label": "Upload helper product", "info": "The hidden $0 product the form uses to carry files to Shopify's CDN. Leave set to \"Artwork upload\"." },
+    { "type": "text", "id": "artwork_variant_id", "label": "Helper product variant ID (fallback)", "info": "Second source for the upload, used when the picker above is empty. The numeric ID of the Artwork upload product's only variant." },
     { "type": "text", "id": "artwork_hint", "label": "Hint under the file field", "default": "PNG, JPG, PDF, AI, EPS, or SVG, up to 20 MB. Don't have it handy? You can email it later." },
     { "type": "text", "id": "artwork_fallback", "label": "Text if upload is unavailable", "default": "Have a logo or design? Email it to orders@uptownmerch145.com with your organization's name and we'll match it to your request." },
     { "type": "header", "content": "Links and buttons" },

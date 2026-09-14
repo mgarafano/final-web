@@ -393,3 +393,37 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
     2024; Raheem disabled customer accounts (verified `DISABLED`), excluded the "Home
     page" collection from the Online Store (verified), and deleted POWR. Policy wording
     edits remain optional.
+
+- **2026-09-14 — Second full review (rendered pass).** Every UMS page was rendered
+  locally (liquidjs, a copy of Dawn's `base.css`, the theme's own settings, each section
+  wrapped in `.shopify-section` the way Shopify does it), screenshotted headless at
+  1280px and 390px, and measured — on top of a fresh read of the store data. Four fixes,
+  all pushed and verified by MD5:
+  - **Package pages and Contact: the box and the form now share the page body's
+    column.** `ums-package-cta` and `ums-contact-form` used `page-width` with their
+    own max-widths, so the green CTA box and the contact form sat narrower than, and
+    inset from, Dawn's `page-width--narrow` body above them. Both now use
+    `page-width page-width--narrow`; measured edges are identical at 1280, 900 and 390.
+  - **"Edit the list" link** on the order form was a bare `<a>` and rendered in
+    browser-default blue; it now inherits the text color like every other UMS link.
+  - **Confirmation screens** for the intake and contact forms are focused by script
+    after submit, and Dawn's `:focus-visible` drew a grey ring and shadow around the
+    whole "Thanks" block. Suppressed on both.
+  - **Artwork upload was silently off on the theme.** The theme's copy of
+    `templates/page.order.json` had no `artwork_product` setting, so the order form
+    showed the "email it to us" note instead of the file picker. Cause found and
+    reproduced: Shopify validates a JSON template against the section's schema at the
+    moment the template is written, so a template pushed in the same batch as (or
+    before) a schema change silently loses the new setting. Fix: `artwork_product`
+    restored, plus a plain-text `artwork_variant_id` (`48416697024738`) as a second
+    source; section pushed first, template second, read back with both settings present.
+    Rule from now on: push sections before templates, never together, and read every
+    JSON template back after a push.
+  - Also checked: no horizontal overflow on any page at 390px; every anchor in the UMS
+    files carries a class; all 24 pages read in full — no `mgarafano@` anywhere, and
+    only `order-form` and `bulk-catalog` (the two go-live pages) are still published
+    besides the new ones; every asset in the build theme is stock Dawn 16 apart from the
+    superseded `ums-brand.css`; `layout/theme.liquid` is stock; all 12 code files match
+    by MD5 and all 9 JSON templates and groups match in content.
+  - The render harness (liquidjs, Chromium) lives outside the repo; it is a review aid,
+    not part of the theme.
