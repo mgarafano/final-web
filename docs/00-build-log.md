@@ -115,3 +115,23 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
   - Copy consistency pass; rules recorded in `docs/02-copy-style.md`.
   - Organizations page given real interim content instead of a dev placeholder,
     since the new nav links to it.
+
+- **2026-09-14 — the 8 service products were deleted (not unpublished).**
+  Recorded in `docs/03-deleted-service-products.md` with salvage data. Deletion is
+  permanent in Shopify and also removes them from Point of Sale.
+
+- **2026-09-14 — Phase 4, Storefront templates.**
+  - `templates/collection.json`: quick-add **on** (was `none`), square image ratio,
+    24 per page so the catalog is one page, 2 columns on mobile, filtering and
+    sorting on, vendor hidden.
+  - `templates/product.json`: vendor block **removed**; `inventory` block added with
+    **threshold 8** so "Only 3 left" shows under 8 units; `show_dynamic_checkout`
+    **false**, which removes the Shop Pay / PayPal / Google Pay shortcut buttons and
+    the Shop Pay installment messaging from product pages; gift-card recipient off;
+    a pickup-and-returns callout sits directly under the buy buttons, next to
+    Shopify's own pickup availability box.
+  - Store-level gaps found and written up in `docs/04-store-settings-todo.md`.
+
+| Newly blocked operation | Consequence |
+|---|---|
+| `shopPolicyUpdate` | Cannot create the refund policy — Raheem must, in Settings → Policies |
