@@ -74,24 +74,29 @@ translation string, not a theme setting. Correcting it to pickup-only wording me
 overriding that key in `locales/en.default.json`. Handled in the cart and checkout
 phase.
 
-## 6. Form submissions are going to the wrong address — and it has a typo
+## 6. Form submissions go to one address — and it's still the misspelled one
 
-Shopify delivers every contact-form submission — which now includes the
-Organizations intake form — to the **store contact email**. Right now that is:
+Re-checked after Raheem's test submission on 2026-09-14: the store contact email is
+**still** `Dtftranfers@uptownmerch145.com` (both `email` and `contactEmail`). That is
+where the test landed.
 
-> `Dtftranfers@uptownmerch145.com`
+**Why mgarafano@ didn't get a copy:** Shopify's contact form delivers to exactly one
+address — the store contact email. There is no second-recipient setting anywhere in
+Shopify, and nothing in the theme can add one. The second inbox is a **mailbox
+forwarding rule**, full stop.
 
-Two problems. It isn't `orders@`, so the brief's routing requirement (§5.5: every
-submission to **orders@** and **mgarafano@**) is not met. And "tranfers" is missing an
-"s" — if that mailbox doesn't actually exist, submissions vanish.
+The two-step fix:
 
-Changing the store's primary contact email is a business decision, not a theme
-setting, so it was not changed from here.
+1. **Settings → Store details → Contact information → Store contact email** →
+   `orders@uptownmerch145.com`. Fixes the routing *and* the typo.
+2. In the **orders@** mailbox, add a rule that forwards every message to
+   `mgarafano@uptownmerch145.com`. On Google Workspace that's Gmail → Settings →
+   Forwarding, or a group/alias in the admin console; on other providers it's the
+   equivalent forwarding or alias setting.
 
-**Settings → Store details → Contact information → Store contact email** →
-`orders@uptownmerch145.com`. Then add a forwarding rule on orders@ so every message
-also reaches `mgarafano@uptownmerch145.com`. That is the whole routing mechanism —
-no code involved.
+Then send one more test through `/pages/organizations-order` and one through
+`/pages/contact`. Both should arrive in both inboxes, each field labelled, with a
+`Source` line saying which form it came from.
 
-Send one test submission through `/pages/organizations-order` afterwards and confirm
-it lands in both inboxes with every field labelled.
+`mgarafano@` is not listed anywhere on the site and never will be — verified by
+searching every theme file. `orders@` is the only address shown to customers.

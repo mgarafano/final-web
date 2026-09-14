@@ -15,19 +15,38 @@
   and prefilled into the "Exact products chosen" field and shown read-only
   above it.
 
+  Artwork upload is native, with no app: the file is posted to /cart/add.js
+  as a line-item property on a hidden $0 helper product. Shopify stores the
+  file on its CDN and returns the URL, which goes into a hidden field and
+  rides along with the submission. The helper line is removed from the cart
+  immediately by key, so a Storefront customer's real cart is untouched.
+  The file input has no name attribute, so the file itself is never sent
+  with the contact form (which cannot accept files).
+
+  Every control uses the shared .ums-* form system from ums-globals, so
+  labels, inputs, selects, and textareas are the same size everywhere.
+
   No pricing, no turnaround promises anywhere on this page.
 {%- endcomment -%}
 
-<div class="ums-intake page-width">
+{%- liquid
+  assign art_product = section.settings.artwork_product
+  assign art_variant = ''
+  if art_product != blank and art_product.selected_or_first_available_variant != blank
+    assign art_variant = art_product.selected_or_first_available_variant.id
+  endif
+-%}
+
+<div class="ums-intake page-width" data-artwork-variant="{{ art_variant }}">
   {%- form 'contact', id: 'UmsIntake', class: 'ums-intake__form' -%}
 
     {%- if form.posted_successfully? -%}
       <div class="ums-intake__done" role="status" tabindex="-1" id="UmsIntakeDone">
-        <p class="ums-intake__eyebrow">{{ section.settings.eyebrow | escape }}</p>
-        <h1 class="ums-intake__title">{{ section.settings.done_heading | escape }}</h1>
-        <div class="ums-intake__body rte">{{ section.settings.done_body }}</div>
+        <p class="ums-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        <h1 class="ums-h1">{{ section.settings.done_heading | escape }}</h1>
+        <div class="ums-lede rte">{{ section.settings.done_body }}</div>
         <div class="ums-intake__done-actions">
-          <a class="button" href="{{ section.settings.done_link }}">{{ section.settings.done_link_label | escape }}</a>
+          <a class="button ums-cta" href="{{ section.settings.done_link }}">{{ section.settings.done_link_label | escape }}</a>
         </div>
       </div>
       <script>
@@ -38,15 +57,15 @@
     {%- else -%}
 
       <div class="ums-intake__intro">
-        <p class="ums-intake__eyebrow">{{ section.settings.eyebrow | escape }}</p>
-        <h1 class="ums-intake__title">{{ section.settings.heading | escape }}</h1>
+        <p class="ums-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        <h1 class="ums-h1">{{ section.settings.heading | escape }}</h1>
         {%- if section.settings.body != blank -%}
-          <div class="ums-intake__body rte">{{ section.settings.body }}</div>
+          <div class="ums-lede rte">{{ section.settings.body }}</div>
         {%- endif -%}
       </div>
 
       {%- if form.errors -%}
-        <div class="ums-intake__errors" role="alert">
+        <div class="ums-alert ums-intake__errors" role="alert">
           <p><strong>{{ 'templates.contact.form.error_heading' | t }}</strong></p>
           <ul>
             {%- for field in form.errors -%}
@@ -56,38 +75,36 @@
         </div>
       {%- endif -%}
 
-      <p class="ums-intake__required-note">{{ section.settings.required_note | escape }}</p>
+      <p class="ums-hint ums-intake__required">{{ section.settings.required_note | escape }}</p>
 
-      {%- comment -%} ---- Who you are ---- {%- endcomment -%}
       <fieldset class="ums-intake__group">
         <legend class="ums-intake__legend">About you</legend>
 
-        <div class="field">
-          <input class="field__input" id="UmsOrg" type="text" name="contact[Organization]" required autocomplete="organization" placeholder=" ">
-          <label class="field__label" for="UmsOrg">Organization name <span aria-hidden="true">*</span></label>
+        <div class="ums-field">
+          <label class="ums-label" for="UmsOrg">Organization name <span aria-hidden="true">*</span></label>
+          <input class="ums-input" id="UmsOrg" type="text" name="contact[Organization]" required autocomplete="organization">
         </div>
 
-        <div class="ums-intake__two">
-          <div class="field">
-            <input class="field__input" id="UmsName" type="text" name="contact[Name]" required autocomplete="name" placeholder=" ">
-            <label class="field__label" for="UmsName">Your name <span aria-hidden="true">*</span></label>
+        <div class="ums-form-two">
+          <div class="ums-field">
+            <label class="ums-label" for="UmsName">Your name <span aria-hidden="true">*</span></label>
+            <input class="ums-input" id="UmsName" type="text" name="contact[Name]" required autocomplete="name">
           </div>
-          <div class="field">
-            <input class="field__input" id="UmsEmail" type="email" name="contact[email]" required autocomplete="email" placeholder=" " spellcheck="false" autocapitalize="off">
-            <label class="field__label" for="UmsEmail">Email <span aria-hidden="true">*</span></label>
+          <div class="ums-field">
+            <label class="ums-label" for="UmsEmail">Email <span aria-hidden="true">*</span></label>
+            <input class="ums-input" id="UmsEmail" type="email" name="contact[email]" required autocomplete="email" spellcheck="false" autocapitalize="off">
           </div>
         </div>
 
-        <div class="field">
-          <input class="field__input" id="UmsPhone" type="tel" name="contact[Phone]" autocomplete="tel" placeholder=" ">
-          <label class="field__label" for="UmsPhone">Phone (optional)</label>
+        <div class="ums-field">
+          <label class="ums-label" for="UmsPhone">Phone <span class="ums-label__opt">(optional)</span></label>
+          <input class="ums-input" id="UmsPhone" type="tel" name="contact[Phone]" autocomplete="tel">
         </div>
       </fieldset>
 
-      {%- comment -%} ---- What you need ---- {%- endcomment -%}
       <fieldset class="ums-intake__group" id="UmsTypes">
         <legend class="ums-intake__legend">What you need <span aria-hidden="true">*</span></legend>
-        <p class="ums-intake__hint">Choose every kind of order that applies.</p>
+        <p class="ums-hint">Choose every kind of order that applies.</p>
         <div class="ums-intake__checks">
           {%- assign types = section.settings.product_types | newline_to_br | split: '<br />' -%}
           {%- for t in types -%}
@@ -100,34 +117,33 @@
             {%- endif -%}
           {%- endfor -%}
         </div>
-        <p class="ums-intake__field-error" id="UmsTypesError" hidden>Choose at least one.</p>
+        <p class="ums-alert" id="UmsTypesError" hidden>Choose at least one.</p>
       </fieldset>
 
       <fieldset class="ums-intake__group">
         <legend class="ums-intake__legend">Your order</legend>
 
-        <div class="field">
-          <input class="field__input" id="UmsQty" type="number" min="1" step="1" inputmode="numeric" name="contact[Estimated quantity]" required placeholder=" ">
-          <label class="field__label" for="UmsQty">Estimated total quantity <span aria-hidden="true">*</span></label>
+        <div class="ums-field">
+          <label class="ums-label" for="UmsQty">Estimated total quantity <span aria-hidden="true">*</span></label>
+          <input class="ums-input" id="UmsQty" type="number" min="1" step="1" inputmode="numeric" name="contact[Estimated quantity]" required>
         </div>
 
-        <div class="ums-intake__list" id="UmsListPanel" hidden>
+        <div class="ums-note" id="UmsListPanel" hidden>
           <p class="ums-intake__list-head">Your list from the previous step</p>
           <ul class="ums-intake__list-items" id="UmsListItems"></ul>
-          <p class="ums-intake__list-edit">
-            <a href="{{ section.settings.build_list_url }}">Edit the list</a>
-          </p>
+          <p class="ums-intake__list-edit"><a href="{{ section.settings.build_list_url }}">Edit the list</a></p>
         </div>
 
-        <div class="field">
-          <textarea class="text-area field__input" id="UmsExact" name="contact[Exact products chosen]" rows="4" placeholder=" "></textarea>
-          <label class="field__label" for="UmsExact">Exact products, if you already know</label>
+        <div class="ums-field">
+          <label class="ums-label" for="UmsExact">Exact products, if you already know <span class="ums-label__opt">(optional)</span></label>
+          <textarea class="ums-input" id="UmsExact" name="contact[Exact products chosen]" rows="4"></textarea>
         </div>
 
-        <div class="ums-intake__two">
-          <div class="field">
-            <select class="select__select field__input" id="UmsMethod" name="contact[Preferred decoration method]">
-              <option value="">Preferred decoration (optional)</option>
+        <div class="ums-form-two">
+          <div class="ums-field">
+            <label class="ums-label" for="UmsMethod">Preferred decoration <span class="ums-label__opt">(optional)</span></label>
+            <select class="ums-input" id="UmsMethod" name="contact[Preferred decoration method]">
+              <option value="">Choose one</option>
               {%- assign methods = section.settings.decoration_methods | newline_to_br | split: '<br />' -%}
               {%- for m in methods -%}
                 {%- assign clean = m | strip_newlines | strip -%}
@@ -135,33 +151,36 @@
               {%- endfor -%}
             </select>
           </div>
-          <div class="field">
-            <input class="field__input" id="UmsDate" type="date" name="contact[Event or deadline date]" placeholder=" ">
-            <label class="field__label" for="UmsDate">Event or deadline date (optional)</label>
+          <div class="ums-field">
+            <label class="ums-label" for="UmsDate">Event or deadline date <span class="ums-label__opt">(optional)</span></label>
+            <input class="ums-input" id="UmsDate" type="date" name="contact[Event or deadline date]">
           </div>
         </div>
 
-        <div class="field">
-          <input class="field__input" id="UmsBudget" type="text" name="contact[Estimated budget]" inputmode="decimal" placeholder=" ">
-          <label class="field__label" for="UmsBudget">Estimated budget (optional)</label>
+        <div class="ums-field">
+          <label class="ums-label" for="UmsBudget">Estimated budget <span class="ums-label__opt">(optional)</span></label>
+          <input class="ums-input" id="UmsBudget" type="text" name="contact[Estimated budget]" inputmode="decimal">
         </div>
 
-        {%- comment -%}
-          Artwork upload slot. Shopify's native contact form cannot accept
-          file attachments, so this is wired up by the upload app once it is
-          installed. Until then the customer is told to email artwork.
-        {%- endcomment -%}
-        <div class="ums-intake__artwork" id="UmsArtworkSlot">
-          <p class="ums-intake__list-head">Artwork (optional)</p>
-          <p class="ums-intake__hint">{{ section.settings.artwork_note | escape }}</p>
+        <div class="ums-field" id="UmsArtworkField">
+          <label class="ums-label" for="UmsArtworkFile">Artwork <span class="ums-label__opt">(optional)</span></label>
+          {%- if art_variant != blank -%}
+            <input class="ums-input" id="UmsArtworkFile" type="file" accept=".png,.jpg,.jpeg,.gif,.pdf,.ai,.eps,.svg,.psd,.tif,.tiff">
+            <p class="ums-hint">{{ section.settings.artwork_hint | escape }}</p>
+            <p class="ums-hint" id="UmsArtworkStatus" role="status" aria-live="polite"></p>
+            <input type="hidden" id="UmsArtworkUrl" name="contact[Artwork]" value="">
+          {%- else -%}
+            <p class="ums-hint">{{ section.settings.artwork_fallback | escape }}</p>
+          {%- endif -%}
         </div>
       </fieldset>
 
       <fieldset class="ums-intake__group">
         <legend class="ums-intake__legend">One last thing</legend>
-        <div class="field">
-          <select class="select__select field__input" id="UmsHeard" name="contact[How did you hear about us]">
-            <option value="">How did you hear about us? (optional)</option>
+        <div class="ums-field">
+          <label class="ums-label" for="UmsHeard">How did you hear about us? <span class="ums-label__opt">(optional)</span></label>
+          <select class="ums-input" id="UmsHeard" name="contact[How did you hear about us]">
+            <option value="">Choose one</option>
             {%- assign heard = section.settings.heard_options | newline_to_br | split: '<br />' -%}
             {%- for h in heard -%}
               {%- assign clean = h | strip_newlines | strip -%}
@@ -169,22 +188,25 @@
             {%- endfor -%}
           </select>
         </div>
-        <div class="field">
-          <textarea class="text-area field__input" id="UmsNotes" name="contact[Notes]" rows="4" placeholder=" "></textarea>
-          <label class="field__label" for="UmsNotes">Anything else we should know? (optional)</label>
+        <div class="ums-field">
+          <label class="ums-label" for="UmsNotes">Anything else we should know? <span class="ums-label__opt">(optional)</span></label>
+          <textarea class="ums-input" id="UmsNotes" name="contact[Notes]" rows="4"></textarea>
         </div>
       </fieldset>
 
       <input type="hidden" name="contact[Source]" value="UMS for Organizations intake form">
 
       <div class="ums-intake__submit">
-        <button type="submit" class="button">{{ section.settings.submit_label | escape }}</button>
-        <p class="ums-intake__submit-note">{{ section.settings.submit_note | escape }}</p>
+        <button type="submit" class="button ums-cta" id="UmsIntakeSubmit">{{ section.settings.submit_label | escape }}</button>
+        <p class="ums-hint">{{ section.settings.submit_note | escape }}</p>
       </div>
 
       <script>
         (function () {
-          // Prefill from Build your list.
+          var root = document.querySelector('.ums-intake');
+          var form = document.getElementById('UmsIntake');
+
+          // ---- Prefill from Build your list ------------------------------
           var panel = document.getElementById('UmsListPanel');
           var items = document.getElementById('UmsListItems');
           var exact = document.getElementById('UmsExact');
@@ -205,10 +227,73 @@
             if (qty && !qty.value && total > 0) qty.value = total;
           }
 
-          // At least one product type — HTML can't require a checkbox group.
-          var form = document.getElementById('UmsIntake');
+          // ---- At least one order type -----------------------------------
           var group = document.getElementById('UmsTypes');
           var err = document.getElementById('UmsTypesError');
+          group.addEventListener('change', function () {
+            if (group.querySelector('input[type="checkbox"]:checked')) {
+              err.hidden = true;
+              group.classList.remove('is-invalid');
+            }
+          });
+
+          // ---- Native artwork upload via the cart ------------------------
+          var VARIANT = root.dataset.artworkVariant;
+          var fileEl = document.getElementById('UmsArtworkFile');
+          var urlEl = document.getElementById('UmsArtworkUrl');
+          var statusEl = document.getElementById('UmsArtworkStatus');
+          var uploading = false;
+          var MAX = 20 * 1024 * 1024;
+
+          function status(msg, isError) {
+            if (!statusEl) return;
+            statusEl.textContent = msg || '';
+            statusEl.classList.toggle('ums-intake__status--error', !!isError);
+          }
+
+          if (fileEl && VARIANT) {
+            fileEl.addEventListener('change', function () {
+              var f = fileEl.files && fileEl.files[0];
+              if (!f) { urlEl.value = ''; status(''); return; }
+              if (f.size > MAX) {
+                fileEl.value = ''; urlEl.value = '';
+                status('That file is over 20 MB. Email it to orders@uptownmerch145.com instead.', true);
+                return;
+              }
+              uploading = true;
+              fileEl.disabled = true;
+              status('Uploading ' + f.name + '…');
+
+              var fd = new FormData();
+              fd.append('id', VARIANT);
+              fd.append('quantity', '1');
+              fd.append('properties[Artwork]', f);
+
+              fetch('/cart/add.js', { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } })
+                .then(function (r) { if (!r.ok) throw new Error('add'); return r.json(); })
+                .then(function (res) {
+                  var item = res && res.items ? res.items[0] : res;
+                  var url = item && item.properties && item.properties.Artwork;
+                  if (!url) throw new Error('nourl');
+                  urlEl.value = url;
+                  status('Attached: ' + f.name);
+                  // Take the helper line straight back out of the cart, by key,
+                  // so a customer's real cart is never touched.
+                  return fetch('/cart/change.js', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify({ id: item.key, quantity: 0 })
+                  }).catch(function () {});
+                })
+                .catch(function () {
+                  urlEl.value = ''; fileEl.value = '';
+                  status('That upload didn’t go through. You can email the file to orders@uptownmerch145.com instead.', true);
+                })
+                .then(function () { uploading = false; fileEl.disabled = false; });
+            });
+          }
+
+          // ---- Submit guard ----------------------------------------------
           form.addEventListener('submit', function (e) {
             var any = group.querySelector('input[type="checkbox"]:checked');
             if (!any) {
@@ -218,12 +303,11 @@
               group.scrollIntoView({ block: 'center' });
               var first = group.querySelector('input[type="checkbox"]');
               if (first) first.focus();
+              return;
             }
-          });
-          group.addEventListener('change', function () {
-            if (group.querySelector('input[type="checkbox"]:checked')) {
-              err.hidden = true;
-              group.classList.remove('is-invalid');
+            if (uploading) {
+              e.preventDefault();
+              status('Still uploading your artwork — one moment.', false);
             }
           });
         })();
@@ -235,71 +319,41 @@
 
 {% stylesheet %}
   .ums-intake { padding-block: 4rem 6rem; max-width: 72rem; }
-  .ums-intake__eyebrow {
-    margin: 0 0 1.2rem; font-size: 1.2rem; font-weight: 600;
-    letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.7;
-  }
-  .ums-intake__title { margin: 0; font-size: clamp(2.8rem, 5vw, 4rem); line-height: 1.08; letter-spacing: -0.02em; }
-  .ums-intake__body { margin-top: 1.6rem; max-width: 60ch; font-size: 1.7rem; }
-  .ums-intake__body > :first-child { margin-top: 0; }
-  .ums-intake__body > :last-child { margin-bottom: 0; }
-
-  .ums-intake__required-note { margin: 2.4rem 0 0; font-size: 1.3rem; opacity: 0.7; }
-
-  .ums-intake__errors {
-    margin-top: 2.4rem; padding: 1.4rem 1.8rem;
-    background: rgba(200, 60, 30, 0.08); border-left: 3px solid #9c4a2f;
-  }
+  .ums-intake__required { margin-top: 2.4rem; }
+  .ums-intake__errors { margin-top: 2.4rem; }
   .ums-intake__errors p { margin: 0; }
-  .ums-intake__errors ul { margin: 0.6rem 0 0; padding-left: 1.8rem; }
+  .ums-intake__errors ul { margin: 0.6rem 0 0; padding-left: 1.8rem; font-weight: 400; }
 
   .ums-intake__group {
     border: 0; padding: 0; margin: 3.6rem 0 0; min-width: 0;
-    display: flex; flex-direction: column; gap: 1.6rem;
+    display: flex; flex-direction: column; gap: 1.8rem;
   }
   .ums-intake__legend {
     font-family: var(--font-heading-family); font-weight: var(--font-heading-weight);
-    font-size: 2rem; padding: 0; margin-bottom: 0.4rem; letter-spacing: -0.01em;
+    font-size: 2rem; padding: 0; margin-bottom: 0.2rem; letter-spacing: -0.01em;
   }
-  .ums-intake__hint { margin: -0.8rem 0 0; font-size: 1.4rem; opacity: 0.75; }
-
-  .ums-intake__two { display: grid; gap: 1.6rem; }
-  @media screen and (min-width: 750px) { .ums-intake__two { grid-template-columns: 1fr 1fr; } }
-
-  .ums-intake .field { margin: 0; }
-  .ums-intake .select__select { min-height: 4.5rem; }
 
   .ums-intake__checks { display: grid; gap: 0.8rem; }
   @media screen and (min-width: 750px) { .ums-intake__checks { grid-template-columns: 1fr 1fr; } }
   .ums-intake__check {
-    display: flex; align-items: center; gap: 1rem; padding: 1.2rem 1.4rem;
-    border: 1px solid rgba(var(--color-foreground), 0.2);
-    border-radius: var(--ums-radius, 2px); cursor: pointer; font-size: 1.5rem;
+    display: flex; align-items: center; gap: 1.2rem; min-height: 4.6rem; padding: 0 1.4rem;
+    border: var(--inputs-border-width) solid rgba(var(--color-foreground), var(--inputs-border-opacity));
+    border-radius: var(--inputs-radius); cursor: pointer; font-size: 1.6rem;
   }
   .ums-intake__check:has(input:checked) {
-    border-color: var(--ums-green, #355e3b); background: var(--ums-green-050, #eef2ee);
+    border-color: var(--ums-accent); background: var(--ums-green-050);
   }
-  .ums-intake__check input { width: 1.8rem; height: 1.8rem; margin: 0; accent-color: var(--ums-green, #355e3b); }
-  .ums-intake__group.is-invalid .ums-intake__check { border-color: #9c4a2f; }
-  .ums-intake__field-error { margin: 0; font-size: 1.4rem; font-weight: 600; color: #8a4029; }
+  .ums-intake__check input { width: 1.8rem; height: 1.8rem; margin: 0; flex: none; accent-color: var(--ums-accent); }
+  .ums-intake__group.is-invalid .ums-intake__check { border-color: var(--ums-alert); }
 
-  .ums-intake__list {
-    padding: 1.6rem 1.8rem; background: var(--ums-green-050, #eef2ee);
-    border-left: 3px solid var(--ums-green, #355e3b);
-  }
   .ums-intake__list-head { margin: 0 0 0.8rem; font-weight: 600; font-size: 1.4rem; }
   .ums-intake__list-items { margin: 0; padding-left: 1.8rem; font-size: 1.5rem; }
   .ums-intake__list-edit { margin: 1rem 0 0; font-size: 1.3rem; }
 
-  .ums-intake__artwork {
-    padding: 1.6rem 1.8rem; border: 1px dashed rgba(var(--color-foreground), 0.3);
-    border-radius: var(--ums-radius, 2px);
-  }
-  .ums-intake__artwork .ums-intake__hint { margin-top: 0.4rem; }
+  .ums-intake__status--error { color: var(--ums-alert-ink); opacity: 1; font-weight: 600; }
 
   .ums-intake__submit { margin-top: 3.6rem; display: flex; flex-direction: column; gap: 1.2rem; align-items: flex-start; }
-  .ums-intake__submit .button { letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
-  .ums-intake__submit-note { margin: 0; font-size: 1.3rem; opacity: 0.7; max-width: 50ch; }
+  .ums-intake__submit .ums-hint { max-width: 50ch; }
 
   .ums-intake__done { max-width: 60ch; }
   .ums-intake__done:focus { outline: none; }
@@ -326,13 +380,17 @@
       "type": "textarea", "id": "heard_options", "label": "How did you hear about us", "info": "One per line.",
       "default": "Walked past the shop\nInstagram\nTikTok\nGoogle\nA friend or colleague\nSomewhere else"
     },
-    { "type": "text", "id": "artwork_note", "label": "Artwork note", "default": "Have a logo or design? Email it to orders@uptownmerch145.com with your organization's name and we'll match it to your request." },
+    { "type": "header", "content": "Artwork upload" },
+    { "type": "product", "id": "artwork_product", "label": "Upload helper product", "info": "The hidden $0 product the form uses to carry files to Shopify's CDN. Leave set to \"Artwork upload\"." },
+    { "type": "text", "id": "artwork_hint", "label": "Hint under the file field", "default": "PNG, JPG, PDF, AI, EPS, or SVG, up to 20 MB. Don't have it handy? You can email it later." },
+    { "type": "text", "id": "artwork_fallback", "label": "Text if upload is unavailable", "default": "Have a logo or design? Email it to orders@uptownmerch145.com with your organization's name and we'll match it to your request." },
+    { "type": "header", "content": "Links and buttons" },
     { "type": "url", "id": "build_list_url", "label": "Build your list page" },
     { "type": "text", "id": "submit_label", "label": "Submit button", "default": "Send my request" },
     { "type": "text", "id": "submit_note", "label": "Note under the button", "default": "No payment is taken here. We'll review your request and send a quote." },
     { "type": "header", "content": "After submission" },
     { "type": "text", "id": "done_heading", "label": "Confirmation heading", "default": "Thanks — we've got your request." },
-    { "type": "richtext", "id": "done_body", "label": "Confirmation body", "default": "<p>Someone from the shop will look it over and get back to you by email with a quote.</p><p>If you have artwork to send, email it to orders@uptownmerch145.com with your organization's name.</p><p>Questions in the meantime? Call 646-398-8178.</p>" },
+    { "type": "richtext", "id": "done_body", "label": "Confirmation body", "default": "<p>Someone from the shop will look it over and get back to you by email with a quote.</p><p>Questions in the meantime? Call 646-398-8178.</p>" },
     { "type": "url", "id": "done_link", "label": "Confirmation button link" },
     { "type": "text", "id": "done_link_label", "label": "Confirmation button label", "default": "Back to the homepage" }
   ],

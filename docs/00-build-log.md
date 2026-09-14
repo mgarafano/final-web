@@ -186,3 +186,35 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
     and code comments normalised to American spelling ("Color scheme", "catalog",
     "program"); the theme still has the British spellings in those five files. Nothing
     customer-facing differs. Will sync on the next push that touches them.
+
+- **2026-09-14 — fixes from Raheem's review, then Phase 6 (About, Contact, social).**
+  - **"Some text bars are small font"** — root cause: Dawn styles `<select>` at 1.2rem
+    but `<input>` at 1.6rem, and its floating labels shrink to 1rem once a field has a
+    value. Three sizes on one form. Fix: a single shared form system in `ums-globals`
+    (`.ums-field` / `.ums-label` / `.ums-input` / `.ums-hint` / `.ums-alert` /
+    `.ums-note`). Every control is 4.6rem tall at 1.6rem type; every label sits above
+    its control at 1.4rem/600. Build your list, the intake form, and the contact form
+    all use it. No floating labels anywhere.
+  - **Native artwork upload, no app.** Hidden helper product `Artwork upload`
+    (`9363391774946`, handle `artwork-upload`, SKU `INTERNAL-ARTWORK-UPLOAD`, $0,
+    status `UNLISTED`, published to Online Store only). The intake form posts the file
+    to `/cart/add.js` as `properties[Artwork]` on that product's variant; Shopify stores
+    it on its CDN and returns the URL, which goes into a hidden `contact[Artwork]` field;
+    the helper line is then removed by key via `/cart/change.js` so a real cart is never
+    touched. The file input has no `name`, so the file itself never posts with the form.
+    20 MB cap, submit is blocked while an upload is in flight, and every failure path
+    falls back to "email it to orders@". If the product picker can't resolve an
+    `UNLISTED` product in Liquid, the field degrades to the email note automatically.
+  - **Contact is native.** `sections/ums-contact-form.liquid` (Name, Email, Message —
+    required, nothing else) and `templates/page.contact.json` (page body + form). The
+    `/pages/contact` page title went from "CONTACT US" to "Contact"; the body's inline
+    `<style>` block — the orange text and `#101820` gradient that was the brief's
+    "source unclear" background — is gone, replaced with hours, address, phone,
+    orders@, the "do you still do custom work?" answer, no-shipping, all-sales-final,
+    and the Instagram/TikTok handles. That body edit is live now, since page bodies are
+    store data, and it fixes the live contact page too.
+  - Social: footer icons (since Phase 2) plus handles on the Contact page. About was
+    done in Phase 2 with the approved copy.
+  - The cosmetic repo/theme drift is resolved — all ten UMS files re-pushed byte-exact.
+  - Routing: store contact email confirmed still `Dtftranfers@`; documented in
+    `docs/04` why a second recipient is a mailbox rule and not a Shopify setting.

@@ -42,6 +42,10 @@
     --ums-gray-200: #e2e0df;
     --ums-gray-600: #6c6a6a;
 
+    --ums-alert: #9c4a2f;
+    --ums-alert-ink: #8a4029;
+    --ums-alert-050: rgba(156, 74, 47, 0.08);
+
     --ums-surface: var(--ums-white);
     --ums-surface-alt: var(--ums-gray-050);
     --ums-text: var(--ums-ink);
@@ -59,6 +63,169 @@
     --ums-space-6: 2.4rem;
     --ums-space-8: 3.2rem;
   }
+
+  /* ---------------------------------------------------------------
+     One form system for every UMS form: build your list, the intake
+     form, and the contact form. Every control is the same height and
+     type size, every label sits above its control at the same weight.
+     Reads Dawn's input tokens so the theme editor still governs
+     border and radius.
+     --------------------------------------------------------------- */
+  .ums-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    min-width: 0;
+  }
+
+  .ums-label {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .ums-label__opt {
+    font-weight: 400;
+    opacity: 0.7;
+  }
+
+  .ums-input {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    min-height: 4.6rem;
+    padding: 0 1.4rem;
+    box-sizing: border-box;
+    font-family: var(--font-body-family);
+    font-size: 1.6rem;
+    line-height: 1.4;
+    color: rgb(var(--color-foreground));
+    background: rgb(var(--color-background));
+    border: var(--inputs-border-width) solid rgba(var(--color-foreground), var(--inputs-border-opacity));
+    border-radius: var(--inputs-radius);
+  }
+
+  .ums-input::placeholder {
+    color: rgba(var(--color-foreground), 0.55);
+  }
+
+  .ums-input:focus,
+  .ums-input:focus-visible {
+    outline: 2px solid var(--ums-accent);
+    outline-offset: 1px;
+    border-color: var(--ums-accent);
+  }
+
+  textarea.ums-input {
+    min-height: 12rem;
+    padding: 1.2rem 1.4rem;
+    line-height: 1.5;
+    resize: vertical;
+  }
+
+  select.ums-input {
+    padding-right: 4rem;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%231b1b1b' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 1.4rem center;
+  }
+
+  input[type="number"].ums-input {
+    -moz-appearance: textfield;
+  }
+
+  input[type="file"].ums-input {
+    padding: 0.9rem 1.4rem;
+    min-height: 4.6rem;
+    cursor: pointer;
+  }
+
+  .ums-hint {
+    margin: 0;
+    font-size: 1.3rem;
+    line-height: 1.45;
+    opacity: 0.72;
+  }
+
+  .ums-note {
+    margin: 0;
+    padding: 1.4rem 1.8rem;
+    background: var(--ums-green-050);
+    border-left: 3px solid var(--ums-accent);
+    font-size: 1.5rem;
+    line-height: 1.5;
+  }
+
+  .ums-note--strong {
+    font-weight: 600;
+  }
+
+  .ums-alert {
+    margin: 0;
+    padding: 1.4rem 1.8rem;
+    background: var(--ums-alert-050);
+    border-left: 3px solid var(--ums-alert);
+    color: var(--ums-alert-ink);
+    font-size: 1.5rem;
+    line-height: 1.5;
+    font-weight: 600;
+  }
+
+  .ums-alert a {
+    color: inherit;
+  }
+
+  .ums-form-two {
+    display: grid;
+    gap: 1.6rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ums-form-two { grid-template-columns: 1fr 1fr; }
+  }
+
+  .ums-cta {
+    letter-spacing: var(--ums-tracking-wide);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .ums-cta.is-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  /* ---------------------------------------------------------------
+     Shared page-intro pattern for the Organizations and contact pages.
+     --------------------------------------------------------------- */
+  .ums-eyebrow {
+    margin: 0 0 1.2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  .ums-h1 {
+    margin: 0;
+    font-size: clamp(2.8rem, 5vw, 4rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  .ums-lede {
+    margin-top: 1.6rem;
+    max-width: 60ch;
+    font-size: 1.7rem;
+    line-height: 1.5;
+  }
+
+  .ums-lede > :first-child { margin-top: 0; }
+  .ums-lede > :last-child { margin-bottom: 0; }
 
   /* ---------------------------------------------------------------
      Nav weighting. "UMS for Organizations" is the primary business line
@@ -127,7 +294,7 @@
   "settings": [
     {
       "type": "paragraph",
-      "content": "Loads the UMS brand tokens and global styling rules. Renders nothing visible — leave it in place."
+      "content": "Loads the UMS brand tokens, the shared form system, and global styling rules. Renders nothing visible — leave it in place."
     }
   ]
 }

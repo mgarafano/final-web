@@ -23,21 +23,21 @@
 <div class="ums-build page-width" data-min="{{ min_qty }}" data-next="{{ section.settings.next_url }}">
   <div class="ums-build__intro">
     {%- if section.settings.eyebrow != blank -%}
-      <p class="ums-build__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      <p class="ums-eyebrow">{{ section.settings.eyebrow | escape }}</p>
     {%- endif -%}
-    <h1 class="ums-build__title">{{ section.settings.heading | escape }}</h1>
+    <h1 class="ums-h1">{{ section.settings.heading | escape }}</h1>
     {%- if section.settings.body != blank -%}
-      <div class="ums-build__body rte">{{ section.settings.body }}</div>
+      <div class="ums-lede rte">{{ section.settings.body }}</div>
     {%- endif -%}
-    <p class="ums-build__rule">
+    <p class="ums-note ums-note--strong ums-build__rule">
       {{ section.settings.minimum_note | replace: '[min]', min_qty | escape }}
     </p>
   </div>
 
   <form class="ums-build__add" id="UmsBuildAdd" novalidate>
-    <div class="ums-build__field">
-      <label class="form__label" for="UmsBuildItem">{{ section.settings.item_label | escape }}</label>
-      <select id="UmsBuildItem" class="select__select" required>
+    <div class="ums-field">
+      <label class="ums-label" for="UmsBuildItem">{{ section.settings.item_label | escape }}</label>
+      <select id="UmsBuildItem" class="ums-input" required>
         <option value="">{{ section.settings.item_placeholder | escape }}</option>
         {%- for item in items -%}
           {%- assign clean = item | strip_newlines | strip -%}
@@ -48,11 +48,11 @@
       </select>
     </div>
 
-    <div class="ums-build__field ums-build__field--qty">
-      <label class="form__label" for="UmsBuildQty">{{ section.settings.qty_label | escape }}</label>
+    <div class="ums-field ums-build__qtyfield">
+      <label class="ums-label" for="UmsBuildQty">{{ section.settings.qty_label | escape }}</label>
       <input
         id="UmsBuildQty"
-        class="field__input"
+        class="ums-input"
         type="number"
         inputmode="numeric"
         min="1"
@@ -62,12 +62,12 @@
       >
     </div>
 
-    <button type="submit" class="button button--secondary ums-build__addbtn">
+    <button type="submit" class="button button--secondary ums-cta ums-build__addbtn">
       {{ section.settings.add_label | escape }}
     </button>
   </form>
 
-  <p class="ums-build__error" id="UmsBuildError" role="alert" hidden></p>
+  <p class="ums-alert ums-build__error" id="UmsBuildError" role="alert" hidden></p>
 
   <div class="ums-build__list-wrap">
     <h2 class="ums-build__list-title">{{ section.settings.list_heading | escape }}</h2>
@@ -76,10 +76,10 @@
 
     <ul class="ums-build__list" id="UmsBuildList" aria-live="polite"></ul>
 
-    <p class="ums-build__warn" id="UmsBuildWarn" role="status" hidden></p>
+    <p class="ums-alert ums-build__warn" id="UmsBuildWarn" role="status" hidden></p>
 
     <div class="ums-build__actions">
-      <a class="button ums-build__continue" id="UmsBuildContinue" href="{{ section.settings.next_url }}" aria-disabled="true">
+      <a class="button ums-cta ums-build__continue" id="UmsBuildContinue" href="{{ section.settings.next_url }}" aria-disabled="true">
         {{ section.settings.continue_label | escape }}
       </a>
       <button type="button" class="link ums-build__clear" id="UmsBuildClear">
@@ -151,7 +151,7 @@
         qty.min = '1';
         qty.step = '1';
         qty.id = 'UmsQty' + i;
-        qty.className = 'field__input ums-build__qty';
+        qty.className = 'ums-input ums-build__qty';
         qty.value = line.qty;
         qty.addEventListener('change', function () {
           var v = parseInt(qty.value, 10);
@@ -259,40 +259,18 @@
 
 {% stylesheet %}
   .ums-build { padding-block: 4rem 6rem; max-width: 76rem; }
-  .ums-build__eyebrow {
-    margin: 0 0 1.2rem; font-size: 1.2rem; font-weight: 600;
-    letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.7;
-  }
-  .ums-build__title { margin: 0; font-size: clamp(2.8rem, 5vw, 4rem); line-height: 1.08; letter-spacing: -0.02em; }
-  .ums-build__body { margin-top: 1.6rem; max-width: 60ch; font-size: 1.7rem; }
-  .ums-build__body > :first-child { margin-top: 0; }
-  .ums-build__body > :last-child { margin-bottom: 0; }
-
-  .ums-build__rule {
-    margin: 2rem 0 0; padding: 1.2rem 1.6rem;
-    background: var(--ums-green-050, #eef2ee);
-    border-left: 3px solid var(--ums-green, #355e3b);
-    font-weight: 600; font-size: 1.5rem;
-  }
+  .ums-build__rule { margin-top: 2rem; }
 
   .ums-build__add {
-    display: grid; gap: 1.6rem; margin-top: 3.2rem;
-    padding: 2.4rem; border: 1px solid rgba(var(--color-foreground), 0.15);
+    display: grid; gap: 1.6rem; margin-top: 3.2rem; padding: 2.4rem;
+    border: 1px solid rgba(var(--color-foreground), 0.15);
     border-radius: var(--ums-radius, 2px); align-items: end;
   }
   @media screen and (min-width: 750px) {
     .ums-build__add { grid-template-columns: 1fr 12rem auto; }
   }
-  .ums-build__field { display: flex; flex-direction: column; gap: 0.6rem; }
-  .ums-build__field .form__label { margin: 0; font-size: 1.4rem; font-weight: 600; }
-  .ums-build__add select,
-  .ums-build__add input { width: 100%; min-height: 4.5rem; padding: 0 1.2rem; }
-  .ums-build__addbtn { min-height: 4.5rem; }
-
-  .ums-build__error {
-    margin: 1.6rem 0 0; padding: 1.2rem 1.6rem; font-weight: 600;
-    background: rgba(200, 60, 30, 0.08); border-left: 3px solid #9c4a2f; color: #8a4029;
-  }
+  .ums-build__addbtn { min-height: 4.6rem; }
+  .ums-build__error, .ums-build__warn { margin-top: 1.6rem; }
 
   .ums-build__list-wrap { margin-top: 4rem; }
   .ums-build__list-title { font-size: 1.8rem; margin: 0 0 1.6rem; }
@@ -304,31 +282,20 @@
     align-items: center; padding: 1.4rem 0;
     border-bottom: 1px solid rgba(var(--color-foreground), 0.12);
   }
-  .ums-build__row.is-under { border-left: 3px solid #9c4a2f; padding-left: 1.2rem; }
+  .ums-build__row.is-under { border-left: 3px solid var(--ums-alert); padding-left: 1.2rem; }
   .ums-build__name { font-weight: 600; font-size: 1.6rem; }
-  .ums-build__qty { width: 8rem; min-height: 4rem; padding: 0 1rem; text-align: center; }
+  .ums-build__qty { width: 9rem; text-align: center; }
   .ums-build__remove {
     background: none; border: 0; cursor: pointer; padding: 0.6rem;
-    font-size: 1.3rem; text-decoration: underline; text-underline-offset: 0.3rem;
+    font-size: 1.4rem; text-decoration: underline; text-underline-offset: 0.3rem;
     color: inherit; opacity: 0.75;
   }
   .ums-build__remove:hover { opacity: 1; }
-  .ums-build__flag {
-    grid-column: 1 / -1; font-size: 1.3rem; font-weight: 600; color: #8a4029;
-  }
-
-  .ums-build__warn {
-    margin: 2rem 0 0; padding: 1.2rem 1.6rem; font-weight: 600;
-    background: rgba(200, 60, 30, 0.08); border-left: 3px solid #9c4a2f; color: #8a4029;
-  }
+  .ums-build__flag { grid-column: 1 / -1; font-size: 1.4rem; font-weight: 600; color: var(--ums-alert-ink); }
 
   .ums-build__actions {
     display: flex; flex-wrap: wrap; align-items: center; gap: 1.6rem 2.4rem; margin-top: 3.2rem;
   }
-  .ums-build__continue {
-    letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;
-  }
-  .ums-build__continue.is-disabled { opacity: 0.4; cursor: not-allowed; }
   .ums-build__clear {
     background: none; border: 0; cursor: pointer; font-size: 1.4rem;
     text-decoration: underline; text-underline-offset: 0.4rem; color: inherit;

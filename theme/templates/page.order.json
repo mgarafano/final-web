@@ -3,6 +3,7 @@
     "form": {
       "type": "ums-intake-form",
       "settings": {
+        "artwork_product": "artwork-upload",
         "build_list_url": "/pages/organizations-build-list",
         "done_link": "/"
       }
