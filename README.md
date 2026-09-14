@@ -14,3 +14,16 @@ Rebuild of the Uptown Merch Solutions Shopify storefront (uptownmerch145.com).
   Changing it changes the live site immediately, so every product change is proposed in
   `docs/` and executed only on approval.
 - SKUs, variant IDs and inventory quantities are never altered during the rename work.
+
+## What lives where in `theme/`
+
+- `sections/ums-*.liquid`, `snippets/ums-*.liquid` — every UMS customization. These
+  files are ours; Dawn never ships them.
+- `templates/*.json`, `sections/*-group.json`, `config/settings_data.json` — Dawn
+  templates and settings as configured for UMS.
+- **Modified Dawn files** (the only stock files edited, each edit marked `UMS:` inline):
+  - `sections/main-cart-footer.liquid` — pickup-only note replaces the tax/shipping
+    line; express checkout buttons removed.
+  - `snippets/cart-drawer.liquid` — pickup-only note replaces the tax/shipping line.
+  - `config/settings_schema.json` — one settings group appended ("UMS cart note").
+- Everything else on the theme is stock Dawn 16.0.0 and is not mirrored here.

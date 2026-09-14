@@ -1,0 +1,34 @@
+{%- comment -%}
+  UMS cart note — pickup-only messaging for the cart page and the cart drawer.
+
+  Replaces Dawn's "Taxes, discounts and shipping calculated at checkout" line
+  (brief §7). The store never ships, so no shipping language may appear in the
+  cart. Also carries the all-sales-final callout the brief wants visible before
+  checkout (§4), and the store hours.
+
+  Copy is edited in Theme settings → UMS cart note, never here.
+
+  Usage:
+    render 'ums-cart-note'                  cart page (sections/main-cart-footer)
+    render 'ums-cart-note', compact: true   cart drawer (snippets/cart-drawer)
+{%- endcomment -%}
+
+{%- liquid
+  assign note_title = settings.ums_cart_note_title
+  assign note_body = settings.ums_cart_note_body
+  assign note_tax = settings.ums_cart_tax_note
+-%}
+
+{%- if note_title != blank or note_body != blank or note_tax != blank -%}
+  <div class="ums-cart-note{% if compact %} ums-cart-note--compact{% endif %}">
+    {%- if note_title != blank -%}
+      <p class="ums-cart-note__title">{{ note_title | escape }}</p>
+    {%- endif -%}
+    {%- if note_body != blank -%}
+      <div class="ums-cart-note__body">{{ note_body }}</div>
+    {%- endif -%}
+    {%- if note_tax != blank -%}
+      <p class="ums-cart-note__tax">{{ note_tax | escape }}</p>
+    {%- endif -%}
+  </div>
+{%- endif -%}

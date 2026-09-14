@@ -26,6 +26,7 @@
 | Update products, collections, metafields | ✅ |
 | Read installed apps | ❌ `appInstallations` — access denied |
 | Fetch `cdn.shopify.com` from this container | ❌ egress proxy denies it |
+| Checkout branding via API (`checkoutBranding`, `checkoutBrandingUpsert`) | ❌ Plus-only — "the shop must be on a Plus plan"; Raheem does it in Settings → Checkout → Customize |
 
 The publish restriction is a good thing here: it makes it impossible for this
 session to put anything in front of customers by accident. Go-live is a
@@ -218,3 +219,54 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
   - The cosmetic repo/theme drift is resolved — all ten UMS files re-pushed byte-exact.
   - Routing: store contact email confirmed still `Dtftranfers@`; documented in
     `docs/04` why a second recipient is a mailbox rule and not a Shopify setting.
+
+- **2026-09-14 — Phase 7, cart and checkout.**
+  - **Shipping language is gone from the cart.** Dawn's "Taxes, discounts and shipping
+    calculated at checkout" line (eight translation-key variants, some linking to the
+    shipping policy) is replaced on both the cart page and the cart drawer by a new
+    snippet, `snippets/ums-cart-note.liquid`. It renders a pickup-only box directly above
+    the Check out button: title "Pickup only"; "Every order is picked up in store at
+    241 W 145th St, Harlem. Tuesday–Saturday, 11am–8pm. We don't ship." / "All sales are
+    final. No refunds, no exchanges."; then "Taxes and discounts are calculated at
+    checkout." That covers brief §7 (shipping copy; pickup details and hours in the cart)
+    and §4 (all-sales-final callout visible before checkout). The copy is editable in
+    **Theme settings → UMS cart note** — three settings appended to
+    `config/settings_schema.json`, with the copy as their defaults. `settings_data.json`
+    was deliberately not pushed, so nothing changed in the editor since the last push
+    could be overwritten; the defaults apply until Raheem edits them.
+  - **One Check out button on the cart page.** The store has Shop Pay, Apple Pay, and
+    Google Pay enabled, so Dawn's cart footer was rendering all of them under Check out
+    (`additional_checkout_buttons`). That block is removed. The drawer never had them in
+    Dawn 16; the product page lost them in Phase 4. The button is hunter green through
+    scheme-1, and Dawn's label already reads "Check out". Express methods stay available
+    inside checkout itself, exactly as the brief specifies.
+  - **Architecture exception, recorded deliberately.** This is the first time Dawn's own
+    files were edited: `sections/main-cart-footer.liquid` (two edits) and
+    `snippets/cart-drawer.liquid` (one edit). Each file carries a header comment and each
+    edit is marked `UMS:` inline; the repo keeps the modified copies. There was no clean
+    way to change the drawer's footer from outside it — the drawer is a snippet with no
+    sections or blocks, and anything injected by JS is wiped every time the cart
+    re-renders.
+  - Dead block and newsletter under the checkout button (brief §7): neither exists in
+    Dawn 16's cart — both were the old theme's. Cart type has been `drawer` since
+    Phase 1, with Dawn's dimmed backdrop.
+  - **Checkout branding is a wall.** `checkoutBranding` returns "Access denied … the shop
+    must be on a Plus plan or a Development store plan". The brief is right that the
+    checkout editor is available without Plus — through admin only, not the API. Exact
+    values to enter are in `docs/04` §4.
+  - **Shipping is live on the store, and the brief requires that it not be (§4).**
+    Audited delivery profiles: the General profile has a Domestic (US) zone with five
+    flat rates (Economy $0 / $4.90 / $19.90, Standard $6.90 / $9.90) and an
+    International zone of 27 countries with USPS and DHL Express carrier rates, all
+    active. The profile's only location is "Shop location" — the one holding no stock.
+    Nothing was changed: removing rates on a live store needs Raheem's go-ahead. Details
+    and the one-step fix are in `docs/04` §3.
+  - **Correction to the Phase 4 note.** `show_dynamic_checkout: false` removes the
+    express buttons but *not* Shop Pay Installments messaging: Dawn 16 renders that in
+    the `price` block of `sections/main-product.liquid` via `payment_terms`, gated only
+    by whether Installments is switched on in Settings → Payments. The brief asks for
+    the native toggle, so that is an admin item (`docs/04` §7), not theme code.
+  - Verified in admin since Phase 6: all six policies now exist (Contact, Legal notice,
+    Privacy, Refund, Shipping, Terms). The store contact email is still `Dtftranfers@`,
+    so form routing is still not fixed.
+  - Every pushed file verified by MD5 against the repo copy.

@@ -286,6 +286,58 @@
     text-decoration: underline;
     text-underline-offset: 0.3rem;
   }
+  /* ---------------------------------------------------------------
+     Cart note — pickup-only messaging on the cart page and in the
+     cart drawer (snippets/ums-cart-note.liquid). Replaces Dawn's
+     "shipping calculated at checkout" line. Sits directly above the
+     Check out button in both places.
+     --------------------------------------------------------------- */
+  .ums-cart-note {
+    margin: 2.2rem 0 1.6rem;
+    padding: 1.6rem 1.8rem;
+    border: 0.1rem solid rgba(var(--color-foreground), 0.15);
+    border-radius: var(--text-boxes-radius, 0);
+    background: rgba(var(--color-foreground), 0.03);
+    color: rgb(var(--color-foreground));
+    font-size: 1.4rem;
+    line-height: 1.5;
+    text-align: left;
+  }
+
+  .ums-cart-note__title {
+    margin: 0 0 0.4rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .ums-cart-note__body p {
+    margin: 0;
+  }
+
+  .ums-cart-note__body p + p {
+    margin-top: 0.6rem;
+  }
+
+  .ums-cart-note__tax {
+    margin: 0.8rem 0 0;
+    font-size: 1.3rem;
+    color: rgba(var(--color-foreground), 0.75);
+  }
+
+  .ums-cart-note--compact {
+    margin: 1.2rem 0 0;
+    padding: 1.2rem 1.4rem;
+    font-size: 1.3rem;
+  }
+
+  .ums-cart-note--compact .ums-cart-note__title {
+    font-size: 1.4rem;
+  }
+
+  .ums-cart-note--compact .ums-cart-note__tax {
+    font-size: 1.2rem;
+  }
+
 {% endstylesheet %}
 
 {% schema %}
