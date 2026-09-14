@@ -21,10 +21,14 @@ From `docs/04-store-settings-todo.md`:
 - [x] §4 Checkout branding — done by Raheem in the editor (API cannot verify on this plan; visual check on the live checkout).
 - [ ] §6 Forwarding rule from orders@ to mgarafano@, then one test through each form.
 - [x] §7 Shop Pay Installments — disabled by Raheem.
-- [ ] Phone pass on the preview (`?preview_theme_id=162803613922`), any last fixes.
+- [x] Phone pass on the preview, plus three review passes and Raheem's desktop screenshots.
 - [x] The four open decisions — answered (section 4).
 
-## 2. Go-live sequence
+## 2. Go-live sequence — RUN 2026-09-14
+
+Raheem published the theme (now "UMS Live 2026", role MAIN; "Dawn" back in the library as
+the rollback) at 09:30 UTC. The session then ran steps 3 and 5. Step 4 (removing Uptown
+Blanks from the Online Store channel) is Raheem's click; its redirect is already in place.
 
 Total time from first click to done: a few minutes. Best done outside the store's
 busiest hour, but no downtime is involved.
@@ -53,8 +57,8 @@ follow one rule: a shopper lands on the closest live equivalent, never on a 404.
 
 | Old path | What it is | Target | Status |
 |---|---|---|---|
-| `/pages/order-form` | Old custom-order page: neon styling, links to service variants that no longer sell online | `/pages/organizations` | at publish |
-| `/pages/bulk-catalog` | "Events and Promotional Products" — carries the **ESP link twice** and a `body{background:#101820}` rule (the brief's dark-gradient source). Must not survive go-live. | `/pages/organizations` | at publish |
+| `/pages/order-form` | Old custom-order page: neon styling, links to service variants that no longer sell online | `/pages/organizations` | done 2026-09-14: unpublished + redirect |
+| `/pages/bulk-catalog` | "Events and Promotional Products" — carries the **ESP link twice** and a `body{background:#101820}` rule (the brief's dark-gradient source). Must not survive go-live. | `/pages/organizations` | done 2026-09-14: unpublished + redirect |
 | `/pages/screen-printing` | Title "Order Form"; a script that bounces to `/pages/order-form` | `/pages/organizations` | done: unpublished + redirect |
 | `/pages/direct-to-garment` | Old DTG service page with a mailto order form, "Free 1 Week Shipping", "Hub92Prints" copy | `/pages/organizations` | done: unpublished + redirect |
 | `/pages/embroidery` | Old embroidery page with a mailto order form and `contact@` / `dtftransfers@` addresses | `/pages/organizations` | done: unpublished + redirect |
@@ -77,7 +81,7 @@ Kept as-is: `/pages/contact`, `/pages/about`, and every `/pages/organizations*` 
 
 | Old path | Products | Target | Status |
 |---|---|---|---|
-| `/collections/uptown-blanks` | 29 — the same products as UMS Storefront | `/collections/ums-storefront` | at publish (in the live menu) |
+| `/collections/uptown-blanks` | 29 — the same products as UMS Storefront | `/collections/ums-storefront` | redirect created 2026-09-14; Raheem removes the collection from the Online Store channel |
 | `/collections/pos-products` | 29 — Point of Sale grouping, was never meant to be public | `/collections/ums-storefront` | done: hidden + redirect |
 | `/collections/pos-services` | 8 — Point of Sale services, not sold online | `/pages/organizations` | done: hidden + redirect |
 
@@ -93,8 +97,8 @@ Left alone: `/collections/all` (Shopify's built-in) and `/collections/frontpage`
 
 ### Existing redirect to repoint
 
-`/pages/custom-print-order` currently → `/pages/order-form`. After go-live that would
-chain through two hops. Repoint it straight to `/pages/organizations`.
+`/pages/custom-print-order` pointed at `/pages/order-form`, which would have chained through
+two hops. Repointed straight to `/pages/organizations` on 2026-09-14.
 
 ### Not needed
 

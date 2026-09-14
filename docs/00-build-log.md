@@ -484,3 +484,15 @@ Confirmed it checks setting ranges/steps, font-picker handles, and section block
   - "Clear the list" no longer borrows Dawn's `link` class, so its color is ours.
   - The render harness now loads UMS styles before `base.css`, marks the current nav item
     the way Dawn does, and ends with a footer block, so this class of bug shows up locally.
+
+- **2026-09-14 — Go-live.** Raheem published the build theme from admin (the API refuses
+  `themePublish` by policy); it is now "UMS Live 2026", role MAIN, with "Dawn" unpublished
+  in the library as the one-click rollback. Verified the role through the API before
+  touching anything, then ran the session's part of `docs/05` §2: unpublished
+  `/pages/order-form` and `/pages/bulk-catalog`, created their redirects to
+  `/pages/organizations`, repointed `/pages/custom-print-order` from `/pages/order-form`
+  to `/pages/organizations`, and created `/collections/uptown-blanks` →
+  `/collections/ums-storefront`. Redirects were created only after the pages were
+  unpublished, since Shopify will not redirect a path that still resolves. Read back:
+  36 redirects; the only remaining go-live click is Raheem removing Uptown Blanks from
+  the Online Store channel.
